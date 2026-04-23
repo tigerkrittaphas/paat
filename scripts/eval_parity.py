@@ -27,31 +27,40 @@ from paat.tokenizer.train import load_tokenizer
 
 def print_table(report_dict: dict) -> None:
     summary = report_dict["summary"]
-    langs = report_dict["languages"]  # sorted by fertility
+    langs = report_dict["languages"]  # sorted by tokens_per_sentence
 
     print()
-    print(f"{'lang':>5}  {'fertility':>9}  {'tok/sent':>9}  {'avg_tok_len':>11}  {'unk_rate':>9}")
-    print("-" * 52)
+    print(f"{'lang':>5}  {'tok/sent':>9}  {'tok/byte':>9}  {'fertility*':>10}  {'unk_rate':>9}")
+    print("-" * 56)
     for l in langs:
         print(
-            f"  {l['lang']:>4}  {l['fertility']:>9.3f}"
-            f"  {l['n_tokens']/l['n_sentences'] if l['n_sentences'] else 0:>9.1f}"
-            f"  {l['avg_token_len']:>11.2f}"
+            f"  {l['lang']:>4}  {l['tokens_per_sentence']:>9.2f}"
+            f"  {l['tokens_per_byte']:>9.4f}"
+            f"  {l['fertility']:>10.3f}"
             f"  {l['unk_rate']:>9.5f}"
         )
-    print("-" * 52)
+    print("-" * 56)
     print(
-        f"  {'ALL':>4}  {summary['mean_fertility']:>9.3f}"
+        f"  {'ALL':>4}  {summary['mean_tokens_per_sentence']:>9.2f}"
         f"  {'':>9}"
-        f"  {'':>11}"
+        f"  {summary['mean_fertility']:>10.3f}"
         f"  {'':>9}"
     )
     print()
-    print(f"  Fertility std:   {summary['std_fertility']:.4f}  "
-          f"(spread across languages; lower = more fair)")
-    print(f"  Fertility ratio: {summary['fertility_ratio']:.2f}x  "
-          f"(max/min; 1.0 = perfect parity)")
-    print(f"  Max: {summary['max_fertility']:.3f}   Min: {summary['min_fertility']:.3f}")
+    print("  Primary metrics (parallel-sentence, robust to script/whitespace):")
+    print(f"    Tokens/sentence mean: {summary['mean_tokens_per_sentence']:.2f}   "
+          f"std: {summary['std_tokens_per_sentence']:.2f}")
+    print(f"    Tokens/sentence max:  {summary['max_tokens_per_sentence']:.2f}   "
+          f"min: {summary['min_tokens_per_sentence']:.2f}   "
+          f"ratio: {summary['tokens_per_sentence_ratio']:.2f}x")
+    print(f"    Gini (tokens/sentence): {summary['gini_tokens_per_sentence']:.4f}   "
+          f"(0 = perfect equality; headline fairness metric)")
+    print(f"    Gini (tokens/byte):     {summary['gini_tokens_per_byte']:.4f}")
+    print()
+    print("  Legacy fertility (*unreliable for CJK/Thai — whitespace-split):")
+    print(f"    mean: {summary['mean_fertility']:.3f}   "
+          f"std: {summary['std_fertility']:.3f}   "
+          f"ratio: {summary['fertility_ratio']:.2f}x")
     print()
 
 
