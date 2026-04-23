@@ -1,0 +1,28 @@
+[project]
+name = "paat"
+version = "0.1.0"
+description = "Parity-aware Adaptive Tokenization"
+requires-python = ">=3.11"
+dependencies = [
+    "sentencepiece",
+    "tokenizers",
+    "datasets",
+    "transformers",
+    "torch",
+    "numpy",
+    "tqdm",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+    "ipykernel",
+    "jupyter",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/paat"]
