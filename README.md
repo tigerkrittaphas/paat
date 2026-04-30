@@ -120,6 +120,27 @@ python scripts/eval_parity.py \
 
 This prints a per-language table of tokens-per-sentence, tokens-per-byte, and legacy fertility, plus aggregate Gini-based fairness metrics.
 
+### Step 4b — Train the parity-aware BPE baseline (Foroutan et al., 2025)
+
+Same input layout as Step 3 (per-language `<lang>.jsonl` files in `--data-dir`) and same output (a `tokenizer.json` evaluable with `scripts/eval_parity.py`). Uses FLORES+ as the multi-parallel parity dev set, so Step 1 must have run.
+
+**Train/eval split:** training-time parity uses only the FLORES+ `dev` split (~997 sentences/lang); `eval_parity.py` uses only the `devtest` split (~1012 sentences/lang) — for *every* tokenizer, not just parity-aware BPE — so the held-out set is identical across baselines and there's no train/test leakage.
+
+```bash
+python scripts/train_parity_bpe.py \
+    --data-dir data/raw/mc4 \
+    --flores-dir data/raw/flores \
+    --output-dir models/tokenizers/parity_bpe_demo \
+    --vocab-size 32000
+
+python scripts/eval_parity.py \
+    --tokenizer models/tokenizers/parity_bpe_demo \
+    --flores-dir data/raw/flores \
+    --output results/parity/parity_bpe_demo.json
+```
+
+Notable flags: `--variant {base,window}`, `--global-merges N` (Hybrid: first *N* merges use global statistics like classic BPE), `--ratio` (per-language compression targets — alternative to using a FLORES+ dev set).
+
 ### Step 5 — Run ADAT Phase 1 (32K → 16K, 3 iterations)
 
 This is the main experiment. It:
