@@ -17,6 +17,12 @@ We compute two families of metrics:
   tokens-per-sentence across languages**, which is the headline fairness
   metric used in Foroutan et al. 2025 ("Parity-Aware Byte-Pair Encoding").
 
+Eval uses only the FLORES+ ``devtest`` split. The ``dev`` split is held
+back for parity-aware BPE's training-time parity computation (see
+:mod:`paat.tokenizer.parity_bpe.train`), so all tokenizers — classic
+BPE, parity-aware BPE, Unigram, ADAT — are evaluated on the same
+held-out sentences.
+
 References:
     Rust et al. (2021) "How Good is Your Tokenizer?" ACL 2021.
     Foroutan et al. (2025) "Parity-Aware Byte-Pair Encoding: Improving
@@ -115,7 +121,13 @@ def compute_language_stats(
 
 
 def load_flores_sentences(flores_dir: Path, lang: str) -> list[str]:
-    """Load FLORES+ sentences for one language (dev + devtest)."""
+    """Load FLORES+ ``devtest`` sentences for one language.
+
+    The `dev` split is reserved as the parity-aware BPE training-time dev
+    set (see :func:`paat.tokenizer.parity_bpe.train.train_parity_bpe`),
+    so eval uses only `devtest` to keep the held-out split clean across
+    all tokenizers.
+    """
     path = flores_dir / f"{lang}.jsonl"
     if not path.exists():
         raise FileNotFoundError(f"FLORES+ file not found: {path}")
@@ -123,8 +135,12 @@ def load_flores_sentences(flores_dir: Path, lang: str) -> list[str]:
     with path.open(encoding="utf-8") as fh:
         for line in fh:
             line = line.strip()
-            if line:
-                sentences.append(json.loads(line)["sentence"])
+            if not line:
+                continue
+            rec = json.loads(line)
+            if rec.get("split") != "devtest":
+                continue
+            sentences.append(rec["sentence"])
     return sentences
 
 
