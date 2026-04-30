@@ -11,6 +11,7 @@ dependencies = [
     "torch",
     "numpy",
     "tqdm",
+    "accelerate>=1.13.0",
 ]
 
 [project.optional-dependencies]
