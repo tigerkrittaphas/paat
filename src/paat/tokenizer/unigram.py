@@ -49,7 +49,9 @@ def train_unigram_sentencepiece(
     n_lines = 0
     with tmp_corpus.open("w", encoding="utf-8") as fh:
         for text in texts:
-            fh.write(text.replace("\n", " ") + "\n")
+            # Strip embedded null bytes — mC4 contains them and SentencePiece
+            # otherwise spams "Found null character" INFO logs (harmless but noisy).
+            fh.write(text.replace("\0", "").replace("\n", " ") + "\n")
             n_lines += 1
     print(f"[unigram-init] corpus has {n_lines:,} lines")
 
