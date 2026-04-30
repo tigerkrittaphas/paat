@@ -76,8 +76,15 @@ def load_flores_per_lang(
     flores_dir: Path,
     langs: list[str],
     max_sentences: int | None = None,
+    split: str = "dev",
 ) -> dict[str, list[str]]:
-    """Load parallel FLORES+ sentences per language for parity weighting."""
+    """Load parallel FLORES+ sentences per language for parity weighting.
+
+    Defaults to the ``dev`` split — reserved as the parity-aware *training*
+    split.  ``devtest`` is held out for ``eval_parity.py`` so that the
+    parity numbers we report are not the same data the bonus was fit on.
+    Pass ``split=None`` only for legacy/debug runs that want both splits.
+    """
     out: dict[str, list[str]] = {}
     for lang in langs:
         path = flores_dir / f"{lang}.jsonl"
@@ -89,7 +96,10 @@ def load_flores_per_lang(
                 line = line.strip()
                 if not line:
                     continue
-                sentences.append(json.loads(line)["sentence"])
+                rec = json.loads(line)
+                if split is not None and rec.get("split") != split:
+                    continue
+                sentences.append(rec["sentence"])
                 if max_sentences is not None and len(sentences) >= max_sentences:
                     break
         if sentences:

@@ -93,7 +93,17 @@ def main() -> None:
         default=None,
         help="Path to write JSON report (default: results/parity/<tokenizer_name>.json).",
     )
+    parser.add_argument(
+        "--eval-split",
+        choices=["dev", "devtest", "all"],
+        default="devtest",
+        help="FLORES+ split to evaluate on.  'devtest' (default) is the "
+             "held-out split; 'dev' is reserved for parity-aware training "
+             "in run_paat.py — useful here only as a sanity check.  'all' "
+             "reverts to legacy union-of-splits behaviour (data leakage).",
+    )
     args = parser.parse_args()
+    eval_split = None if args.eval_split == "all" else args.eval_split
 
     # Resolve language list
     if args.languages:
@@ -119,13 +129,14 @@ def main() -> None:
     print(f"Tokenizer:  {args.tokenizer}")
     print(f"FLORES dir: {args.flores_dir}")
     print(f"Languages:  {len(langs)}")
+    print(f"Split:      {args.eval_split}")
     print()
 
     tokenizer = load_tokenizer(args.tokenizer)
     print(f"Vocab size: {tokenizer.get_vocab_size():,}")
     print()
 
-    report = compute_parity_report(tokenizer, args.flores_dir, langs)
+    report = compute_parity_report(tokenizer, args.flores_dir, langs, split=eval_split)
     report_dict = report_to_dict(report)
 
     print_table(report_dict)

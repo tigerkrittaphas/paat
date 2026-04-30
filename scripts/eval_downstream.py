@@ -31,12 +31,16 @@ from pathlib import Path
 
 
 # Tasks from the paper (Table 1, Zheng et al. 2024) — 5-shot.
+# Restricted to the two that actually produce signal at this scale
+# (~36M params, ≤3B tokens):
+#   - sciq:     easiest paper task, signals first at small scale
+#   - arc_easy: 4-way reasoning anchor; standard "is the LM learning" check
+# Dropped: piqa (binary → 50% random, hard to separate from noise),
+# arc_challenge (stays near 25% until much larger scale),
+# lambada_openai (needs strong LM, returned null in 300M pilot).
 PAPER_TASKS = [
-    "piqa",
-    "arc_easy",
-    "arc_challenge",
     "sciq",
-    "lambada_openai",
+    "arc_easy",
 ]
 
 # XNLI languages available in lm-eval-harness.
@@ -168,17 +172,14 @@ def main() -> None:
     print("\n\n" + "=" * 70)
     print("DOWNSTREAM RESULTS SUMMARY")
     print("=" * 70)
-    print(f"\n{'Model':<20}  {'PIQA':>6}  {'ARC-E':>6}  {'ARC-C':>6}  {'SciQ':>6}  {'Lam':>6}  {'Avg':>6}")
-    print("-" * 70)
+    print(f"\n{'Model':<20}  {'SciQ':>6}  {'ARC-E':>6}  {'Avg':>6}")
+    print("-" * 50)
     for name, sums in all_summaries.items():
         pt = sums.get("paper_tasks", {})
         print(
             f"  {name:<18}  "
-            f"{pt.get('piqa') or '—':>6}  "
-            f"{pt.get('arc_easy') or '—':>6}  "
-            f"{pt.get('arc_challenge') or '—':>6}  "
             f"{pt.get('sciq') or '—':>6}  "
-            f"{pt.get('lambada_openai') or '—':>6}  "
+            f"{pt.get('arc_easy') or '—':>6}  "
             f"{pt.get('avg') or '—':>6}"
         )
 

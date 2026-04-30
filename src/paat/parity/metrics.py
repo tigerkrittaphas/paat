@@ -120,13 +120,27 @@ def compute_language_stats(
     )
 
 
-def load_flores_sentences(flores_dir: Path, lang: str) -> list[str]:
-    """Load FLORES+ ``devtest`` sentences for one language.
+def load_flores_sentences(
+    flores_dir: Path,
+    lang: str,
+    split: str | None = "devtest",
+) -> list[str]:
+    """Load FLORES+ sentences for one language.
 
-    The `dev` split is reserved as the parity-aware BPE training-time dev
-    set (see :func:`paat.tokenizer.parity_bpe.train.train_parity_bpe`),
-    so eval uses only `devtest` to keep the held-out split clean across
-    all tokenizers.
+    Args:
+        flores_dir: Directory of per-language JSONL files written by
+                    ``scripts/download_flores.py``.  Each record carries a
+                    ``"split"`` field of either ``"dev"`` or ``"devtest"``.
+        lang:       Language code (file stem).
+        split:      Which FLORES+ split to keep.
+
+                    * ``"dev"``      → reserved as the parity-aware *training*
+                                       split (consumed by ``run_paat.py`` to
+                                       compute per-piece parity weights).
+                    * ``"devtest"``  → held-out evaluation split (default;
+                                       used by ``eval_parity.py``).
+                    * ``None``       → return both splits (legacy behaviour;
+                                       leaks training data into the eval).
     """
     path = flores_dir / f"{lang}.jsonl"
     if not path.exists():
@@ -138,7 +152,7 @@ def load_flores_sentences(flores_dir: Path, lang: str) -> list[str]:
             if not line:
                 continue
             rec = json.loads(line)
-            if rec.get("split") != "devtest":
+            if split is not None and rec.get("split") != split:
                 continue
             sentences.append(rec["sentence"])
     return sentences
@@ -188,6 +202,7 @@ def compute_parity_report(
     tokenizer: Tokenizer,
     flores_dir: Path,
     languages: list[str],
+    split: str | None = "devtest",
 ) -> ParityReport:
     """Evaluate parity across all given languages using parallel FLORES+ data.
 
@@ -197,13 +212,17 @@ def compute_parity_report(
                     sentences *must* be parallel across languages (FLORES+
                     devtest satisfies this).
         languages:  Language codes to include.
+        split:      FLORES+ split to evaluate on.  Default ``"devtest"`` so
+                    parity numbers are reported on the held-out split (the
+                    ``"dev"`` split is reserved for parity-aware training in
+                    ``run_paat.py``).  See :func:`load_flores_sentences`.
 
     Returns:
         A :class:`ParityReport` with per-language stats and aggregate metrics.
     """
     stats: list[LanguageStats] = []
     for lang in languages:
-        sentences = load_flores_sentences(flores_dir, lang)
+        sentences = load_flores_sentences(flores_dir, lang, split=split)
         s = compute_language_stats(tokenizer, sentences, lang)
         stats.append(s)
         print(f"  [{lang:>4}] tok/sent={s.tokens_per_sentence:6.2f}  "
