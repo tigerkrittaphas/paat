@@ -12,6 +12,7 @@ dependencies = [
     "numpy",
     "tqdm",
     "accelerate>=1.13.0",
+    "lm-eval>=0.4.11",
 ]
 
 [project.optional-dependencies]

@@ -77,12 +77,18 @@ def run_lm_eval(
     print(f"{'='*60}\n")
     print("Running:", " ".join(cmd))
 
-    result = subprocess.run(cmd, check=True, text=True)
-    # lm_eval writes JSON to output_path; load it back.
-    results_file = output_path / "results.json"
-    if results_file.exists():
-        with results_file.open() as f:
+    result = subprocess.run(cmd, text=True)
+    if result.returncode != 0:
+        print(f"\n[WARN] lm_eval failed (exit {result.returncode}) for {model_dir} on {tasks}.")
+        print("[WARN] Continuing with remaining models/tasks.\n")
+        return {}
+    # lm_eval may write either results.json (older) or results_<timestamp>.json
+    # under either output_path or a model-named subdir. Pick the most recent.
+    candidates = sorted(output_path.rglob("results*.json"), key=lambda p: p.stat().st_mtime)
+    if candidates:
+        with candidates[-1].open() as f:
             return json.load(f)
+    print(f"[WARN] no results JSON found under {output_path}")
     return {}
 
 

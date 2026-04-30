@@ -123,8 +123,7 @@ def main() -> None:
     parser.add_argument("--seq-len", type=int, default=512)
     parser.add_argument("--train-tokens-per-iter", type=int, default=5_000_000)
     parser.add_argument("--eval-tokens-per-iter", type=int, default=2_000_000)
-    parser.add_argument("--model-size", choices=["tiny", "small", "medium"],
-                        default="tiny")
+    parser.add_argument("--model-size", default="pythia70m")
     parser.add_argument("--batch-size", type=int, default=32)
     parser.add_argument("--lr", type=float, default=3e-4)
     parser.add_argument("--balance-lambda", type=float, default=1.0)
