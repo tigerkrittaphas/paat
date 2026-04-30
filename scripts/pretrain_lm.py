@@ -29,6 +29,7 @@ import json
 import math
 import random
 from pathlib import Path
+from typing import Iterator
 
 import numpy as np
 import torch
@@ -46,50 +47,88 @@ from paat.data.languages import ALL_LANGUAGES, MC4_NATURAL_COUNTS
 from paat.model.transformer import build_model
 
 
-def load_texts_proportional(
-    data_dir: Path, langs: list[str], total_docs: int, seed: int
-) -> list[str]:
-    """Load documents proportional to natural mC4 resource distribution."""
-    rng = random.Random(seed)
+def _iter_docs_proportional(
+    data_dir: Path, langs: list[str], total_docs: int,
+) -> "Iterator[str]":
+    """Yield mC4 docs interleaved across languages, proportional to natural counts.
+
+    Streams from disk so RAM stays bounded by ``buffer_size`` open file
+    handles plus one in-flight document, regardless of the total budget.
+    Doc counts per language are pinned via the same formula as
+    ``load_mc4_texts`` in :mod:`scripts.run_paat`.
+    """
     total_natural = sum(MC4_NATURAL_COUNTS.get(l, 0) for l in langs)
-    texts: list[str] = []
+    quotas: dict[str, int] = {}
+    handles: dict[str, "object"] = {}
     for lang in langs:
         path = data_dir / f"{lang}.jsonl"
         if not path.exists():
             continue
         natural = MC4_NATURAL_COUNTS.get(lang, 1)
-        n_docs = max(1, round(total_docs * natural / total_natural))
-        docs: list[str] = []
-        with path.open(encoding="utf-8") as fh:
-            for line in fh:
+        quotas[lang] = max(1, round(total_docs * natural / total_natural))
+        handles[lang] = path.open(encoding="utf-8")
+
+    served: dict[str, int] = {l: 0 for l in handles}
+    try:
+        # Round-robin pull until every language is exhausted or quota hit.
+        active = list(handles.keys())
+        while active:
+            still_active: list[str] = []
+            for lang in active:
+                if served[lang] >= quotas[lang]:
+                    continue
+                fh = handles[lang]
+                line = fh.readline()
+                if not line:                 # end of file
+                    continue
                 line = line.strip()
-                if line:
-                    docs.append(json.loads(line)["text"])
-                if len(docs) >= n_docs:
-                    break
-        rng.shuffle(docs)
-        texts.extend(docs)
-    rng.shuffle(texts)
-    return texts
+                if not line:
+                    still_active.append(lang)
+                    continue
+                served[lang] += 1
+                still_active.append(lang)
+                yield json.loads(line)["text"]
+            active = still_active
+    finally:
+        for fh in handles.values():
+            fh.close()
 
 
-def tokenize_to_sequences(
-    texts: list[str],
+def stream_pack_sequences(
+    data_dir: Path,
+    langs: list[str],
+    total_docs: int,
     tokenizer: PreTrainedTokenizerFast,
     seq_len: int,
     max_tokens: int,
 ) -> list[list[int]]:
-    """Encode texts into packed fixed-length sequences up to max_tokens."""
+    """Tokenize on the fly and pack into ``seq_len`` blocks until budget hit.
+
+    Replaces the old "load everything, then tokenize" pipeline.  The full
+    Python list of documents never exists in memory — only the in-flight
+    buffer (≤ seq_len ints) plus the packed sequences themselves
+    (which are what we actually need).
+    """
     buffer: list[int] = []
     sequences: list[list[int]] = []
-    for text in texts:
+    target_seqs = max_tokens // seq_len
+    n_docs = 0
+    for text in _iter_docs_proportional(data_dir, langs, total_docs):
+        n_docs += 1
         ids = tokenizer.encode(text)
         buffer.extend(ids)
         while len(buffer) >= seq_len:
             sequences.append(buffer[:seq_len])
             buffer = buffer[seq_len:]
-            if len(sequences) * seq_len >= max_tokens:
+            if len(sequences) >= target_seqs:
+                print(f"  [stream] {n_docs:,} docs -> {len(sequences):,} sequences "
+                      f"({len(sequences) * seq_len:,} tokens)")
                 return sequences
+        if n_docs % 50_000 == 0:
+            print(f"  [stream] {n_docs:,} docs -> {len(sequences):,} sequences "
+                  f"({len(sequences) * seq_len:,} tokens)")
+    print(f"  [stream] corpus exhausted at {n_docs:,} docs -> "
+          f"{len(sequences):,} sequences  ({len(sequences) * seq_len:,} tokens)")
     return sequences
 
 
@@ -129,15 +168,39 @@ def main() -> None:
         raise FileNotFoundError(f"tokenizer.json not found in {args.tokenizer}")
 
     hf_tok = PreTrainedTokenizerFast(tokenizer_file=str(tok_path))
-    # GPT-style models need a pad token; add one that won't appear in real text.
-    if hf_tok.pad_token is None:
-        hf_tok.add_special_tokens({"pad_token": "<|pad|>"})
-    if hf_tok.bos_token is None:
-        hf_tok.add_special_tokens({"bos_token": "<|bos|>"})
-    if hf_tok.eos_token is None:
-        hf_tok.add_special_tokens({"eos_token": "<|eos|>"})
+    # Reuse special tokens already present in the underlying tokenizer rather
+    # than adding new ones — adding inflates the vocab on top of the base
+    # tokenizer (the bug that produced 43,209-vocab BPE in the first round).
+    # Unigram tokenizers carry  <unk> <s> </s> <pad>;  BPE carries
+    # [UNK] [CLS] [SEP] [PAD] [MASK].  Map common aliases first; only fall
+    # back to adding new pieces if the vocab really has nothing usable.
+    base_vocab = hf_tok.get_vocab()
+    role_aliases = {
+        "pad_token": ["<pad>", "[PAD]"],
+        "bos_token": ["<s>",   "[CLS]"],
+        "eos_token": ["</s>",  "[SEP]"],
+        "unk_token": ["<unk>", "[UNK]"],
+    }
+    for role, candidates in role_aliases.items():
+        if getattr(hf_tok, role) is not None:
+            continue
+        for piece in candidates:
+            if piece in base_vocab:
+                setattr(hf_tok, role, piece)
+                break
+    # Last-resort additions (only if the tokenizer truly lacks the role).
+    additions: dict[str, str] = {}
+    for role, fallback in [("pad_token", "<|pad|>"),
+                           ("bos_token", "<|bos|>"),
+                           ("eos_token", "<|eos|>")]:
+        if getattr(hf_tok, role) is None:
+            additions[role] = fallback
+    if additions:
+        print(f"[WARN] tokenizer missing roles {list(additions)}; "
+              f"adding new pieces (will grow vocab).")
+        hf_tok.add_special_tokens(additions)
 
-    vocab_size = len(hf_tok)  # may be slightly larger than base vocab after adding specials
+    vocab_size = len(hf_tok)  # equals base vocab unless `additions` fired
 
     # ── Model ──────────────────────────────────────────────────────────────
     model = build_model(vocab_size=vocab_size, size=args.model_size)
@@ -149,16 +212,16 @@ def main() -> None:
     model.resize_token_embeddings(vocab_size)
 
     # ── Data ───────────────────────────────────────────────────────────────
-    print(f"\nLoading up to {args.total_docs:,} mC4 docs (proportional distribution)...")
-    texts = load_texts_proportional(
-        args.data_dir, ALL_LANGUAGES, args.total_docs, args.seed
+    print(f"\nStreaming mC4 (up to {args.total_docs:,} docs, "
+          f"target {args.train_tokens:,} tokens) ...")
+    sequences = stream_pack_sequences(
+        args.data_dir, ALL_LANGUAGES, args.total_docs,
+        hf_tok, args.seq_len, args.train_tokens,
     )
-    print(f"Loaded {len(texts):,} documents.")
-
-    print(f"Tokenizing (target: {args.train_tokens:,} tokens)...")
-    sequences = tokenize_to_sequences(texts, hf_tok, args.seq_len, args.train_tokens)
     actual_tokens = len(sequences) * args.seq_len
-    print(f"Packed {len(sequences):,} sequences  ({actual_tokens:,} tokens).")
+    if actual_tokens < args.train_tokens:
+        print(f"[WARN] only packed {actual_tokens:,} tokens "
+              f"(target {args.train_tokens:,}); raise --total-docs to feed more.")
 
     rng = random.Random(args.seed)
     rng.shuffle(sequences)
