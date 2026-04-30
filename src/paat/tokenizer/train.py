@@ -24,12 +24,17 @@ from tokenizers.trainers import BpeTrainer
 SPECIAL_TOKENS = ["[UNK]", "[CLS]", "[SEP]", "[PAD]", "[MASK]"]
 
 
-def _text_iter(data_dir: Path, languages: list[str] | None = None) -> Iterator[str]:
+def _text_iter(
+    data_dir: Path,
+    languages: list[str] | None = None,
+    docs_per_lang: dict[str, int] | None = None,
+) -> Iterator[str]:
     """Yield raw text strings from <data_dir>/<lang>.jsonl files.
 
     Args:
-        data_dir:  Directory containing per-language JSONL files.
-        languages: If given, only read files whose stem is in this list.
+        data_dir:      Directory containing per-language JSONL files.
+        languages:     If given, only read files whose stem is in this list.
+        docs_per_lang: Per-language doc caps. None means read all docs.
     """
     files = sorted(data_dir.glob("*.jsonl"))
     if languages:
@@ -38,11 +43,43 @@ def _text_iter(data_dir: Path, languages: list[str] | None = None) -> Iterator[s
     if not files:
         raise FileNotFoundError(f"No JSONL files found in {data_dir}")
     for path in files:
+        lang = path.stem
+        limit = docs_per_lang.get(lang) if docs_per_lang else None
+        count = 0
         with path.open(encoding="utf-8") as fh:
             for line in fh:
                 line = line.strip()
                 if line:
                     yield json.loads(line)["text"]
+                    count += 1
+                    if limit is not None and count >= limit:
+                        break
+
+
+def _proportional_caps(
+    data_dir: Path,
+    languages: list[str] | None,
+    total_docs: int,
+) -> dict[str, int]:
+    """Compute per-language doc caps proportional to MC4_NATURAL_COUNTS.
+
+    Languages not present in MC4_NATURAL_COUNTS get a weight of 1 so they
+    still receive a small allocation rather than being dropped.
+    """
+    from paat.data.languages import MC4_NATURAL_COUNTS
+
+    files = sorted(data_dir.glob("*.jsonl"))
+    if languages:
+        lang_set = set(languages)
+        files = [f for f in files if f.stem in lang_set]
+    langs = [f.stem for f in files]
+
+    total_natural = sum(MC4_NATURAL_COUNTS.get(l, 1) for l in langs)
+    caps: dict[str, int] = {}
+    for lang in langs:
+        natural = MC4_NATURAL_COUNTS.get(lang, 1)
+        caps[lang] = max(1, round(total_docs * natural / total_natural))
+    return caps
 
 
 def train_bpe(
@@ -51,6 +88,7 @@ def train_bpe(
     vocab_size: int = 32_000,
     min_frequency: int = 2,
     languages: list[str] | None = None,
+    total_docs: int | None = None,
 ) -> Tokenizer:
     """Train a BPE tokenizer and save it to *output_dir*.
 
@@ -60,6 +98,8 @@ def train_bpe(
         vocab_size:    Target vocabulary size.
         min_frequency: Minimum merge pair frequency.
         languages:     Subset of language codes to train on (default: all).
+        total_docs:    Total documents across all languages, distributed
+                       proportionally to MC4_NATURAL_COUNTS. None = all docs.
 
     Returns:
         The trained :class:`~tokenizers.Tokenizer` object.
@@ -75,8 +115,17 @@ def train_bpe(
         show_progress=True,
     )
 
+    docs_per_lang = (
+        _proportional_caps(data_dir, languages, total_docs)
+        if total_docs is not None
+        else None
+    )
+    if docs_per_lang is not None:
+        total = sum(docs_per_lang.values())
+        print(f"  Total docs cap: {total:,} (proportional to MC4_NATURAL_COUNTS)")
+
     tokenizer.train_from_iterator(
-        _text_iter(data_dir, languages),
+        _text_iter(data_dir, languages, docs_per_lang),
         trainer=trainer,
     )
 

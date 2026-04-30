@@ -29,9 +29,10 @@ class ModelSize:
 
 
 SIZES: dict[str, ModelSize] = {
-    "tiny":   ModelSize(n_layer=4, n_embd=256, n_head=4),   # ~3 M (no emb)
-    "small":  ModelSize(n_layer=6, n_embd=384, n_head=6),   # ~10 M
-    "medium": ModelSize(n_layer=12, n_embd=768, n_head=12), # ~85 M (Pythia-70M-ish)
+    "tiny":      ModelSize(n_layer=4, n_embd=256, n_head=4),   # ~3 M (no emb)
+    "small":     ModelSize(n_layer=6, n_embd=384, n_head=6),   # ~10 M
+    "pythia70m": ModelSize(n_layer=6, n_embd=512, n_head=8),   # matches Table 13 of Zheng et al. 2024
+    "medium":    ModelSize(n_layer=12, n_embd=768, n_head=12), # ~85 M
 }
 
 

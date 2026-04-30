@@ -27,7 +27,7 @@ import numpy as np
 import torch
 
 from paat.data.languages import ALL_LANGUAGES
-from paat.model.train import TrainConfig, evaluate_perplexity, train_llm
+from paat.model.train import TrainConfig, train_llm
 from paat.model.transformer import build_model
 from paat.tokenizer.adat import ADATConfig, encode_corpus, run_adat
 from paat.tokenizer.unigram import (
@@ -36,23 +36,35 @@ from paat.tokenizer.unigram import (
 )
 
 
-def load_mc4_texts(data_dir: Path, langs: list[str], docs_per_lang: int,
+def load_mc4_texts(data_dir: Path, langs: list[str], total_docs: int,
                    seed: int) -> list[str]:
-    """Load up to ``docs_per_lang`` documents per language."""
+    """Load docs proportional to MC4_NATURAL_COUNTS, preserving the natural resource distribution.
+
+    ``total_docs`` is distributed across languages proportionally to their natural
+    mC4 counts — high-resource languages receive more documents, low-resource ones
+    fewer.  Each language is capped at however many docs are available on disk.
+    """
+    from paat.data.languages import MC4_NATURAL_COUNTS
+
     rng = random.Random(seed)
+    total_natural = sum(MC4_NATURAL_COUNTS.get(l, 0) for l in langs)
     texts: list[str] = []
     for lang in langs:
         path = data_dir / f"{lang}.jsonl"
         if not path.exists():
             continue
+        natural = MC4_NATURAL_COUNTS.get(lang, 1)
+        n_docs = max(1, round(total_docs * natural / total_natural))
         docs = []
         with path.open(encoding="utf-8") as fh:
             for line in fh:
                 line = line.strip()
                 if line:
                     docs.append(json.loads(line)["text"])
+                if len(docs) >= n_docs:
+                    break
         rng.shuffle(docs)
-        texts.extend(docs[:docs_per_lang])
+        texts.extend(docs)
     rng.shuffle(texts)
     return texts
 
@@ -86,8 +98,8 @@ def eval_tokenizer_ppl(
     tok = HFTokenizer.from_file(str(tokenizer_path))
 
     train_texts, eval_split = eval_texts[:len(eval_texts) // 2], eval_texts[len(eval_texts) // 2:]
-    train_ids = encode_corpus(tok, train_texts)[:train_tokens]
-    eval_ids = encode_corpus(tok, eval_split)[:eval_tokens]
+    train_ids = encode_corpus(tok, train_texts, max_tokens=train_tokens)
+    eval_ids = encode_corpus(tok, eval_split, max_tokens=eval_tokens)
 
     model = build_model(vocab_size=vocab_size, size=model_size)
     model, ppl = train_llm(
@@ -105,8 +117,9 @@ def main() -> None:
     parser.add_argument("--initial-vocab", type=int, default=32_000)
     parser.add_argument("--target-vocab", type=int, default=16_000)
     parser.add_argument("--iterations", type=int, default=3)
-    parser.add_argument("--docs-per-lang", type=int, default=2_000,
-                        help="mC4 docs sampled per language for training.")
+    parser.add_argument("--total-docs", type=int, default=500_000,
+                        help="Total mC4 docs across all languages, distributed proportionally "
+                             "to natural mC4 counts (preserves resource distribution).")
     parser.add_argument("--seq-len", type=int, default=512)
     parser.add_argument("--train-tokens-per-iter", type=int, default=5_000_000)
     parser.add_argument("--eval-tokens-per-iter", type=int, default=2_000_000)
@@ -133,7 +146,7 @@ def main() -> None:
 
     # ---------------------------------------------------------------- corpus
     print("Loading mC4 texts ...")
-    texts = load_mc4_texts(args.data_dir, ALL_LANGUAGES, args.docs_per_lang, args.seed)
+    texts = load_mc4_texts(args.data_dir, ALL_LANGUAGES, args.total_docs, args.seed)
     print(f"  loaded {len(texts):,} documents across {len(ALL_LANGUAGES)} languages")
 
     train_texts, eval_texts = split_texts(texts, train_frac=0.9, seed=args.seed)
