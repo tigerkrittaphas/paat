@@ -75,22 +75,39 @@ class IterationLog:
 
 # --------------------------------------------------------------- tokenisation
 
-def encode_corpus(tokenizer: Tokenizer, texts: list[str]) -> np.ndarray:
-    """Tokenize a corpus and return a flat array of token ids."""
-    encodings = tokenizer.encode_batch(texts, add_special_tokens=False)
-    ids: list[int] = []
-    for enc in encodings:
-        ids.extend(enc.ids)
-    return np.asarray(ids, dtype=np.int32)
+def encode_corpus(
+    tokenizer: Tokenizer,
+    texts: list[str],
+    max_tokens: int | None = None,
+    batch_size: int = 256,
+) -> np.ndarray:
+    """Tokenize a corpus and return a flat int32 array of token ids.
 
-
-def take_token_slice(tokens: np.ndarray, n_tokens: int,
-                     rng: np.random.Generator) -> np.ndarray:
-    """Return ``n_tokens`` from ``tokens``, looping the array if needed."""
-    if n_tokens >= len(tokens):
-        return tokens.copy()
-    start = int(rng.integers(0, len(tokens) - n_tokens))
-    return tokens[start:start + n_tokens]
+    Processes ``texts`` in batches so the intermediate Python list of ints
+    never exceeds ``batch_size`` documents at once.  Stops early once
+    ``max_tokens`` ids have been collected, avoiding tokenising more of the
+    corpus than the training budget requires.
+    """
+    chunks: list[np.ndarray] = []
+    total = 0
+    for i in range(0, len(texts), batch_size):
+        batch = texts[i : i + batch_size]
+        encodings = tokenizer.encode_batch(batch, add_special_tokens=False)
+        chunk = np.array(
+            [id_ for enc in encodings for id_ in enc.ids], dtype=np.int32
+        )
+        if len(chunk) == 0:
+            continue
+        chunks.append(chunk)
+        total += len(chunk)
+        if max_tokens is not None and total >= max_tokens:
+            break
+    if not chunks:
+        return np.array([], dtype=np.int32)
+    arr = np.concatenate(chunks)
+    if max_tokens is not None:
+        arr = arr[:max_tokens]
+    return arr
 
 
 # ------------------------------------------------------------------- pruning
@@ -119,6 +136,27 @@ def balance_score(
     score[unseen] = -np.inf
     score[~np.isfinite(score)] = -np.inf
     return score
+
+def get_coverage_protected_ids(pieces: list[tuple[str, float]]) -> list[int]:
+    """Return ids of pieces that are the sole coverage for at least one Unicode codepoint.
+
+    If these pieces were pruned, that character would have no subword representation
+    and would always map to <unk>.  We protect them the same way we protect specials.
+    """
+    from collections import defaultdict
+    # For each Unicode codepoint, collect which piece ids cover it.
+    codepoint_to_ids: dict[str, list[int]] = defaultdict(list)
+    for i, (piece, _) in enumerate(pieces):
+        # Strip SentencePiece metaspace prefix before checking characters.
+        surface = piece.lstrip("▁")
+        for ch in surface:
+            codepoint_to_ids[ch].append(i)
+
+    protected: list[int] = []
+    for ch, ids in codepoint_to_ids.items():
+        if len(ids) == 1:
+            protected.append(ids[0])
+    return protected
 
 
 def select_surviving_pieces(
@@ -206,16 +244,16 @@ def run_adat(
         print(f"\n====== ADAT iteration {it}/{config.n_iterations}  "
               f"({current_vocab} -> {target_size}) ======")
 
-        # Tokenize fresh slices of the corpora with the current vocab.
+        # Tokenize just enough of each corpus to fill the per-iter token budget.
         print("  [tokenize] encoding train / eval corpora ...")
-        train_ids = encode_corpus(tokenizer, train_texts)
-        eval_ids = encode_corpus(tokenizer, eval_texts)
-        print(f"  [tokenize] train: {len(train_ids):,} ids   "
-              f"eval: {len(eval_ids):,} ids")
-
-        # Slice down to the budgeted per-iter counts.
-        train_slice = take_token_slice(train_ids, config.train_tokens_per_iter, rng)
-        eval_slice = take_token_slice(eval_ids, config.eval_tokens_per_iter, rng)
+        train_slice = encode_corpus(
+            tokenizer, train_texts, max_tokens=config.train_tokens_per_iter
+        )
+        eval_slice = encode_corpus(
+            tokenizer, eval_texts, max_tokens=config.eval_tokens_per_iter
+        )
+        print(f"  [tokenize] train: {len(train_slice):,} ids   "
+              f"eval: {len(eval_slice):,} ids")
 
         # Fresh model each iteration — "randomly initialized" per the paper.
         model = build_model(vocab_size=current_vocab, size=config.model_size)
@@ -250,8 +288,10 @@ def run_adat(
         # Update state for next iteration (survivors only, handled below).
 
         # Prune to target size.
+        coverage_ids = get_coverage_protected_ids(pieces)
+        all_protected = list(dict.fromkeys(special_ids + coverage_ids))  # deduplicated, order preserved
         surviving = select_surviving_pieces(
-            pieces, smoothed, target_size, special_ids,
+            pieces, smoothed, target_size, all_protected,
         )
         tokenizer = build_hf_unigram(surviving)
         current_vocab = tokenizer.get_vocab_size()

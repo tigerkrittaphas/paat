@@ -56,6 +56,17 @@ def main() -> None:
         help="Minimum merge pair frequency.",
     )
     parser.add_argument(
+        "--total-docs",
+        type=int,
+        default=None,
+        metavar="N",
+        help=(
+            "Total mC4 documents across all languages, distributed proportionally "
+            "to natural mC4 counts (preserves resource distribution). "
+            "Default: None = stream all available docs (may take hours)."
+        ),
+    )
+    parser.add_argument(
         "--languages",
         nargs="+",
         default=None,
@@ -86,6 +97,11 @@ def main() -> None:
         print(f"Languages:  {langs}")
     print()
 
+    if args.total_docs is not None:
+        print(f"Total docs:  {args.total_docs:,} (proportional to MC4_NATURAL_COUNTS)")
+    else:
+        print("Total docs:  all available (no cap)")
+
     t0 = time.time()
     train_bpe(
         data_dir=args.data_dir,
@@ -93,6 +109,7 @@ def main() -> None:
         vocab_size=args.vocab_size,
         min_frequency=args.min_frequency,
         languages=langs,
+        total_docs=args.total_docs,
     )
     elapsed = time.time() - t0
     print(f"Training time: {elapsed:.1f}s  ({elapsed/60:.1f} min)")
