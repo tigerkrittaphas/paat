@@ -91,23 +91,36 @@ def compute_parity_weights(
 ) -> tuple[np.ndarray, dict[str, float]]:
     """Per-piece parity weight from per-language FLORES+ samples.
 
-    The weight is the usage-share-weighted relative tokens-per-byte across
-    languages: pieces predominantly used in badly-served (high tpb)
-    languages receive weights > 1, while pieces used in over-served
-    languages get weights < 1.
+    The weight is the usage-share-weighted relative **tokens-per-parallel-
+    sentence** across languages: pieces predominantly used in languages
+    that need many tokens to encode the same parallel sentence receive
+    weights > 1, while pieces used in already-cheap languages get
+    weights < 1.
+
+    Why tokens-per-sentence and not tokens-per-byte?
+        UTF-8 inflates the byte count of complex scripts (Devanagari,
+        Tamil, Khmer, Thai, Burmese, Hebrew, Greek, …) by ~3× per logical
+        character, so they look "fine" on tok/byte even when each
+        sentence costs 100+ tokens.  Empirically that mismatch made the
+        first PAAT iteration boost the wrong languages
+        (low-resource Latin/Arabic) and ignore the ones pruning hurts most
+        (Indic / SE-Asian scripts).  Tokens-per-parallel-sentence directly
+        measures cross-lingual encoding cost, which is what
+        ``Gini(tokens_per_sentence)`` rewards us for closing — so the
+        signal and the eval metric are now aligned.
 
     Args:
         tokenizer:     Current HF tokenizer; ids are taken from its vocab.
         parity_texts:  Mapping ``{lang_code: list[parallel_sentences]}``.
-                       Sentences should be parallel across languages
-                       (FLORES+ devtest is the natural fit) so per-language
-                       ``tokens_per_byte`` is comparable.
+                       Sentences MUST be parallel across languages
+                       (FLORES+ ``dev`` is the natural fit) so per-language
+                       ``tokens_per_sentence`` is directly comparable.
 
     Returns:
-        ``(weights, per_lang_tpb)`` where ``weights`` has shape
-        ``(vocab_size,)`` and is centred around 1.0, and ``per_lang_tpb``
-        maps language code to its tokens-per-byte under the current
-        tokenizer (useful for logging).
+        ``(weights, per_lang_tps)`` where ``weights`` has shape
+        ``(vocab_size,)`` and is centred around 1.0, and ``per_lang_tps``
+        maps language code to its tokens-per-parallel-sentence under the
+        current tokenizer (useful for logging).
     """
     vocab_size = tokenizer.get_vocab_size()
     langs = [l for l, s in parity_texts.items() if s]
@@ -116,7 +129,7 @@ def compute_parity_weights(
         return np.ones(vocab_size, dtype=np.float64), {}
 
     freq = np.zeros((vocab_size, n_langs), dtype=np.float64)
-    n_bytes_per_lang = np.zeros(n_langs, dtype=np.float64)
+    n_sents_per_lang = np.zeros(n_langs, dtype=np.float64)
 
     for li, lang in enumerate(langs):
         sentences = parity_texts[lang]
@@ -125,23 +138,22 @@ def compute_parity_weights(
             ids = enc.ids
             if not ids:
                 continue
-            # vectorised increment
             np.add.at(freq[:, li], ids, 1.0)
-        n_bytes_per_lang[li] = sum(len(s.encode("utf-8")) for s in sentences)
+        n_sents_per_lang[li] = float(len(sentences))
 
     n_tokens_per_lang = freq.sum(axis=0)
     with np.errstate(divide="ignore", invalid="ignore"):
-        tpb = np.where(
-            n_bytes_per_lang > 0,
-            n_tokens_per_lang / n_bytes_per_lang,
+        tps = np.where(
+            n_sents_per_lang > 0,
+            n_tokens_per_lang / n_sents_per_lang,
             0.0,
         )
-    valid = tpb > 0
+    valid = tps > 0
     if not valid.any():
         return np.ones(vocab_size, dtype=np.float64), {}
 
-    mean_tpb = float(tpb[valid].mean())
-    lang_penalty = np.where(valid, tpb / mean_tpb, 1.0)
+    mean_tps = float(tps[valid].mean())
+    lang_penalty = np.where(valid, tps / mean_tps, 1.0)
 
     piece_total = freq.sum(axis=1, keepdims=True)
     with np.errstate(divide="ignore", invalid="ignore"):
@@ -152,8 +164,8 @@ def compute_parity_weights(
     unseen = piece_total.squeeze(-1) == 0
     weights[unseen] = 1.0
 
-    per_lang_tpb = {lang: float(tpb[i]) for i, lang in enumerate(langs)}
-    return weights, per_lang_tpb
+    per_lang_tps = {lang: float(tps[i]) for i, lang in enumerate(langs)}
+    return weights, per_lang_tps
 
 
 def parity_aware_score(
@@ -263,19 +275,19 @@ def run_paat(
 
         # ── Parity weighting ──────────────────────────────────────────────
         if config.parity_alpha != 0.0 and parity_texts:
-            print("  [parity] computing per-language tokens-per-byte ...")
-            parity_weights, per_lang_tpb = compute_parity_weights(
+            print("  [parity] computing per-language tokens-per-sentence ...")
+            parity_weights, per_lang_tps = compute_parity_weights(
                 tokenizer, parity_texts
             )
-            tpb_vals = list(per_lang_tpb.values())
-            if tpb_vals:
-                print(f"  [parity] tpb min={min(tpb_vals):.4f}  "
-                      f"max={max(tpb_vals):.4f}  "
-                      f"mean={float(np.mean(tpb_vals)):.4f}  "
+            tps_vals = list(per_lang_tps.values())
+            if tps_vals:
+                print(f"  [parity] tps min={min(tps_vals):.2f}  "
+                      f"max={max(tps_vals):.2f}  "
+                      f"mean={float(np.mean(tps_vals)):.2f}  "
                       f"alpha={config.parity_alpha}")
         else:
             parity_weights = np.ones(current_vocab, dtype=np.float64)
-            per_lang_tpb = {}
+            per_lang_tps = {}
 
         raw_score = parity_aware_score(
             piece_scores, llm_loss,
@@ -307,9 +319,9 @@ def run_paat(
         tokenizer.save(str(tok_path))
 
         # Persist per-iteration parity diagnostics.
-        if per_lang_tpb:
+        if per_lang_tps:
             (output_dir / f"iter_{it:02d}_parity.json").write_text(
-                json.dumps(per_lang_tpb, indent=2, sort_keys=True)
+                json.dumps(per_lang_tps, indent=2, sort_keys=True)
             )
 
         log = IterationLog(

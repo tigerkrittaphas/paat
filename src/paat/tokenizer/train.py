@@ -13,10 +13,9 @@ import json
 from pathlib import Path
 from typing import Iterator
 
-from tokenizers import Tokenizer
+from tokenizers import Tokenizer, decoders, pre_tokenizers, processors
 from tokenizers.models import BPE
 from tokenizers.normalizers import NFKC
-from tokenizers.pre_tokenizers import Whitespace
 from tokenizers.trainers import BpeTrainer
 
 
@@ -104,14 +103,29 @@ def train_bpe(
     Returns:
         The trained :class:`~tokenizers.Tokenizer` object.
     """
-    tokenizer = Tokenizer(BPE(unk_token="[UNK]"))
+    # Byte-level BPE (GPT-2 style).  Three reasons we need this for the
+    # PAAT comparison:
+    #   1. The previous Whitespace pre-tokenizer degenerated on CJK/Thai
+    #      (no space boundaries) and on the multilingual corpus more
+    #      generally — the trainer exhausted the vocab budget on the
+    #      initial character alphabet and learned ~0 merges, producing
+    #      avg_token_len = 1.0 across all 96 languages (Stage 1 result).
+    #   2. ByteLevel has a fixed 256-byte initial alphabet, which leaves
+    #      almost the entire vocab budget free for merges.
+    #   3. UTF-8 bytes guarantee zero UNKs without any character-coverage
+    #      tuning, making the tokenizer comparable across scripts.
+    tokenizer = Tokenizer(BPE())
     tokenizer.normalizer = NFKC()
-    tokenizer.pre_tokenizer = Whitespace()
+    tokenizer.pre_tokenizer = pre_tokenizers.ByteLevel(add_prefix_space=False,
+                                                       use_regex=True)
+    tokenizer.decoder = decoders.ByteLevel()
+    tokenizer.post_processor = processors.ByteLevel(trim_offsets=False)
 
     trainer = BpeTrainer(
         vocab_size=vocab_size,
         min_frequency=min_frequency,
         special_tokens=SPECIAL_TOKENS,
+        initial_alphabet=pre_tokenizers.ByteLevel.alphabet(),
         show_progress=True,
     )
 

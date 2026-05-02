@@ -138,25 +138,48 @@ def balance_score(
     return score
 
 def get_coverage_protected_ids(pieces: list[tuple[str, float]]) -> list[int]:
-    """Return ids of pieces that are the sole coverage for at least one Unicode codepoint.
+    """Return ids of pieces that must survive pruning to keep coverage intact.
 
-    If these pieces were pruned, that character would have no subword representation
-    and would always map to <unk>.  We protect them the same way we protect specials.
+    Two protection rules, both necessary:
+
+    1. **Single-character pieces.**  Every piece whose surface form is one
+       Unicode codepoint after stripping the SentencePiece metaspace prefix
+       (``▁``) is protected.  These are the byte-level fallbacks: as long as
+       a single-char piece exists for codepoint *c*, any string containing
+       *c* remains representable post-prune.  The original ADAT loop only
+       caught the rarer "sole multi-piece coverage" case, which silently
+       broke Devanagari/Hebrew/Sinhala (15% UNK rate observed in Stage 1).
+
+    2. **Sole-piece coverage.**  A multi-character piece that happens to be
+       the only piece in the vocab containing some codepoint is also
+       protected.  After (1) this should be redundant for any codepoint
+       SentencePiece's character-coverage guarantees, but we keep it as
+       defence-in-depth for edge codepoints that lack a single-char form.
+
+    The metaspace marker itself (``"▁"``) is treated as a single-char piece
+    so the word-boundary signal is never pruned.
     """
     from collections import defaultdict
-    # For each Unicode codepoint, collect which piece ids cover it.
+
+    protected: set[int] = set()
+
+    # Rule 1: every single-codepoint piece survives.
+    for i, (piece, _) in enumerate(pieces):
+        surface = piece.lstrip("▁")
+        if len(surface) == 1 or piece == "▁":
+            protected.add(i)
+
+    # Rule 2: any codepoint covered by exactly one piece keeps that piece.
     codepoint_to_ids: dict[str, list[int]] = defaultdict(list)
     for i, (piece, _) in enumerate(pieces):
-        # Strip SentencePiece metaspace prefix before checking characters.
         surface = piece.lstrip("▁")
         for ch in surface:
             codepoint_to_ids[ch].append(i)
-
-    protected: list[int] = []
-    for ch, ids in codepoint_to_ids.items():
+    for ids in codepoint_to_ids.values():
         if len(ids) == 1:
-            protected.append(ids[0])
-    return protected
+            protected.add(ids[0])
+
+    return sorted(protected)
 
 
 def select_surviving_pieces(
