@@ -122,11 +122,27 @@ def balance_score(
     * ``piece_scores``:  Unigram log-probabilities (higher = more useful).
       These are the scores stored by the tokenizer.
     * ``llm_loss``:      Per-token cross-entropy (lower = better predicted).
+    * ``lam``:           Balance weight on the LLM CE term.  ``lam=0``
+                         disables the CE term entirely — pieces are
+                         ranked by their Unigram log-probability alone
+                         (and the parity bonus, if present).  Useful as
+                         an ablation: PAAT with ``lam=0`` measures the
+                         standalone effect of the parity-aware bonus
+                         without ADAT's LLM-guided pruning.
 
     Tokens never observed in the inference corpus have ``llm_loss = inf``
     and thus receive a score of 0 — they are ranked at the bottom and
     pruned first.
     """
+    if lam == 0:
+        # Degenerate case: ignore CE entirely, rank by Unigram score only.
+        # Unseen tokens still get -inf so the parity bonus alone can't
+        # rescue a piece the LLM never saw (consistent with lam>0 path).
+        score = piece_scores.astype(np.float64, copy=True)
+        unseen = ~np.isfinite(llm_loss)
+        score[unseen] = -np.inf
+        return score
+
     denom = lam * np.log(llm_loss + 1.0)
     with np.errstate(divide="ignore", invalid="ignore"):
         score = np.where(denom > 0, piece_scores / denom, -np.inf)

@@ -2,7 +2,7 @@
 name = "paat"
 version = "0.1.0"
 description = "Parity-aware Adaptive Tokenization"
-requires-python = ">=3.11"
+requires-python = ">=3.11,<3.14"
 dependencies = [
     "sentencepiece",
     "tokenizers",
@@ -28,3 +28,24 @@ build-backend = "hatchling.build"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/paat"]
+
+[dependency-groups]
+dev = [
+    "jupyter>=1.1.1",
+    "matplotlib>=3.10.9",
+]
+
+# Pin torch to the cu121 wheel index so cloud pods with NVIDIA driver
+# 12.x get a compatible build.  Without this, uv pulls the latest PyPI
+# wheel (currently cu130), which fails on driver < 13 with
+# "NVIDIA driver on your system is too old".  cu121 is forward-compatible
+# with 12.x drivers and works on every Ampere/Hopper GPU we'll target.
+[tool.uv.sources]
+torch = [
+    { index = "pytorch-cu121", marker = "sys_platform == 'linux'" },
+]
+
+[[tool.uv.index]]
+name = "pytorch-cu121"
+url = "https://download.pytorch.org/whl/cu121"
+explicit = true

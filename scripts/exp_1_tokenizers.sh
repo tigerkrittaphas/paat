@@ -1,17 +1,22 @@
 #!/usr/bin/env bash
 # ──────────────────────────────────────────────────────────────────────────
-# Stage 1 — Train all six tokenizers and run parity evaluation on each.
+# Stage 1 — Train all eight tokenizers and run parity evaluation on each.
 #
 #   1. BPE                                   → models/tokenizers/bpe/
-#   2. ADAT                                  → models/tokenizers/adat/
-#   3. Unigram (same-size baseline)          → models/tokenizers/adat/baseline/
+#   2. Parity-aware BPE (Foroutan 2025)      → models/tokenizers/parity_bpe/
+#   3. ADAT                                  → models/tokenizers/adat/
+#   4. Unigram (same-size baseline)          → models/tokenizers/adat/baseline/
 #      (produced as a side-effect of the ADAT run; reused by PAAT)
-#   4. PAAT α = 0.33                         → models/tokenizers/paat_a033/
-#   5. PAAT α = 0.67                         → models/tokenizers/paat_a067/
-#   6. PAAT α = 1.00                         → models/tokenizers/paat_a100/
+#   5. PAAT α = 0.33                         → models/tokenizers/paat_a033/
+#   6. PAAT α = 0.67                         → models/tokenizers/paat_a067/
+#   7. PAAT α = 1.00                         → models/tokenizers/paat_a100/
+#   8. PAAT α = 1.00, λ = 0   (no LLM CE)    → models/tokenizers/paat_a100_l0/
+#      (parity-bonus-only ablation; isolates the parity term from ADAT's
+#      LLM-guided pruning)
 #
 # Each tokenizer is then parity-evaluated against FLORES+:
-#   results/parity/{bpe,adat,unigram,paat_a033,paat_a067,paat_a100}.json
+#   results/parity/{bpe,parity_bpe,adat,unigram,paat_a033,paat_a067,
+#                   paat_a100,paat_a100_l0}.json
 #
 # Plus a side-by-side summary table at:
 #   results/parity/comparison.json
@@ -21,6 +26,8 @@
 #   PRESET=smoke bash scripts/exp_1_tokenizers.sh     # tiny vocab, fast
 #   ALPHAS="0.5 1.0 2.0" bash scripts/exp_1_tokenizers.sh
 #   SKIP_TRAIN=1 bash scripts/exp_1_tokenizers.sh     # parity eval only
+#   SKIP_PARITY_BPE=1 bash scripts/exp_1_tokenizers.sh   # skip slow parity-BPE
+#   SKIP_PAAT_L0=1    bash scripts/exp_1_tokenizers.sh   # skip the λ=0 ablation
 #
 # Each stage is idempotent — re-running skips tokenizers that already exist.
 # ──────────────────────────────────────────────────────────────────────────
@@ -36,6 +43,7 @@ case "$PRESET" in
         : "${TRAIN_TOK_PER_ITER:=1000000}"
         : "${EVAL_TOK_PER_ITER:=200000}"
         : "${BPE_TOTAL_DOCS:=50000}"
+        : "${PARITY_BPE_TOTAL_DOCS:=10000}"   # ~100 docs/lang — fast smoke
         ;;
     standard)
         : "${INITIAL_VOCAB:=64000}";  : "${TARGET_VOCAB:=32000}"
@@ -43,6 +51,11 @@ case "$PRESET" in
         : "${TRAIN_TOK_PER_ITER:=5000000}"
         : "${EVAL_TOK_PER_ITER:=2000000}"
         : "${BPE_TOTAL_DOCS:=500000}"
+        # Parity-BPE doesn't need the LM-scale corpus — its merge loop
+        # is single-threaded and cost grows with distinct pair count.
+        # 50K docs ≈ 500/lang is plenty for reliable parity statistics
+        # (Foroutan et al. 2025 use far less); 500K would take ~15h here.
+        : "${PARITY_BPE_TOTAL_DOCS:=50000}"
         ;;
     *)
         echo "Unknown PRESET=$PRESET. Choose smoke|standard, or set knobs directly." >&2
@@ -67,6 +80,12 @@ SEED="${SEED:-42}"
 
 SKIP_TRAIN="${SKIP_TRAIN:-0}"
 SKIP_PARITY="${SKIP_PARITY:-0}"
+SKIP_PARITY_BPE="${SKIP_PARITY_BPE:-0}"
+SKIP_PAAT_L0="${SKIP_PAAT_L0:-0}"
+
+# Parity-aware BPE knobs (Foroutan et al. 2025)
+PBPE_VARIANT="${PBPE_VARIANT:-base}"           # base | window
+PBPE_GLOBAL_MERGES="${PBPE_GLOBAL_MERGES:-0}"  # hybrid: N initial standard-BPE merges
 
 PYTHON="${PYTHON:-.venv/bin/python}"
 
@@ -81,7 +100,7 @@ cat <<EOF
   vocab:         $INITIAL_VOCAB -> $TARGET_VOCAB in $ITERATIONS iters
   per-iter tok:  train=$TRAIN_TOK_PER_ITER  eval=$EVAL_TOK_PER_ITER
   alphas:        $ALPHAS
-  total docs:    $TOTAL_DOCS  (BPE: $BPE_TOTAL_DOCS)
+  total docs:    $TOTAL_DOCS  (BPE: $BPE_TOTAL_DOCS, parity-BPE: $PARITY_BPE_TOTAL_DOCS)
   llm:           $MODEL_SIZE  bs=$BATCH_SIZE  lr=$LR  seq=$SEQ_LEN
   seed:          $SEED
 ================================================================
@@ -89,9 +108,11 @@ EOF
 
 # Tokenizer paths produced by this stage.
 BPE_DIR="$TOK_ROOT/bpe"
+PARITY_BPE_DIR="$TOK_ROOT/parity_bpe"
 ADAT_ROOT="$TOK_ROOT/adat"
 ADAT_TOK="$ADAT_ROOT/adat"
 UNIGRAM_TOK="$ADAT_ROOT/baseline"   # same-size Unigram from the ADAT run
+PAAT_L0_DIR="$TOK_ROOT/paat_a100_l0"  # PAAT α=1, λ=0 (no LLM CE) ablation
 
 # alpha → tag helper (e.g. 0.33 -> a033)
 alpha_tag() { printf "a%s" "$(echo "$1" | sed 's/[.]//g')"; }
@@ -113,6 +134,30 @@ train_bpe() {
         --output-dir "$out" \
         --vocab-size "$TARGET_VOCAB" \
         --total-docs "$BPE_TOTAL_DOCS" \
+        2>&1 | tee "$log"
+}
+
+# ── 1b. Parity-aware BPE (Foroutan et al. 2025) ────────────────────────────
+train_parity_bpe() {
+    local out="$PARITY_BPE_DIR"
+    if [[ -f "$out/tokenizer.json" ]]; then
+        echo "[skip] parity-BPE already trained at $out"
+        return 0
+    fi
+    local log="$LOG_DIR/train_parity_bpe.log"
+    echo ""
+    echo "================================================================"
+    echo "  Training parity-aware BPE  ->  $out   (log: $log)"
+    echo "  variant=$PBPE_VARIANT  global_merges=$PBPE_GLOBAL_MERGES"
+    echo "================================================================"
+    "$PYTHON" scripts/train_parity_bpe.py \
+        --data-dir       "$DATA_DIR" \
+        --flores-dir     "$FLORES_DIR" \
+        --output-dir     "$out" \
+        --vocab-size     "$TARGET_VOCAB" \
+        --variant        "$PBPE_VARIANT" \
+        --global-merges  "$PBPE_GLOBAL_MERGES" \
+        --total-docs     "$PARITY_BPE_TOTAL_DOCS" \
         2>&1 | tee "$log"
 }
 
@@ -182,17 +227,54 @@ train_paat() {
         2>&1 | tee "$log"
 }
 
+# ── 3b. PAAT α=1.0 with λ=0 (no LLM CE — parity-only ablation) ─────────────
+train_paat_no_ce() {
+    local out="$PAAT_L0_DIR"
+    local final="$out/paat/tokenizer.json"
+    if [[ -f "$final" ]]; then
+        echo "[skip] PAAT α=1.0 λ=0 already trained at $out"
+        return 0
+    fi
+    local log="$LOG_DIR/train_paat_a100_l0.log"
+    echo ""
+    echo "================================================================"
+    echo "  Training PAAT α=1.0 λ=0 (no LLM CE)  ->  $out   (log: $log)"
+    echo "================================================================"
+    "$PYTHON" scripts/run_paat.py \
+        --data-dir       "$DATA_DIR" \
+        --flores-dir     "$FLORES_DIR" \
+        --output-dir     "$out" \
+        --initial-vocab  "$INITIAL_VOCAB" \
+        --target-vocab   "$TARGET_VOCAB" \
+        --iterations     "$ITERATIONS" \
+        --total-docs     "$TOTAL_DOCS" \
+        --seq-len        "$SEQ_LEN" \
+        --train-tokens-per-iter "$TRAIN_TOK_PER_ITER" \
+        --eval-tokens-per-iter  "$EVAL_TOK_PER_ITER" \
+        --model-size     "$MODEL_SIZE" \
+        --batch-size     "$BATCH_SIZE" \
+        --lr             "$LR" \
+        --parity-alpha   "1.0" \
+        --balance-lambda "0" \
+        --seed           "$SEED" \
+        --skip-baseline \
+        --skip-comparison \
+        2>&1 | tee "$log"
+}
+
 # ── Training stage ─────────────────────────────────────────────────────────
 if [[ "$SKIP_TRAIN" != "1" ]]; then
     train_bpe
+    [[ "$SKIP_PARITY_BPE" == "1" ]] || train_parity_bpe
     train_adat                     # also produces $UNIGRAM_TOK
     i=3
     for a in $ALPHAS; do
         echo ""
-        echo "  [$i/6]"
+        echo "  [PAAT α=$a]"
         train_paat "$a"
         i=$((i + 1))
     done
+    [[ "$SKIP_PAAT_L0" == "1" ]] || train_paat_no_ce
 else
     echo ""
     echo "[SKIP_TRAIN=1] skipping tokenizer training"
@@ -233,13 +315,15 @@ echo "================================================================"
 echo "  Parity evaluation"
 echo "================================================================"
 
-eval_parity_one "bpe"     "$BPE_DIR"
-eval_parity_one "adat"    "$ADAT_TOK"
-eval_parity_one "unigram" "$UNIGRAM_TOK"
+eval_parity_one "bpe"        "$BPE_DIR"
+eval_parity_one "parity_bpe" "$PARITY_BPE_DIR"
+eval_parity_one "adat"       "$ADAT_TOK"
+eval_parity_one "unigram"    "$UNIGRAM_TOK"
 for a in $ALPHAS; do
     tag="$(alpha_tag "$a")"
     eval_parity_one "paat_${tag}" "$TOK_ROOT/paat_${tag}/paat"
 done
+eval_parity_one "paat_a100_l0" "$PAAT_L0_DIR/paat"
 
 # ── Side-by-side summary ───────────────────────────────────────────────────
 echo ""
@@ -254,7 +338,11 @@ root = Path("$PARITY_ROOT")
 alphas_str = "$ALPHAS".strip().split()
 def tag(a): return "a" + a.replace(".", "")
 
-names = ["bpe", "adat", "unigram"] + [f"paat_{tag(a)}" for a in alphas_str]
+names = (
+    ["bpe", "parity_bpe", "adat", "unigram"]
+    + [f"paat_{tag(a)}" for a in alphas_str]
+    + ["paat_a100_l0"]
+)
 rows = []
 for n in names:
     p = root / f"{n}.json"

@@ -37,6 +37,123 @@ from paat.tokenizer.parity_bpe.hf_tokenizer import build_vocab_from_merges
 SPECIAL_TOKENS = ["[UNK]", "[CLS]", "[SEP]", "[PAD]", "[MASK]"]
 
 
+_PARALLEL_PATCH_INSTALLED = False
+
+
+def _install_parallel_preprocess() -> None:
+    """Replace ``_upstream.preprocess_input_data`` with a thread-pooled version.
+
+    Idempotent — re-installing is a no-op.  The replacement is functionally
+    identical to the original; it only swaps the serial loops over input/dev
+    files for parallel ``ThreadPoolExecutor.map`` calls.  Safe because
+    ``get_vocabulary`` does its work in Rust (HF tokenizers' ``pre_tokenize_str``)
+    which releases the GIL.
+    """
+    global _PARALLEL_PATCH_INSTALLED
+    if _PARALLEL_PATCH_INSTALLED:
+        return
+
+    import copy
+    import functools
+    import os
+    from collections import defaultdict
+    from concurrent.futures import ThreadPoolExecutor
+
+    import numpy
+
+    def parallel_preprocess_input_data(
+        infiles, devfiles,
+        is_dict=False, total_symbols=False, num_global=0,
+        num_workers=1, bpe_file=None,
+    ):
+        bpe_codes = None
+        if bpe_file is not None:
+            line = bpe_file.readline()
+            offset = 1
+            if not line.startswith("version"):
+                bpe_file.seek(0)
+                offset = 0
+            raw = [tuple(item.strip("\r\n ").split(" "))
+                   for item in bpe_file.read().rstrip("\n").split("\n")]
+            for i, item in enumerate(raw):
+                if len(item) != 2:
+                    raise ValueError(
+                        f"Bad BPE codes line {i + offset}: {' '.join(item)}"
+                    )
+            bpe_codes = dict(
+                (code, i) for (i, code) in reversed(list(enumerate(raw)))
+            )
+
+        def _build(f):
+            v = _upstream.get_vocabulary(f, is_dict, num_workers=1)
+            if bpe_codes is not None:
+                v = _upstream.pre_merge(v, bpe_codes)
+            return dict(((tuple(x,), y) for (x, y) in v.items()))
+
+        # Pool size: bounded by both file count and CPU count.  CPU-bound
+        # tasks (`pre_tokenize_str`) inside HF Rust release the GIL, so
+        # threads scale near-linearly with cores up to ~16.
+        n_workers = min(len(infiles) or 1, (os.cpu_count() or 4) * 2)
+        with ThreadPoolExecutor(max_workers=n_workers) as ex:
+            print(f"  [pbpe] preprocess inputs: {len(infiles)} files × "
+                  f"{n_workers} threads ...", flush=True)
+            vocabs = list(ex.map(_build, infiles))
+            dev_vocabs = []
+            if devfiles:
+                print(f"  [pbpe] preprocess devs:   {len(devfiles)} files × "
+                      f"{n_workers} threads ...", flush=True)
+                dev_vocabs = list(ex.map(_build, devfiles))
+
+        joint_keys = set().union(*(v.keys() for v in vocabs))
+        dev_keys = set().union(*(v.keys() for v in dev_vocabs)) if dev_vocabs else set()
+
+        array_length = len(vocabs) + (1 if num_global else 0)
+
+        vocab = defaultdict(lambda: numpy.zeros(array_length, dtype=int))
+        for i, v in enumerate(vocabs):
+            for key in joint_keys:
+                vocab[key][i] = v.get(key, 0)
+        if num_global:
+            for key in joint_keys:
+                vocab[key][-1] = sum(vocab[key])
+
+        dev_vocab = defaultdict(lambda: numpy.zeros(len(dev_vocabs), dtype=int))
+        if dev_vocabs:
+            for i, v in enumerate(dev_vocabs):
+                for key in dev_keys:
+                    dev_vocab[key][i] = v.get(key, 0)
+
+        sorted_vocab = sorted(vocab.items(), key=lambda x: sum(x[1]), reverse=True)
+        stats, indices = _upstream.get_pair_statistics(sorted_vocab)
+        big_stats = copy.deepcopy(stats)
+
+        if total_symbols:
+            uniq_internal = set()
+            uniq_final = set()
+            for word in vocab:
+                for char in word[:-1]:
+                    uniq_internal.add(char)
+                uniq_final.add(word[-1])
+
+        threshold = numpy.zeros(array_length, dtype=int)
+        for l in range(array_length):
+            threshold[l] = stats[max(stats, key=lambda x: (stats[x][l], x))][l] / 10
+
+        if dev_vocab:
+            lengths = functools.reduce(
+                numpy.add,
+                [len(key) * value for key, value in dev_vocab.items()],
+            )
+        else:
+            lengths = numpy.zeros(len(dev_vocabs) if dev_vocabs else 0, dtype=int)
+
+        return (dev_vocab, sorted_vocab, stats, indices, big_stats,
+                threshold, lengths, array_length)
+
+    _upstream.preprocess_input_data = parallel_preprocess_input_data
+    _PARALLEL_PATCH_INSTALLED = True
+
+
 class _JsonlTextStream:
     """Adapts a ``<lang>.jsonl`` file to the file-like interface the
     upstream learner expects.
@@ -52,15 +169,18 @@ class _JsonlTextStream:
         path: Path,
         key: str = "text",
         record_filter: Callable[[dict], bool] | None = None,
+        max_docs: int | None = None,
     ):
         self.path = Path(path)
         self.name = str(self.path)
         self._key = key
         self._filter = record_filter
+        self._max_docs = max_docs
         self._fh = None
 
     def __iter__(self):
         self._fh = self.path.open(encoding="utf-8")
+        n = 0
         for line in self._fh:
             line = line.strip()
             if not line:
@@ -69,6 +189,9 @@ class _JsonlTextStream:
             if self._filter is not None and not self._filter(rec):
                 continue
             yield rec[self._key]
+            n += 1
+            if self._max_docs is not None and n >= self._max_docs:
+                break
 
     def close(self):
         if self._fh is not None:
@@ -141,6 +264,7 @@ def train_parity_bpe(
     alpha: int = 2,
     ratio: list[float] | None = None,
     verbose: bool = False,
+    total_docs: int | None = None,
 ) -> Tokenizer:
     """Train a parity-aware BPE tokenizer and save it to *output_dir*.
 
@@ -184,8 +308,26 @@ def train_parity_bpe(
     langs = _resolve_languages(data_dir, languages)
     print(f"Languages ({len(langs)}): {langs}")
 
+    # Per-language doc caps proportional to MC4_NATURAL_COUNTS — without
+    # this the upstream learner reads entire mC4 language files (gigabytes
+    # each) and is unusable for both local dev and the cloud sample.
+    docs_per_lang: dict[str, int] | None = None
+    if total_docs is not None:
+        from paat.data.languages import MC4_NATURAL_COUNTS
+        total_natural = sum(MC4_NATURAL_COUNTS.get(l, 1) for l in langs)
+        docs_per_lang = {
+            l: max(1, round(total_docs * MC4_NATURAL_COUNTS.get(l, 1) / total_natural))
+            for l in langs
+        }
+        print(f"Doc cap: {sum(docs_per_lang.values()):,} total "
+              f"(proportional to MC4_NATURAL_COUNTS)")
+
     inputs: list[_JsonlTextStream] = [
-        _JsonlTextStream(data_dir / f"{l}.jsonl", key="text") for l in langs
+        _JsonlTextStream(
+            data_dir / f"{l}.jsonl", key="text",
+            max_docs=docs_per_lang.get(l) if docs_per_lang else None,
+        )
+        for l in langs
     ]
 
     devs: list[_JsonlTextStream] | None = None
@@ -236,6 +378,14 @@ def train_parity_bpe(
     _upstream.pre_tokenizer = pre_tokenizers.Sequence(
         [Whitespace(), ByteLevel(use_regex=False)]
     )
+
+    # Monkey-patch upstream `preprocess_input_data` to parallelise the
+    # per-language `get_vocabulary` calls.  Without this, all 96 input +
+    # 96 dev files are processed sequentially in Python, which can take
+    # 30–60 minutes before the merge loop even starts on a 10M-doc corpus.
+    # `get_vocabulary` calls `pre_tokenize_str` (Rust, releases GIL), so a
+    # plain ThreadPoolExecutor gets near-linear speedup over the file list.
+    _install_parallel_preprocess()
 
     import numpy as np
     ratio_arr = None

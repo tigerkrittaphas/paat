@@ -75,16 +75,19 @@ ALPHAS="${ALPHAS:-0.33 0.67 1.0}"
 # Map logical name → tokenizer.json directory.  Override individually if
 # Stage 1 was run with a custom layout.
 BPE_TOK="${BPE_TOK:-$TOK_ROOT/bpe}"
+PARITY_BPE_TOK="${PARITY_BPE_TOK:-$TOK_ROOT/parity_bpe}"
 ADAT_TOK="${ADAT_TOK:-$TOK_ROOT/adat/adat}"
 UNIGRAM_TOK="${UNIGRAM_TOK:-$TOK_ROOT/adat/baseline}"
+PAAT_L0_TOK="${PAAT_L0_TOK:-$TOK_ROOT/paat_a100_l0/paat}"
 
 alpha_tag() { printf "a%s" "$(echo "$1" | sed 's/[.]//g')"; }
 
 # Build the default MODELS list from the presets unless user overrode it.
-default_models="bpe adat unigram"
+default_models="bpe parity_bpe adat unigram"
 for a in $ALPHAS; do
     default_models="$default_models paat_$(alpha_tag "$a")"
 done
+default_models="$default_models paat_a100_l0"
 MODELS="${MODELS:-$default_models}"
 
 SKIP_PRETRAIN="${SKIP_PRETRAIN:-0}"
@@ -108,10 +111,12 @@ EOF
 # Resolve a logical model name to its tokenizer directory.
 get_tokenizer_path() {
     case "$1" in
-        bpe)        echo "$BPE_TOK" ;;
-        adat)       echo "$ADAT_TOK" ;;
-        unigram)    echo "$UNIGRAM_TOK" ;;
-        paat_*)     echo "$TOK_ROOT/${1}/paat" ;;
+        bpe)           echo "$BPE_TOK" ;;
+        parity_bpe)    echo "$PARITY_BPE_TOK" ;;
+        adat)          echo "$ADAT_TOK" ;;
+        unigram)       echo "$UNIGRAM_TOK" ;;
+        paat_a100_l0)  echo "$PAAT_L0_TOK" ;;
+        paat_*)        echo "$TOK_ROOT/${1}/paat" ;;
         *) echo "Unknown model name: $1" >&2; return 1 ;;
     esac
 }

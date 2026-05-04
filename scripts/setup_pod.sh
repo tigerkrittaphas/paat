@@ -43,11 +43,23 @@ fi
 # ── 2. uv (project manager) ────────────────────────────────────────────────
 echo ""
 echo "[2/5] Ensuring uv is installed ..."
+# Make sure $PATH already includes the canonical install dirs so a previous
+# install (e.g. partial-success from a prior run) is detected.
+export PATH="$HOME/.local/bin:$HOME/.cargo/bin:$PATH"
 if ! command -v uv >/dev/null 2>&1; then
-    curl -LsSf https://astral.sh/uv/install.sh | sh
-    # uv installs to ~/.local/bin or ~/.cargo/bin depending on platform
-    export PATH="$HOME/.local/bin:$HOME/.cargo/bin:$PATH"
+    # UV_INSTALLER_NO_MODIFY_PATH=1 stops the installer from writing to
+    # ~/.bashrc / ~/.config/fish/conf.d / etc.  On stripped pod images the
+    # fish-config write fails ("Permission denied" on ~/.config/fish) and
+    # the whole installer exits non-zero — even though uv itself installed
+    # fine.  We don't need shell rc edits anyway since we just exported PATH.
+    curl -LsSf https://astral.sh/uv/install.sh \
+        | env UV_INSTALLER_NO_MODIFY_PATH=1 sh
 fi
+command -v uv >/dev/null 2>&1 || {
+    echo "[FATAL] uv install completed but binary is not on PATH." >&2
+    echo "        Looked under: $HOME/.local/bin and $HOME/.cargo/bin" >&2
+    exit 1
+}
 uv --version
 
 # ── 3. Python environment ──────────────────────────────────────────────────
@@ -59,16 +71,50 @@ echo "  python: $(.venv/bin/python --version)"
 # ── 4. CUDA / torch sanity ─────────────────────────────────────────────────
 echo ""
 echo "[4/5] Verifying CUDA + torch ..."
-.venv/bin/python - <<'PY'
-import torch, sys
-print(f"torch: {torch.__version__}")
-print(f"cuda available: {torch.cuda.is_available()}")
-if not torch.cuda.is_available():
-    sys.exit("[FATAL] no CUDA device visible — check `nvidia-smi` and pod image.")
-for i in range(torch.cuda.device_count()):
-    p = torch.cuda.get_device_properties(i)
-    print(f"  gpu{i}: {p.name}  {p.total_memory / 1e9:.1f} GB")
+
+# Run the check; if cuda is unavailable AND nvidia-smi sees a GPU, it's
+# almost always a torch/driver mismatch — uv pulled a torch wheel built
+# for a newer CUDA than the pod's driver supports.  Auto-heal by
+# reinstalling torch from the cu121 wheel index (forward-compatible with
+# 12.x drivers).
+torch_check() {
+    .venv/bin/python - <<'PY'
+import sys
+try:
+    import torch
+    ok = torch.cuda.is_available()
+    print(f"torch: {torch.__version__}  cuda: {ok}")
+    if ok:
+        for i in range(torch.cuda.device_count()):
+            p = torch.cuda.get_device_properties(i)
+            print(f"  gpu{i}: {p.name}  {p.total_memory / 1e9:.1f} GB")
+        sys.exit(0)
+except Exception as e:
+    print(f"torch import failed: {e}")
+sys.exit(1)
 PY
+}
+
+if ! torch_check; then
+    if command -v nvidia-smi >/dev/null && nvidia-smi -L >/dev/null 2>&1; then
+        echo ""
+        echo "[heal] CUDA unavailable but nvidia-smi sees a GPU — reinstalling"
+        echo "       torch from cu121 wheel index (compatible with driver 12.x) ..."
+        uv pip install --reinstall torch \
+            --index-url https://download.pytorch.org/whl/cu121
+        echo ""
+        echo "[heal] retrying CUDA check ..."
+        torch_check || {
+            echo "[FATAL] torch still cannot see CUDA after cu121 reinstall." >&2
+            echo "        Check: nvidia-smi" >&2
+            exit 1
+        }
+    else
+        echo "[FATAL] no CUDA device visible AND nvidia-smi sees no GPU." >&2
+        echo "        Check the pod image — it may not have GPU passthrough." >&2
+        exit 1
+    fi
+fi
 
 # ── 5. Data bundle ─────────────────────────────────────────────────────────
 echo ""
@@ -92,10 +138,14 @@ if [[ -n "$BUNDLE" ]]; then
 
     n_mc4=$(find data/raw/mc4 -maxdepth 1 -name '*.jsonl' 2>/dev/null | wc -l)
     n_flo=$(find data/raw/flores -maxdepth 1 -name '*.jsonl' 2>/dev/null | wc -l)
-    size=$(du -sh data/raw 2>/dev/null | awk '{print $1}')
-    echo "  mC4 langs:    $n_mc4"
-    echo "  FLORES langs: $n_flo"
-    echo "  total size:   $size"
+    n_tok=$(find models/tokenizers -maxdepth 3 -name 'tokenizer.json' 2>/dev/null | wc -l)
+    n_par=$(find results/parity -maxdepth 1 -name '*.json' 2>/dev/null | wc -l)
+    size=$(du -sh data/raw models/tokenizers results/parity 2>/dev/null | tail -1 | awk '{print $1}')
+    echo "  mC4 langs:        $n_mc4"
+    echo "  FLORES langs:     $n_flo"
+    echo "  tokenizers:       $n_tok"
+    echo "  parity reports:   $n_par"
+    echo "  total bundle size: $(du -sh data/raw models/tokenizers results/parity 2>/dev/null | awk '{s+=$1} END {print s}' | numfmt --to=iec --suffix=B 2>/dev/null || echo "see du -sh")"
 else
     echo "[5/5] No bundle path given — skipping data unpack."
 fi

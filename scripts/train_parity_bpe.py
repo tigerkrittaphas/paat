@@ -122,6 +122,15 @@ def main() -> None:
              "dev sets. Must match the number of languages.",
     )
     parser.add_argument(
+        "--total-docs",
+        type=int,
+        default=None,
+        metavar="N",
+        help="Total mC4 docs across all languages, distributed proportionally "
+             "to MC4_NATURAL_COUNTS.  Default: None = stream entire language "
+             "files (gigabytes each; only sane on a pre-sampled corpus).",
+    )
+    parser.add_argument(
         "--verbose",
         action="store_true",
         help="Verbose progress output from the learner.",
@@ -173,6 +182,7 @@ def main() -> None:
         alpha=args.alpha,
         ratio=args.ratio,
         verbose=args.verbose,
+        total_docs=args.total_docs,
     )
     elapsed = time.time() - t0
     print(f"Training time: {elapsed:.1f}s  ({elapsed/60:.1f} min)")
