@@ -1,0 +1,173 @@
+sentencepiece_trainer.cc(78) LOG(INFO) Starts training with : 
+trainer_spec {
+  input: models/tokenizers/paat_a20_l0/sp_init/corpus.txt
+  input_format: 
+  model_prefix: models/tokenizers/paat_a20_l0/sp_init/sp
+  model_type: UNIGRAM
+  vocab_size: 64000
+  self_test_sample_size: 0
+  character_coverage: 0.9995
+  input_sentence_size: 500000
+  shuffle_input_sentence: 1
+  seed_sentencepiece_size: 1000000
+  shrinking_factor: 0.75
+  max_sentence_length: 4192
+  num_threads: 16
+  num_sub_iterations: 2
+  max_sentencepiece_length: 16
+  split_by_unicode_script: 1
+  split_by_number: 1
+  split_by_whitespace: 1
+  split_digits: 0
+  pretokenization_delimiter: 
+  treat_whitespace_as_suffix: 0
+  allow_whitespace_only_pieces: 0
+  required_chars: 
+  byte_fallback: 0
+  vocabulary_output_piece_score: 1
+  train_extremely_large_corpus: 0
+  seed_sentencepieces_file: 
+  hard_vocab_limit: 1
+  use_all_vocab: 0
+  unk_id: 0
+  bos_id: 1
+  eos_id: 2
+  pad_id: 3
+  unk_piece: <unk>
+  bos_piece: <s>
+  eos_piece: </s>
+  pad_piece: <pad>
+  unk_surface:  ⁇ 
+  enable_differential_privacy: 0
+  differential_privacy_noise_level: 0
+  differential_privacy_clipping_threshold: 0
+}
+normalizer_spec {
+  name: nmt_nfkc
+  add_dummy_prefix: 1
+  remove_extra_whitespaces: 1
+  escape_whitespaces: 1
+  normalization_rule_tsv: 
+}
+denormalizer_spec {}
+trainer_interface.cc(355) LOG(INFO) SentenceIterator is not specified. Using MultiFileSentenceIterator.
+trainer_interface.cc(186) LOG(INFO) Loading corpus: models/tokenizers/paat_a20_l0/sp_init/corpus.txt
+trainer_interface.cc(382) LOG(WARNING) Found too long line (10996 > 4192).
+trainer_interface.cc(384) LOG(WARNING) Too long lines are skipped in the training.
+trainer_interface.cc(385) LOG(WARNING) The maximum length can be changed with --max_sentence_length=<size> flag.
+trainer_interface.cc(393) LOG(INFO) Reserved chars are found. Skipped: ლ(o◡oლ)﻿﻿ Wide-eyed Happy Hands Up | 1ClickEmoji Add Tags for "Wide-eyed Happy Hands Up" ლ(╹◡╹ლ) Happy Hands Up(ﾉ^_^)ﾉ Squinty Happy Arms Up(ノ・∀・)ノ Laughing Arms Up♪ ♬ ヾ(´︶`♡)ﾉ ♬ ♪ Dancing with music #2┐_ ㋡ _┌ I don't know #4＝( ^o^)ノ ．．．…___ｏ Bowling Fun●ヽ(ﾟ∀ﾟヽ)♪♪(ノﾟ∀ﾟ)ノ● Having Fun╮(─ヮ─)╭ I don't know #7ʘ‿ʘ Happy Happyლ(╹◡╹ლ ) GIVE ME☜(°▽°)☞ YAS YAS!(・∀・)ノ~~~~~~~~~~◎ Fun with yoyo＼(★^∀^★)／ Hands Upd(-_^) Winking Thumbs Up( /¯ °3° )/¯ Cool man #9＼(＾O＾)／ It's A Celebration◉‿◉ Drugged Up Happyヘ(^_^ヘ) Holler!ლ(^ʚ^ლ) come here🙏 Person With Folded Hands👭 Two Women Holding Handsヾ(*ΦωΦ)ﾉ Cat Eyes Hands Up(b~_^)b Hands Thumbs Up(●°u°●)​ 」 O Hai(☞ ͡° ͜ʖ ͡°) ☞ Lenny #3ㄟ( ･ө･ )ㄏ Bird hands upヽ( o♡o )/ Hands Up Heart🙊 Speak-No-Evil Monkeyヽ(^o^)ρ┳┻┳°σ(^o^)/ Ping Pong∩(｀・ω・´)∩ Hands Up 2(^Ｏ^) That's cool😄 Smiling Face With Open Mouth and Smiling Eyesヽ(*′ω`)ﾉﾞ hands up #2＼( ^ω^＼ ) Hands up dance(ˆڡˆ)v Tasty Nom Face(◑‿◐). Face Smiling-x(óωò｡) Kawaii face #54(/^▽^)/ Han up😃 Smiling Face With Open Mouth╰ (*´︶`*) ╯ I feel lucky #6(ﾉ･ｪ･)ﾉ Hands up and danceヽ༼ຈل͜ຈ༽ﾉ︵┻━┻ Flipping hands up╲ʕ·ᴥ·╲ʔ Bear hands upʕ/　·ᴥ·ʔ/ Hands up bear۹⌤ _ ⌤۹ Hands up excitedヾ(*´∀｀*）ノ Partying To The Left୧ʕ ◕ o ◕ ʔ୨ Cute eyes bear(╹◡╹)凸 FUCK IT🙌 Person Raising Both Hands in Celebrationヘ(◕ω ◕ヘ✿) Kawaii face #57 View More Related (=｀ェ´=) Evil #11[◉"] Camera #2(҂◡_◡) Crying Cause Injured(づ｡◕w◕｡)づ Cute arm👩🏼‍🍳 Female Cook, Type-3(ʃ_⌣̀ )/|| Sad Hide💳 Credit Cardxp Tongue Out(° ͜ʖ°) Stalker Guy｛・ω-*} Cuddly Wink(b≧∀)ｸﾞ Really happy #7（＾＿－）≡★ Star Wink＾ｐ＾ Eager #1(´┓`*) Drooling #1🇩🇿 Flag for Algeria🕊 Dove of Peace（TД T） I'm not ok #7( ⋋▂⋌ ) Forward Facing Anger #8╠╬〠╬╣ Long ArmsღԵհɑղƘՏღ( ؔ✪̤ ◡ ؔ✪̤` ๑) Thanks（（（(T-T*)））） Depressed #12໒(•න꒶̰න•)७ Interested #9( ⏺∇⏺) Today will be a good day #6(´ゝ∀・｀)ﾉ Hi,hi #6🇦🇮 Flag for Anguilla👩‍👩‍👦‍👦 Family (Woman, Woman, Boy, Boy)(=‿‿=.) Vocaloid #5🏈\ʕ-ᴥ◕ʋʔ Winking Bear Quarterbackʕっ•ᴥ•ʔっ︵ sǝɹᴉɟplᴉʍ Bear Hates Wildfires🥙 Stuffed Flatbread⸍⚙̥ꇴ⚙̥ ⸌ Rare thing☝🏽 White Up Pointing Index + Emoji Modifier Fitzpatrick Type-4🕺🏽 Man Dancing + Emoji Modifier Fitzpatrick Type-4ლ(ಠ益ಠლ) Y U Noʕ； •`ᴥ•´ʔ Panda's Angry!( •ิ_•ิ )? Blank Look🤷‍♀️ Woman Shrugging👳🏼 Man With Turban, Type-3(✿╹◡╹) Pretty( 乂☉ｪ☉= ) Surprise bunny(・´ｪ｀・ ) Sad blush #1☁ ▅▒░☼‿☼░▒▅ ☁ Sunny Day(￣(ｴ)￣)ﾉ Annoyed �Bear(≧∀≦) Excited #11┐_㋡_┌ Round Shrugʕ ⊃･ ◡ ･ ʔ⊃︵┻━┻ Flipping bearε=ε=ε=(۶•̀Д•́)۶ Running angry(ノ✿・∀・)ノ So good #3━═★[̲̅̅H̲̅][̲̅̅A̲̅][̲̅̅P̲̅][̲̅̅P̲̅][̲̅̅Y̲̅] [̲̅̅B̲̅][̲̅̅I̲̅][̲̅̅R̲̅][̲̅̅T̲̅][̲̅̅H̲̅][̲̅̅D̲̅][̲̅̅A̲̅][̲̅̅Y̲̅]★═━ Birthday☝️ White Up Pointing Index
+trainer_interface.cc(393) LOG(INFO) Reserved chars are found. Skipped: ...Ark ... | OK.RU ...Ark ... News FeedTopics 32Photos 5Videos Participants 55 ▁▂▃▄▅▆▇✮ℕᝪⅅⅈℛℬℰK ✮▇▆▅▄▃▂▁ Unutolmay qiynalma Meni aslo oylama Bevafo de ket mayli Eslama jonim layli Kechganim yoq men atay Sensiz yawayin qanday Ayirdi taqdir sendan Qolimda emas netay Majburman jonim wunga ravo korma bogzimga Sen ozga olandasan teng kelolmas sevgimga Oylama ojizmasman Afsuski tenging masman Baxtli bolgin tilagim Taslim boldi yuragim Sensiz yuzimda goyo kulgu Ammo yiglayman dildan mangu Abadiy yawaydi yurak yodimda Umrimda birbora sevgandim chindan ark guruxi nega sust ark qora saxifa Ark... Sarob ξλσмθη (υζβ) ρσGε ~*Ark*~ qöwularidan parcha yozamiza wu temaga : ♫ <ArK> ♫ & Nodir Mirfayziev "QizG'onaMan" - FaRisHTa MiSoLi DoIm YonImDaSan NaFaS Bo'LiB DoIm TanU-JonImDaSan IsHQinGDa YonaMan MeHrInGDan QonaMan HaTtoKi O'zImDan SenI QizG'onaMan QizG'onaMan SenI KecHa KunDuzLarDan QizG'onaMan oSmonDaGi YuLDuzLarDan HaTtoKi sHamoLDan To'KiLGan BarGLarDan HaTtoKi SoYanGDan QizG'onaMan QizG'onIsHim BiLib eRKaLik QiLma MenDan o'ZGaSinI NaZarGa iLma aYLaTiB RasHk QaLBim TiLma BiLaSan Men SenI QizG'onaMan SenI Har Bir So'ZinG SuV YoKi HaVo MeHrLi ♫ <ArK> ♫"DraMma" - BirIncHi MarTa Ko'rGanImDa Man SanI YuraGim SezGanI Yo'Q HecHniManI o'YLarDim HaMma QaTorI oDdiY QizcHa YuRisH TuRisHi GaP-So'zLarI Nu Tak O'rTacHa KeYin HaMma- HaMmaSi BirDaniGa O'zGarDi VuJuDimDaGi YuRak iSmInGni aYTiB uRarDi QoRa Ko'ZLarInG DoIm MenGa KuLiB BoQarDi JaxLinG cHiQSa Ham Go'ZaL eDinG ManGa YoQarDi BiLmaSDim SeVGimIDi-Bu YokI O'rGanIsH YuRakDa PaYDo Bo'LDi RasHk BosHLanDi QizG'anIsH GaPDan QoLMasDi HecHkim DoIm GaP TaLasHarDik "RoMeo & JuLeTta (σffiçiลl group) ॐॐ ♥ЛюБлЮ♥ ॐﮩﮫﮩNʘdirॐﮩﮫﮩ ღॐАдОлАт Ξηo λονє
+trainer_interface.cc(393) LOG(INFO) Reserved chars are found. Skipped: 穆巴拉克會不會脚痛落台呢?占了一卦.地山謙 - k98 - 頭條日報　頭條網 Blog City k98博客主頁 穆巴拉克會不會脚痛落台呢?占了一卦.地山謙 2011/02/10 00:04:19 網誌分類: 流年預測未來時世吉凶 公历起卦时间：2011年2月9日9时3分　(手工指定) 农历：辛卯年正月初七日巳时 立春：2011年02月04日12时32分 惊蛰：2011年03月06日06时43分 干支：辛卯年　庚寅月　乙未日　辛巳时　（日空：辰巳） 兑宫：地山谦 兑宫：地山谦 玄武 兄弟癸酉金 ▅▅　▅▅ 兄弟癸酉金 ▅▅　▅▅ 白虎 子孙癸亥水 ▅▅　▅▅ 世 子孙癸亥水 ▅▅　▅▅ 世 腾蛇 父母癸丑土 ▅▅　▅▅ 父母癸丑土 ▅▅　▅▅ 勾陈 兄弟丙申金 ▅▅▅▅▅ 兄弟丙申金 ▅▅▅▅▅ 朱雀 妻财丁卯木 官鬼丙午火 ▅▅　▅▅ 应 官鬼丙午火 ▅▅　▅▅ 应 青龙 父母丙辰土 ▅▅　▅▅ 父母丙辰土 ▅▅　▅▅ 1. 卦辭 地山謙這個卦的白話文解釋是說: 謙卦象徵「謙虛、謙遜」。占得謙卦，亨通，君子最終會有好結果。 2. 彖傳 亨通，是因為天道尊顯而降下，地到卑下而上升。天道減損盈滿而補充虧損，地到削減高凸而充實地面的低凹，鬼神作祟有餘者造福不足的人，人道憎惡驕佚而喜歡謙虛。保持謙虛，雖然身處尊貴但是仍然能夠光大謙虛的美德。身處卑微也沒有人敢去凌辱，如此就會像卦辭所謂的君子會有好的結果。 3. 象傳 地中有山，這就是地山謙的原意。 君子應該減損有餘然後補充不足，衡量物質的多寡然後給以公平施予。 埃及總統穆巴垃克賴死唔下台,今占一卦看看發展如何,從爻辭看;謙卦是64卦中最吉者之一,謙虛乃得人心也,但是從爻卦五行看,二爻為民,五爻為政府,二爻正氣得位,得太歲生,日合,氣勢如虹,勢不可擋,二爻陰與五爻陰相鬥,政府亥水處於弱勢,其身不正,貪污腐敗,屬西方國家申酉弱勢,自身難保救不了穆巴拉克,應在本月十九日和平退位,出走外國避世,讓副總統接手和平過渡,埃及才始平亂,如果穆巴拉克繼續賴死唔下台,難過農歷四月,到時必被反對派推翻,謙卦的意思是謙讓.退讓才能免禍o 未來民選政府并非美國想當然親美,而是反美,中東變天由此開始,反美勢力不斷漫延整個中東,美國老有排頭痛。 2011年占星術預測天災人禍;
+trainer_interface.cc(393) LOG(INFO) Reserved chars are found. Skipped: Se você gostou de ‘Saga Lux’, vai gostar de ‘Os Legados de Lorien’ | | QG Creators Se você gostou de ‘Saga Lux’, vai gostar de ‘Os Legados de Lorien’ Olá leitores! Pensando em trazer para vocês uma sugestão de leitura, sem ter que resenhar um livro, eu resolvi fazer a coluna ” Se você gostou de… vai gostar de…” em que eu divulgo livros com temáticas parecidas porém de autores diferentes. E para minha primeira sugestão vou falar de duas séries: A Saga Lux de Jennifer L. Armentrout e a série Os Legados de Lorien de Pittacus Lore. As duas séries tem a temática alienígena, e os leitores podem esperar por muitas cenas de ação em ambas. A Saga Lux começou a ser lançada no Brasil em 2015 pela Editora Valentina, com o livro Obsidiana. A série é composta por cinco livros, porém até o momento apenas três foram lançados no Brasil, e a cada dia conquistam mais leitores. A saga conta a história de Kate, uma garota comum que se muda para West Virginia e descobre que seu vizinho super gato é um alienígena. Devido a alguns fatos, Kate se vê envolvida nesse mundo e também transformada por ele. Obsidiana; (resenha aqui) Ônix; (resenha aqui) Opala. (resenha aqui) A saga tem uma pegada New Adult, então temos, além da ação e reviravoltas próprios do enredo, os questionamentos e dúvidas da personagem principal, em torno das próprias atitudes e escolhas. A escrita em primeira pessoa é leve, descontraída e viciante. Os livros são repletos de ação e reviravoltas, e são impossíveis de largar. ▅ ▆ ▇ ▆ ▅ A série os Legados de Lorien começou a ser lançada pela Editora Intrínseca aqui no Brasil em 2011 com o livro “Eu Sou o Número Quatro” que virou filme nesse mesmo ano. O filme não teve continuação, diferentemente dos livros que somam uma série com sete volumes (o último lançado em 2016) e quinze e-books. Continue lendo em Proposições Literárias Tagged Blog Proposições Literárias Comunidade dos blogueiros Dicas Ele só pode ser de outro planeta Eu sou o número quatro Indicação de livro Livros OBsidiana QG dos blogueiros Resenha Sinopse
+trainer_interface.cc(393) LOG(INFO) Reserved chars are found. Skipped: Blog de soy-espagnola78 - ¤ Şpάñ¡sђ ђẳşτẳ Şîз๓pяз ¤ - Skyrock.com ¤ Şpάñ¡sђ ђẳşτẳ Şîз๓pяз ¤ soy-espagnola78 ¿VÏVÄ ESPÄñÄ!! soy-espagnola7827 ans Lâtîñâ pârâ Sîêmprê Design by soy-espagnola78 Création : 08/01/2008 à 11:13 Mise à jour : 23/12/2008 à 06:39 ▂ ▃ ▄ ▅ ▆ ▇ •°♀•°Aùrélîê•°♀•°•°♀•° 18 âñs •°♀•°•°♀•° Зşקắģή[Ǿ]ℓέ •°♀•°•°♀•°Rêprésêñtê Mâñtês Lâ jØlîê•°♀•°•°♀•° Trøîsίε๓έ λאאé δe βâς קя[Ợ] m[ộ]d3 •°♀•° •°♀•°Vip-Spanish78.Skay •°♀•° █ ▇ ▆ ▅ ▄ ÄmØùrêùsê---»■■■■■■■■■■[90%] JâlØùsê---»■■■■■■■■■■[100%] Nømbrîllîstê---»■■■■■■■■■■[50%] Spørtîvê---»■■■■■■■■■■[100%] TîmîÐê---»■■■■■■■■■■[20%] Pøsésîvê---»■■■■■■■■■■[100%] Lùñâtîqùê---»■■■■■■■■■■[70%] Gêñtîllê---»■■■■■■■■■■[60%] ËcøñØmê---»■■■■■■■■■■[30%] Søùrîâñtê---»■■■■■■■■■■[70%] Fùmêùsê---»■■■■■■■■■■[01%] Nârcîsîqùê---»■■■■■■■■■■[60%] Gøùrmâñdê---»■■■■■■■■■■[100%] Rêñcùñîére---»■■■■■■■■■■[80%] # Posté le mardi 08 janvier 2008 11:19 Üñ Ptî Bøù Dê Pârâdîs Dâñs Cêttê Ëñfêr.. ♥ 06 Mois ♥ # Posté le lundi 23 juin 2008 04:15 Sîêmprê Espâñâ !! Bîêñ Plùs K'ùñê Fîêrté.. # Posté le jeudi 19 juin 2008 04:28 Modifié le lundi 25 août 2008 03:21 ►Jùst prîmâ ◄ Lê têmps pâssê øñ grâñdî Mâî øñ êst tjr Lâ l'ùñê pøùr l'âûtrê.. Jê tîêñs bøcøùp â twâ Mâ zîñê.. jâî bêsøîñ dê tØâ dâñs mâ vîê.. Tù êst Mâ prîsê dê cøñscîêñcê.. cêllê kî mê fâî âvâñcêr kâñ jâî pâs lê mørâl.. Jê kîfff nøs rêpâs dê fâmîllê âvc nøtrê frømâgê tmtc..^^ Lês føtøs âc tâ câm.. Lês délîrês kî dâtês (Lâ møùchê dâñs Lâ bøùtêillê dê pérîêr^^,"cêst nørmâl jvøî r1.."^^..) jV pâ cøñtîñùêr â écrîr mâ lîfê psk lê bløg sùfîrâî pâs..lOl jùstê êñvîê dê tê dîrê kê jê t'âîmê plùs kê tøùt... # Posté le dimanche 23 mars 2008 16:05 Modifié le samedi 23 août 2008 05:06 Fêlîz CùmplêâñØs!!28.06.08 Mêrcî â : ♥ Sâmùêl ♥ ♥élîsê ♥ ♥ Bêñjî ♥ ♥ Mâ b3st ♥ ♥ Dîøùlâ ♥ ♥ EñØrâ ♥ ♥Mârphîñ ♥ ♥Jùlîê ♥ ♥ Cédrîc ♥ ♥ Nølwêññ ♥ ♥Chrîss ♥ ♥ Lâùrîâñe ♥ ♥Rîchârd ♥ ♥ Stêllâ ♥ ♥ Cârølîñê ♥ # Posté le mardi 11 mars 2008 02:00 Modifié le samedi 16 août 2008 05:51
+trainer_interface.cc(393) LOG(INFO) Reserved chars are found. Skipped: Kosmosda sonsuzluq işarəsi göründü » 3w.LeGenD.Az | Əfsanə olmaq istəyən bizimlədi... | Eurovision 2013, Geyimler, sac duzumleri, mentiq, aforizmler, animasiyalar, sekiller, avatarlar, menali sozler, maraqli, dadli tortlar, mp3, video Kosmosda sonsuzluq işarəsi göründü 20.07.2011, 22:00 Kosmik infraqırmızı "Herşel" teleskopu bizim qalaktikamızın mərkəzində sıx qazların qəribə həlqə yaratdığını müşahidə edib. NASA-nın Reaktiv hərəkət laboratoriyasının əməkdaşları obyektin böyrü üstə yıxılmış "8" rəqəminə, yəni başqa cür desək, sonsuzluq işarəsinə bənzədiyini deyirlər.Milli.Az xəbər portalı RİA Novosti-yə istinadən bildirir ki, indiyədək astronomlar bu həlqənin yalnız 600 işıq ili uzunluqda olan bir hissəsini görə bilirmişlər, "Herşel"in köməyilə isə onun tam əksini almaq mümkün olub. "Biz Süd Yolunu çox tədqiq etmişik, amma "Herşel"dən aldığımız irimiqyaslı submillimetrlik şəkilləri gördükdən sonra fərz etdiyimiz "sonsuzluğun" reallığı aydın oldu, - deyə Kaliforniyanın Texnologiya institutunun əməkdaşı Alberto Noryeqa Krespo bildirib. Submillimetrlik elektromaqnit şüaları qalaktikanın mərkəzini görməyə imkan verməyən ulduzlararası tozu asanlıqla yarıb keçir. Alimlər deyirlər ki, halqa elə çevrilib ki, o bizə sonsuzluq işarəsi kimi görünür, əslində isə belə deyil. Yaponiyadakı "Nobeyama" radioteleskopu isə həlqədəki qazın hərəkət sürətini dəqiqləşdirməyə imkan verib. Son məlumatlar belə bir nəticəyə gəlməyə əsas verib ki, soyuq qaz və toz yığnağından ibarət olan həlqə bütövlükdə, qalaktika ilə eyni sürətlə hərəkət edir. Həlqənin 8 rəqəmi kimi əyilməsini isə alimlər qonşu qalaktikaların qravitasiyasının təsiri ilə izah edirlər. Baxılıb: 2050 Ən böyük kəşf olunduKosmosda neft tapılıb?Yer böyük bir bəladan xilas oldu!Qara bulud Yerə 2014-cü ildə çatacaq: Yeri nələr gözləyir?Kosmosda qütb işıqları göründü 17 sentyabr 2011 12:50 Bal:	twkurler xebere 21 iyul 2011 12:52 Bal:	{awards}	maraqli xeberdi...cox sagolunn -------------------- Deniz 21 iyul 2011 11:15 21 iyul 2011 10:50 Bal:	{awards}	dunya dagilandan sonra basqa planete koce ehtimali var 21 iyul 2011 09:53 Bal:	{awards}	dunyanin axirididaaaaaaaaaa 21 iyul 2011 09:15 21 iyul 2011 00:47 --------------------™Yupiterden RaP_muziC™ Gozel_gozler 21 iyul 2011 00:32 20 iyul 2011 23:25 Bal:	{awards}	mende cixa bilseydim oralara eh 20 iyul 2011 22:31 Bal:	{awards}	ucan bosqab formasindadi e 20 iyul 2011 22:15 Bal:	{awards}	twk hm maraqlidir --------------------Ya gozlerin aklimdaYa da aklim adindaYa hayalin karwimdaYa sesin kulagimdaYa ben cildiriyorumYa da cok seviyorumYa sevmek cok guzelYa da sevilen cok ozel.... nice_angel 20 iyul 2011 22:13 Bal:	{awards}	tewekkurler maraqlidir...... --------------------☜♡☞ ☜♡☞ ☜♡☞ ☜♡☞▂ ▃ ▄ ▅ ▆ ▇ █ █ ▇ ▆ ▅ ▄ ▃ ▂ _.....(¯`v´¯)..... ·.¸.·´...¸.·´ ♥ .. ( ♥ LoVe ♥ ♥ ZAC EFRON 20 iyul 2011 22:08 Bal:	{awards}	tewkeurelr........ 20 iyul 2011 22:04 İstifadəçilər: 7คşк łคfтคɴ คɴłคмคz ❤ sivlersivler ГЕРЦОГИНЯ Burlaxatun sen_men_1 sen_men1 Sol Meleyim
+trainer_interface.cc(411) LOG(INFO) Loaded all 234256 sentences
+trainer_interface.cc(418) LOG(INFO) Skipped 97667 too long sentences.
+trainer_interface.cc(427) LOG(INFO) Adding meta_piece: <unk>
+trainer_interface.cc(427) LOG(INFO) Adding meta_piece: <s>
+trainer_interface.cc(427) LOG(INFO) Adding meta_piece: </s>
+trainer_interface.cc(427) LOG(INFO) Adding meta_piece: <pad>
+trainer_interface.cc(432) LOG(INFO) Normalizing sentences...
+trainer_interface.cc(541) LOG(INFO) all chars count=288580258
+trainer_interface.cc(552) LOG(INFO) Done: 99.95% characters are covered.
+trainer_interface.cc(562) LOG(INFO) Alphabet size=5235
+trainer_interface.cc(563) LOG(INFO) Final character coverage=0.9995
+trainer_interface.cc(594) LOG(INFO) Done! preprocessed 234256 sentences.
+unigram_model_trainer.cc(265) LOG(INFO) Making suffix array...
+unigram_model_trainer.cc(269) LOG(INFO) Extracting frequent sub strings... node_num=139070853
+unigram_model_trainer.cc(312) LOG(INFO) Initialized 1005235 seed sentencepieces
+trainer_interface.cc(600) LOG(INFO) Tokenizing input sentences with whitespace: 234256
+trainer_interface.cc(611) LOG(INFO) Done! 7226168
+unigram_model_trainer.cc(602) LOG(INFO) Using 7226168 sentences for EM training
+unigram_model_trainer.cc(618) LOG(INFO) EM sub_iter=0 size=858042 obj=20.4864 num_tokens=24856737 num_tokens/piece=28.9691
+unigram_model_trainer.cc(618) LOG(INFO) EM sub_iter=1 size=738240 obj=18.6029 num_tokens=24977510 num_tokens/piece=33.8339
+unigram_model_trainer.cc(618) LOG(INFO) EM sub_iter=0 size=553663 obj=18.5764 num_tokens=25184739 num_tokens/piece=45.4875
+unigram_model_trainer.cc(618) LOG(INFO) EM sub_iter=1 size=553512 obj=18.5571 num_tokens=25212896 num_tokens/piece=45.5508
+unigram_model_trainer.cc(618) LOG(INFO) EM sub_iter=0 size=415134 obj=18.6164 num_tokens=25657637 num_tokens/piece=61.8057
+unigram_model_trainer.cc(618) LOG(INFO) EM sub_iter=1 size=415132 obj=18.5898 num_tokens=25662159 num_tokens/piece=61.8169
+unigram_model_trainer.cc(618) LOG(INFO) EM sub_iter=0 size=311349 obj=18.7607 num_tokens=26458773 num_tokens/piece=84.9811
+unigram_model_trainer.cc(618) LOG(INFO) EM sub_iter=1 size=311347 obj=18.7046 num_tokens=26460649 num_tokens/piece=84.9876
+unigram_model_trainer.cc(618) LOG(INFO) EM sub_iter=0 size=233510 obj=19.0233 num_tokens=27491963 num_tokens/piece=117.734
+unigram_model_trainer.cc(618) LOG(INFO) EM sub_iter=1 size=233509 obj=18.9265 num_tokens=27494382 num_tokens/piece=117.744
+unigram_model_trainer.cc(618) LOG(INFO) EM sub_iter=0 size=175131 obj=19.3585 num_tokens=28561113 num_tokens/piece=163.084
+unigram_model_trainer.cc(618) LOG(INFO) EM sub_iter=1 size=175131 obj=19.2429 num_tokens=28563173 num_tokens/piece=163.096
+unigram_model_trainer.cc(618) LOG(INFO) EM sub_iter=0 size=131347 obj=19.7519 num_tokens=29657604 num_tokens/piece=225.796
+unigram_model_trainer.cc(618) LOG(INFO) EM sub_iter=1 size=131347 obj=19.6307 num_tokens=29660170 num_tokens/piece=225.815
+unigram_model_trainer.cc(618) LOG(INFO) EM sub_iter=0 size=98510 obj=20.1979 num_tokens=30783394 num_tokens/piece=312.49
+unigram_model_trainer.cc(618) LOG(INFO) EM sub_iter=1 size=98510 obj=20.0763 num_tokens=30785230 num_tokens/piece=312.509
+unigram_model_trainer.cc(618) LOG(INFO) EM sub_iter=0 size=73882 obj=20.6903 num_tokens=31944293 num_tokens/piece=432.369
+unigram_model_trainer.cc(618) LOG(INFO) EM sub_iter=1 size=73882 obj=20.5672 num_tokens=31948602 num_tokens/piece=432.427
+unigram_model_trainer.cc(618) LOG(INFO) EM sub_iter=0 size=70400 obj=20.6639 num_tokens=32156833 num_tokens/piece=456.773
+unigram_model_trainer.cc(618) LOG(INFO) EM sub_iter=1 size=70400 obj=20.6429 num_tokens=32158246 num_tokens/piece=456.793
+trainer_interface.cc(689) LOG(INFO) Saving model: models/tokenizers/paat_a20_l0/sp_init/sp.model
+trainer_interface.cc(701) LOG(INFO) Saving vocabs: models/tokenizers/paat_a20_l0/sp_init/sp.vocab
+[transformers] `loss_type=None` was set in the config but it is unrecognized. Using the default loss: `ForCausalLMLoss`.
+Loading mC4 texts ...
+  loaded 368,810 documents across 96 languages
+  split: 331,929 train   36,881 eval
+
+Loading FLORES+ parity sentences from data/raw/flores ...
+  loaded 95,712 parallel sentences across 96 languages
+
+[init] training initial 64,000-piece Unigram ...
+[unigram-init] writing corpus to models/tokenizers/paat_a20_l0/sp_init/corpus.txt ...
+[unigram-init] corpus has 331,929 lines
+[unigram-init] training Unigram vocab_size=64,000 ...
+[init] HF Unigram ready (64,000 pieces)
+
+[paat] running PAAT loop (64,000 -> 32,000 in 3 iters, alpha=2.0) ...
+
+====== PAAT iteration 1/3  (64000 -> 53333) ======
+  [tokenize] encoding train / eval corpora ...
+  [tokenize] train: 5,000,000 ids   eval: 2,000,000 ids
+  [llm] training small model from scratch on 5,000,000 tokens ...
+  step 50/305  loss 10.128  lr 1.50e-04
+  step 100/305  loss 9.052  lr 3.00e-04
+  step 150/305  loss 8.461  lr 2.58e-04
+  step 200/305  loss 8.091  lr 1.56e-04
+  step 250/305  loss 7.920  lr 5.02e-05
+  step 300/305  loss 7.817  lr 3.00e-05
+  [llm] held-out PPL = 3130.25
+  [score] computing per-token CE ...
+  [score] 58,839/64,000 tokens observed in eval
+  [parity] computing per-language tokens-per-sentence ...
+  [parity] tps min=32.74  max=81.32  mean=48.72  alpha=2.0
+  [save] tokenizer → models/tokenizers/paat_a20_l0/paat/iter_01_vocab53333.json   ppl=3130.25
+
+====== PAAT iteration 2/3  (53333 -> 42666) ======
+  [tokenize] encoding train / eval corpora ...
+  [tokenize] train: 5,000,000 ids   eval: 2,000,000 ids
+  [llm] training small model from scratch on 5,000,000 tokens ...
+  step 50/305  loss 9.988  lr 1.50e-04
+  step 100/305  loss 8.937  lr 3.00e-04
+  step 150/305  loss 8.384  lr 2.58e-04
+  step 200/305  loss 7.952  lr 1.56e-04
+  step 250/305  loss 7.783  lr 5.02e-05
+  step 300/305  loss 7.710  lr 3.00e-05
+  [llm] held-out PPL = 2838.22
+  [score] computing per-token CE ...
+  [score] 52,585/53,333 tokens observed in eval
+  [parity] computing per-language tokens-per-sentence ...
+  [parity] tps min=34.02  max=84.82  mean=49.82  alpha=2.0
+  [save] tokenizer → models/tokenizers/paat_a20_l0/paat/iter_02_vocab42666.json   ppl=2838.22
+
+====== PAAT iteration 3/3  (42666 -> 32000) ======
+  [tokenize] encoding train / eval corpora ...
+  [tokenize] train: 5,000,000 ids   eval: 2,000,000 ids
+  [llm] training small model from scratch on 5,000,000 tokens ...
+  step 50/305  loss 9.835  lr 1.50e-04
+  step 100/305  loss 8.809  lr 3.00e-04
+  step 150/305  loss 8.242  lr 2.58e-04
+  step 200/305  loss 7.853  lr 1.56e-04
+  step 250/305  loss 7.567  lr 5.02e-05
+  step 300/305  loss 7.546  lr 3.00e-05
+  [llm] held-out PPL = 2438.59
+  [score] computing per-token CE ...
+  [score] 41,898/42,666 tokens observed in eval
+  [parity] computing per-language tokens-per-sentence ...
+  [parity] tps min=35.39  max=84.83  mean=51.45  alpha=2.0
+  [save] tokenizer → models/tokenizers/paat_a20_l0/paat/iter_03_vocab32000.json   ppl=2438.59
+
+[done] final PAAT tokenizer → models/tokenizers/paat_a20_l0/paat/tokenizer.json
+
+[compare] skipped per --skip-comparison
