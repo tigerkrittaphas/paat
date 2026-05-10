@@ -247,6 +247,73 @@ def load_bible_for_lang(subset_id: str) -> dict[tuple[str, int, int], str] | Non
     return None
 
 
+def load_all_bibles_single_pass(
+    subset_ids: list[str],
+) -> dict[str, dict[tuple[str, int, int], str]]:
+    """Load all requested language Bibles in ONE iteration over the combined table.
+
+    Calls ``load_dataset("bible-nlp/biblenlp-corpus")`` once (no config —
+    the multi-language combined table), then iterates a single time,
+    bucketing rows into per-subset_id dicts.  Avoids the 96x cost of
+    re-instantiating and re-filtering the dataset per language.
+
+    Returns ``{subset_id: {(book, ch, v): text}}`` for each subset_id that
+    had at least one parseable row.  Subsets with zero rows are absent.
+
+    Raises if the combined table lacks the language/text/vref columns we
+    need — caller should fall back to per-language loads in that case.
+    """
+    from datasets import load_dataset
+
+    print(
+        f"[bible] one-pass load: fetching combined biblenlp table "
+        f"for {len(subset_ids)} languages ..."
+    )
+    ds = load_dataset("bible-nlp/biblenlp-corpus", trust_remote_code=True)
+    split_name = next(iter(ds.keys()))
+    rows = ds[split_name]
+    cols = set(rows.column_names)
+
+    lang_col = "language" if "language" in cols else ("iso" if "iso" in cols else None)
+    text_col = next((c for c in ("text", "translation", "verse") if c in cols), None)
+    vref_col = next((c for c in ("vref", "ref", "verse_id") if c in cols), None)
+    if lang_col is None or text_col is None or vref_col is None:
+        raise RuntimeError(
+            f"biblenlp combined-table schema not recognised "
+            f"(cols={sorted(cols)}); single-pass loader cannot bucket by language."
+        )
+
+    want = set(subset_ids)
+    out: dict[str, dict[tuple[str, int, int], str]] = {}
+
+    # Materialise the three columns as Python lists and iterate manually —
+    # ~10x faster than ``for ex in rows`` because we skip the per-row dict
+    # construction inside HF Datasets.
+    print(f"[bible] one-pass load: extracting columns ({lang_col}, {vref_col}, {text_col}) ...")
+    langs = rows[lang_col]
+    vrefs = rows[vref_col]
+    texts = rows[text_col]
+    n_rows = len(langs)
+    print(f"[bible] one-pass load: iterating {n_rows:,} rows ...")
+
+    for i, (lang, vref, txt) in enumerate(zip(langs, vrefs, texts)):
+        if i and i % 1_000_000 == 0:
+            print(f"  [bible] {i:,}/{n_rows:,} rows scanned")
+        if lang not in want:
+            continue
+        key = parse_vref(str(vref))
+        if key is None:
+            continue
+        if not txt or not txt.strip():
+            continue
+        d = out.setdefault(lang, {})
+        d.setdefault(key, txt.strip())
+
+    for sub, v in out.items():
+        print(f"  [{sub}] loaded {len(v):,} verses (one-pass)")
+    return out
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(
         description="Download Bible evaluation data for the 96 PAAT languages."
@@ -305,12 +372,35 @@ def main() -> None:
     else:
         print(f"[bible] pass 1 — loading {len(candidates)} candidate Bibles ...")
         per_lang_verses = {}
-        for lang, sub in candidates:
-            verses = load_bible_for_lang(sub)
-            if verses is None:
-                skipped.append({"lang": lang, "subset": sub, "reason": "load_failed"})
-                continue
-            per_lang_verses[lang] = verses
+
+        # Fast path: one combined load + one pass through the rows, bucket
+        # by language.  Falls back to per-language load_dataset calls if the
+        # combined-table schema isn't recognised.
+        subset_to_lang = {sub: lang for lang, sub in candidates}
+        used_fast_path = False
+        try:
+            bucketed = load_all_bibles_single_pass(list(subset_to_lang.keys()))
+            for sub, verses in bucketed.items():
+                lang = subset_to_lang.get(sub)
+                if lang is None:
+                    continue
+                per_lang_verses[lang] = verses
+            for lang, sub in candidates:
+                if lang not in per_lang_verses:
+                    skipped.append(
+                        {"lang": lang, "subset": sub, "reason": "no_rows_in_combined_table"}
+                    )
+            used_fast_path = True
+        except Exception as e:  # noqa: BLE001 — best-effort fast path
+            print(f"[bible] one-pass loader failed ({e!r}); falling back to per-language loads.")
+
+        if not used_fast_path:
+            for lang, sub in candidates:
+                verses = load_bible_for_lang(sub)
+                if verses is None:
+                    skipped.append({"lang": lang, "subset": sub, "reason": "load_failed"})
+                    continue
+                per_lang_verses[lang] = verses
 
         if not per_lang_verses and not verse_index_path.exists():
             raise RuntimeError(

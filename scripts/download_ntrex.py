@@ -35,7 +35,7 @@ from pathlib import Path
 from paat.data.languages import ALL_LANGUAGES, LANG_REGISTRY
 
 
-NTREX_REPO_URL = "https://github.com/MicrosoftTranslator/NTREX-128"
+NTREX_REPO_URL = "https://github.com/MicrosoftTranslator/NTREX"
 
 # mC4 lang code -> NTREX-128 BCP-47 stem (the "<bcp47>" in
 # newstest2019-ref.<bcp47>.txt).  NTREX uses BCP-47 with region/script tags

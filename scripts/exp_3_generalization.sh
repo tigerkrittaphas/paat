@@ -88,6 +88,9 @@ declare -A TOKENIZERS=(
     [paat_a067]="$TOK_ROOT/paat_a067/paat"
     [paat_a100]="$TOK_ROOT/paat_a100/paat"
     [paat_a100_l0]="$TOK_ROOT/paat_a100_l0/paat"
+    [paat_a20_l0]="$TOK_ROOT/paat_a20_l0/paat"
+    [paat_a50_l0]="$TOK_ROOT/paat_a50_l0/paat"
+    [paat_a10]="$TOK_ROOT/paat_a10/paat"
 )
 
 # ── Banner ─────────────────────────────────────────────────────────────────
