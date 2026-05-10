@@ -1,246 +1,246 @@
-# Parity-aware Adaptive Tokenization (PAAT)
+# Parity-Aware Adaptive Tokenization (PAAT)
 
 **Team:** Tiger Chaisutyakorn, Brianna Grissom, Rianna Santra, Nour Massri
 
-## Overview
+PAAT extends the ADAT tokenizer pipeline (Zheng et al. 2024) with a parity-aware loss term that closes the cross-lingual compression gap ADAT introduces. This repo contains the full two-stage experiment: Stage 1 trains and evaluates tokenizers; Stage 2 pretrains one Pythia-70M LM per tokenizer and measures downstream fairness via held-out perplexity across 96 FLORES+ languages.
 
-PAAT combines two ideas to produce a tokenizer that is both performance-aware and cross-lingually fair:
+See [`docs/final-report.md`](docs/final-report.md) for full results.
 
-1. **Adaptive tokenization (ADAT)** — start with a large vocabulary, iteratively train a small LLM on a data subset, compute per-token loss, and prune tokens by a combined frequency + loss score.
-2. **Parity-aware loss** — augment the pruning objective with a parity loss that penalizes compression inequality across languages, ensuring the vocabulary does not systematically over-segment low-resource scripts.
+---
 
-## Repository Layout
+## Repository layout
 
 ```
-src/paat/
-  data/        # language registry (96 mC4 ∩ FLORES+ languages)
-  tokenizer/   # BPE, Unigram, and ADAT iterative pruning
-  model/       # tiny GPT-2 and training loop for the ADAT inner model
-  parity/      # per-language compression and fairness metrics (Gini, tok/sent)
-scripts/       # entry points for each step in the experiment
-configs/       # YAML/JSON configs for experiments
-data/          # download outputs (raw data not tracked)
-docs/          # experiment write-ups
-results/       # JSON metric reports
+src/paat/           # library: tokenizer, parity metrics, model
+scripts/            # experiment entry points (see below)
+configs/            # hyperparameter YAML/JSON files
+data/               # downloaded data (not tracked by git)
+models/             # tokenizers/ and lm/ outputs (not tracked)
+results/            # JSON metric reports
+results_pi/         # metric reports pulled from cloud runs
+docs/               # write-ups and final report
+notebooks/          # analysis notebooks
 ```
 
-## Baselines
-
-| Method | Purpose |
-|---|---|
-| Classic BPE (32K) | Fairness + PPL reference |
-| Direct Unigram (16K) | Same-size baseline vs ADAT |
-| ADAT 16K (Zheng et al., 2024) | Performance-oriented reference |
-| Parity-aware BPE (Foroutan et al., 2025) | Fairness-oriented reference |
-
-## Datasets
-
-- **Training:** mC4 multilingual corpus — 96 languages (the overlap with FLORES+), preserving the natural resource distribution.
-- **Parity evaluation:** FLORES+ (2,009 parallel sentences across all 96 languages).
+---
 
 ## Requirements
 
-- Python 3.12
-- CUDA GPU (tested on NVIDIA RTX A6000 50 GB)
-- ~1 GB disk for demo data, ~178 GB for the full mC4 download
+- Python 3.11–3.13
+- CUDA GPU — tested on RTX A6000 (local) and A100/H100 80 GB (cloud)
+- [`uv`](https://docs.astral.sh/uv/) for dependency management
+- `zstd` and `tmux` (cloud path only)
+
+---
 
 ## Setup
 
 ```bash
-pip install -e ".[dev]"
-# or, with uv:
+# Install uv (once)
+curl -LsSf https://astral.sh/uv/install.sh | sh
+
+# Create venv and install all dependencies
 uv sync
-```
 
-Verify CUDA is available:
-
-```bash
-python -c "import torch; print('CUDA:', torch.cuda.is_available())"
+# Verify CUDA
+uv run python -c "import torch; print('CUDA:', torch.cuda.is_available())"
 ```
 
 ---
 
-## End-to-End Experiment Recipe
+## Running locally
 
-Every command below is run from the repository root. Commands are idempotent where possible — re-running will skip completed steps.
+### 0. Download evaluation data (FLORES+)
 
-### Step 1 — Download evaluation data (FLORES+)
-
-FLORES+ is small (~10 MB for all 96 languages) and is required for every parity evaluation. Run this first.
+Required before anything else. Small (~10 MB for 96 languages).
 
 ```bash
-python scripts/download_flores.py
+uv run python scripts/download_flores.py
+# → data/raw/flores/<lang>.jsonl
 ```
 
-Output: `data/raw/flores/<lang>.jsonl` (2,009 parallel sentences per language, `dev` + `devtest` splits).
-
-### Step 2 — Download training data (mC4)
-
-Choose one of the two download modes. Start with demo mode to validate the pipeline; switch to full mode for the real experiment.
-
-**Demo mode** — 5,000 docs per language × 96 languages ≈ 1 GB:
+### 1. Download and sample mC4
 
 ```bash
-python scripts/download_mc4.py --demo
+# Streaming download — keeps only a proportional sample, never stores the full corpus.
+uv run python scripts/sample_mc4.py
+# → data/raw/mc4_sampled/<lang>.jsonl   (~8 M docs, ~30 GB)
+
+# Convenience symlink used by training scripts
+ln -sfn mc4_sampled data/raw/mc4
 ```
 
-**Full mode** — natural resource distribution per `MC4_NATURAL_COUNTS` ≈ 178 GB:
+For a quick smoke test, pass `--total-docs 100000` to sample_mc4.py.
+
+### 2. Stage 1 — train tokenizers and evaluate parity
 
 ```bash
-python scripts/download_mc4.py
+# Full run (standard preset — all 8 tokenizers, ~4–6 h on A6000)
+bash scripts/exp_1_tokenizers.sh
+
+# Smoke test (~10 min, small vocab)
+PRESET=smoke bash scripts/exp_1_tokenizers.sh
+
+# Custom alpha sweep or subset
+ALPHAS="0.33 0.67 1.0" bash scripts/exp_1_tokenizers.sh
+SKIP_PARITY_BPE=1 bash scripts/exp_1_tokenizers.sh   # skip the slow parity-BPE step
+SKIP_TRAIN=1 bash scripts/exp_1_tokenizers.sh         # parity eval only (tokenizers exist)
 ```
-
-**Subset** — restrict to specific languages:
-
-```bash
-python scripts/download_mc4.py --demo --languages en zh ar hi sw am
-```
-
-Output: `data/raw/mc4/<lang>.jsonl` (one JSON object per line: `{"text": ...}`). Files are streamed from HuggingFace, so no full-dataset download is materialised — each language is fetched independently.
-
-### Step 3 — Train the classic BPE baseline (32K)
-
-```bash
-python scripts/train_tokenizer.py \
-    --data-dir data/raw/mc4 \
-    --output-dir models/tokenizers/bpe_demo \
-    --vocab-size 32000
-```
-
-Output: `models/tokenizers/bpe_demo/tokenizer.json`.
-
-### Step 4 — Evaluate BPE baseline parity
-
-```bash
-python scripts/eval_parity.py \
-    --tokenizer models/tokenizers/bpe_demo \
-    --flores-dir data/raw/flores \
-    --output results/parity/bpe_demo.json
-```
-
-This prints a per-language table of tokens-per-sentence, tokens-per-byte, and legacy fertility, plus aggregate Gini-based fairness metrics.
-
-### Step 4b — Train the parity-aware BPE baseline (Foroutan et al., 2025)
-
-Same input layout as Step 3 (per-language `<lang>.jsonl` files in `--data-dir`) and same output (a `tokenizer.json` evaluable with `scripts/eval_parity.py`). Uses FLORES+ as the multi-parallel parity dev set, so Step 1 must have run.
-
-**Train/eval split:** training-time parity uses only the FLORES+ `dev` split (~997 sentences/lang); `eval_parity.py` uses only the `devtest` split (~1012 sentences/lang) — for *every* tokenizer, not just parity-aware BPE — so the held-out set is identical across baselines and there's no train/test leakage.
-
-```bash
-python scripts/train_parity_bpe.py \
-    --data-dir data/raw/mc4 \
-    --flores-dir data/raw/flores \
-    --output-dir models/tokenizers/parity_bpe_demo \
-    --vocab-size 32000
-
-python scripts/eval_parity.py \
-    --tokenizer models/tokenizers/parity_bpe_demo \
-    --flores-dir data/raw/flores \
-    --output results/parity/parity_bpe_demo.json
-```
-
-Notable flags: `--variant {base,window}`, `--global-merges N` (Hybrid: first *N* merges use global statistics like classic BPE), `--ratio` (per-language compression targets — alternative to using a FLORES+ dev set).
-
-### Step 5 — Run ADAT Phase 1 (32K → 16K, 3 iterations)
-
-This is the main experiment. It:
-
-1. Trains an initial 32K SentencePiece Unigram on the training split.
-2. Runs 3 iterations of ADAT pruning (32K → 26.7K → 21.3K → 16K). Each iteration trains a tiny GPT-2 from scratch, computes per-token cross-entropy on a held-out slice, combines with the Unigram piece score, and keeps the top-K pieces.
-3. Trains a direct 16K Unigram baseline on the same data for a same-size comparison.
-4. Trains both tokenizers' LLMs to convergence and reports held-out PPL.
-
-```bash
-python scripts/run_adat.py \
-    --data-dir data/raw/mc4 \
-    --output-dir models/tokenizers/adat_phase1 \
-    --initial-vocab 32000 \
-    --target-vocab 16000 \
-    --iterations 3 \
-    --docs-per-lang 2000 \
-    --train-tokens-per-iter 5000000 \
-    --eval-tokens-per-iter 2000000 \
-    --seq-len 512 \
-    --batch-size 32 \
-    --model-size tiny
-```
-
-Approximate wall time on an A6000: ~40 minutes for the ADAT loop + ~15 minutes for the baseline Unigram + ~15 minutes for the PPL comparison.
 
 Outputs:
-
-| Path | Contents |
-|---|---|
-| `models/tokenizers/adat_phase1/sp_init/sp.model` | Initial 32K SentencePiece Unigram |
-| `models/tokenizers/adat_phase1/adat/iter_{01,02,03}_vocab*.json` | Intermediate ADAT tokenizers |
-| `models/tokenizers/adat_phase1/adat/tokenizer.json` | Final ADAT 16K tokenizer |
-| `models/tokenizers/adat_phase1/adat/adat_log.json` | Per-iteration training log |
-| `models/tokenizers/adat_phase1/baseline/tokenizer.json` | Direct 16K Unigram baseline |
-| `models/tokenizers/adat_phase1/comparison.json` | PPL comparison summary |
-
-**Micro-test** — before running the full Phase 1, validate the pipeline end-to-end with a 5-minute run:
-
-```bash
-python scripts/run_adat.py \
-    --data-dir data/raw/mc4 \
-    --output-dir models/tokenizers/adat_microtest \
-    --initial-vocab 8000 \
-    --target-vocab 6000 \
-    --iterations 2 \
-    --docs-per-lang 50 \
-    --train-tokens-per-iter 200000 \
-    --eval-tokens-per-iter 50000 \
-    --seq-len 128 \
-    --batch-size 16 \
-    --model-size tiny
+```
+models/tokenizers/{bpe,parity_bpe,adat,unigram,paat_a033,paat_a067,paat_a10,paat_a100_l0}/
+results/parity/{bpe,parity_bpe,adat,unigram,paat_a033,...}.json
+results/parity/comparison.json
 ```
 
-### Step 6 — Evaluate ADAT and baseline parity
+### 3. Stage 2 — pretrain LMs and run downstream eval
 
-Run the parity eval on both tokenizers produced in Step 5:
-
-```bash
-python scripts/eval_parity.py \
-    --tokenizer models/tokenizers/adat_phase1/adat \
-    --flores-dir data/raw/flores \
-    --output results/parity/adat_phase1.json
-
-python scripts/eval_parity.py \
-    --tokenizer models/tokenizers/adat_phase1/baseline \
-    --flores-dir data/raw/flores \
-    --output results/parity/unigram_baseline_16k.json
-```
-
-### Step 7 — Inspect results
+Each model takes ~10 h at `standard` (1 B tokens) or ~30 h at `long` (3 B tokens) on a single A6000.
 
 ```bash
-# PPL comparison (ADAT vs same-size Unigram baseline)
-cat models/tokenizers/adat_phase1/comparison.json
+# 1 B-token run (standard)
+PRESET=standard bash scripts/exp_2_pretrain_eval.sh
 
-# Parity reports — look at "gini_tokens_per_sentence" and
-# "tokens_per_sentence_ratio" for the headline fairness numbers.
-cat results/parity/adat_phase1.json | python -m json.tool | head -40
-cat results/parity/unigram_baseline_16k.json | python -m json.tool | head -40
-cat results/parity/bpe_demo.json | python -m json.tool | head -40
+# 3 B-token run (long) — used for the paper
+PRESET=long bash scripts/exp_2_pretrain_eval.sh
+
+# Subset of models only
+MODELS="adat paat_a10 paat_a100_l0" bash scripts/exp_2_pretrain_eval.sh
+
+# Skip downstream eval (pretrain only) or vice versa
+SKIP_EVAL=1    bash scripts/exp_2_pretrain_eval.sh
+SKIP_PRETRAIN=1 bash scripts/exp_2_pretrain_eval.sh
 ```
 
-See [docs/adat-phase1-results.md](docs/adat-phase1-results.md) for the full Phase 1 analysis.
+Outputs:
+```
+models/lm/{bpe,parity_bpe,adat,unigram,paat_a033,...}/
+results/downstream/comparison.json
+```
+
+### 4. Held-out perplexity across 96 languages
+
+```bash
+uv run python scripts/eval_perplexity.py
+# → results/perplexity/perplexity.json
+# → results/perplexity/perplexity_summary.json
+
+# Subset of models or languages
+uv run python scripts/eval_perplexity.py --models adat paat_a10 --languages en zh ar hi
+```
 
 ---
 
-## Metrics
+## Running on Prime Intellect cloud
 
-Tokenizer fairness is reported using metrics from Foroutan et al. 2025:
+The cloud path offloads Stage 2 to an A100-80GB pod. Stage 1 is run locally first (tokenizers are small; the inner LLM only needs ~10 min/iteration on CPU-class hardware).
 
-- **tokens_per_sentence** — average tokens produced per parallel FLORES+ sentence. Sentence *i* in every language is a translation of the same source, so this compares like-for-like content. Robust to script and whitespace differences (works for Chinese, Japanese, Thai, etc., where `str.split()` is meaningless).
-- **tokens_per_byte** — tokens per UTF-8 byte. Accounts for per-script byte length (ASCII vs CJK UTF-8).
-- **Gini (tokens/sentence)** — Gini coefficient of per-language tokens-per-sentence. 0 = perfect equality, 1 = maximum inequality. The headline fairness metric.
-- **Legacy fertility** (tokens/word) — retained for backward comparability but unreliable for languages without whitespace word boundaries.
+### SSH alias (one-time)
+
+Add to `~/.ssh/config`:
+
+```
+Host pi-paat
+    HostName <pod-ip>
+    User root
+    IdentityFile ~/.ssh/id_ed25519
+    Port 22
+```
+
+Replace `<pod-ip>` with the address shown in the Prime Intellect dashboard. Update the alias when you spin up a new pod.
+
+### Option A — Bundle upload (simplest, ~9 GB transfer)
+
+Pack everything the pod needs into a single compressed archive, upload, and launch.
+
+```bash
+# 1. Build the bundle (includes tokenizers + mC4 sample + FLORES+)
+bash scripts/pack_bundle.sh
+# → paat_bundle.tar.zst  (~9 GB)
+
+# 2. Upload and launch Stage 2
+bash scripts/cloud_launch.sh
+
+# Override preset or model list
+PRESET=standard bash scripts/cloud_launch.sh
+MODELS="adat paat_a10 paat_a100_l0" bash scripts/cloud_launch.sh
+
+# Dry run — preflight only, no upload
+DRY_RUN=1 bash scripts/cloud_launch.sh
+```
+
+### Option B — Persistent volume (fast subsequent runs, ~few MB per launch)
+
+Upload data once to a PI persistent volume; future runs only ship source code.
+
+```bash
+# 1. Create a persistent volume in the PI dashboard and attach it to any pod.
+#    Update ~/.ssh/config with the new pod's IP.
+
+# 2. Upload data + tokenizers to the volume (one time, ~30 min)
+bash scripts/init_data_volume.sh
+# → destroys the upload pod after; the volume persists
+
+# 3. All future launches skip the bundle — rsync source code only
+USE_VOLUME=1 bash scripts/cloud_launch.sh
+USE_VOLUME=1 PRESET=long bash scripts/cloud_launch.sh
+```
+
+### Monitor and retrieve results
+
+```bash
+# Attach to the tmux session on the pod
+ssh pi-paat tmux attach -t paat-exp2
+# Detach without killing: Ctrl-b d
+
+# Live log tail without attaching
+ssh pi-paat tail -f /workspace/paat/logs/exp_2/cloud_run.log
+
+# Pull results back when done
+rsync -avP --exclude='checkpoint-*' \
+    pi-paat:/workspace/paat/models/lm/ ./models/lm_pi/
+rsync -avP pi-paat:/workspace/paat/results/ ./results_pi/
+rsync -avP pi-paat:/workspace/paat/logs/   ./logs_pi/
+
+# Run perplexity eval locally on the pulled checkpoints
+uv run python scripts/eval_perplexity.py \
+    --models bpe parity_bpe unigram adat paat_a033 paat_a067 paat_a10 paat_a100_l0
+# → results_pi/perplexity/perplexity.json
+```
+
+**Cost estimates (A100-80GB at ~$1.80/hr, 6 models):**
+
+| Preset | Tokens/model | Wall time | Est. cost |
+|---|---|---|---|
+| `smoke` | ~10 M | ~10 min | <$1 |
+| `standard` | 1 B | ~9 h | ~$15 |
+| `long` | 3 B | ~25 h | ~$45 |
+
+Destroy the pod from the PI dashboard when done — it bills by the second.
+
+---
+
+## Key environment variables
+
+| Variable | Default | Effect |
+|---|---|---|
+| `PRESET` | `standard` | Token budget: `smoke` / `standard` / `long` |
+| `MODELS` | all 6 | Space-separated model names to train |
+| `ALPHAS` | `0.33 0.67 1.0` | PAAT parity weights for Stage 1 |
+| `SKIP_EVAL` | `0` | Skip downstream eval in Stage 2 |
+| `SKIP_PRETRAIN` | `0` | Skip LM training in Stage 2 |
+| `LM_ROOT` | `models/lm` | Output dir for LMs (set to `models/lm_pi` for cloud pulls) |
+| `PI_HOST` | `pi-paat` | SSH alias for the cloud pod |
+| `USE_VOLUME` | `0` | Use persistent volume instead of bundle upload |
+| `DRY_RUN` | `0` | Preflight only, no upload or launch |
+| `AUTO_PACK` | `0` | Build bundle automatically if missing |
+
+---
 
 ## References
 
-- Foroutan et al. (2025). Parity-Aware Byte-Pair Encoding. arXiv:2508.04796
-- Zheng et al. (2024). ADAT: Adaptive Tokenization. NeurIPS 2024.
-- Petrov et al. (2023). Language Model Tokenizers Introduce Unfairness Between Languages. arXiv:2305.15425
-- Rust et al. (2021). How Good is Your Tokenizer? ACL 2021.
-- Sun et al. (2026). LiteToken. arXiv:2602.04706
+- Zheng et al. (2024). ADAT: Adaptive Tokenization. *NeurIPS 2024*.
+- Foroutan et al. (2025). Parity-Aware Byte-Pair Encoding. *arXiv:2508.04796*.
+- Petrov et al. (2023). Language Model Tokenizers Introduce Unfairness Between Languages. *arXiv:2305.15425*.
+- Rust et al. (2021). How Good is Your Tokenizer? *ACL 2021*.
