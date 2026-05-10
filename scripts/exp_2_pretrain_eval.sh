@@ -147,6 +147,7 @@ pretrain_one() {
     echo "  log:        $log"
     echo "================================================================"
 
+    PYTHONUNBUFFERED=1 TOKENIZERS_PARALLELISM=true \
     "$PYTHON" scripts/pretrain_lm.py \
         --tokenizer    "$tok_path" \
         --output-dir   "$out_dir" \

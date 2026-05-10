@@ -32,7 +32,7 @@
 set -euo pipefail
 
 PI_HOST="${PI_HOST:-pi-paat}"
-VOLUME_MOUNT="${VOLUME_MOUNT:-/data}"
+VOLUME_MOUNT="${VOLUME_MOUNT:-/workspace}"
 BUNDLE_MODE="${BUNDLE_MODE:-1}"
 LOCAL_BUNDLE="${LOCAL_BUNDLE:-paat_bundle.tar.zst}"
 KEEP_LOCAL_BUNDLE="${KEEP_LOCAL_BUNDLE:-0}"

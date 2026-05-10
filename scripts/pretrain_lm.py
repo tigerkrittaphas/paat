@@ -101,35 +101,93 @@ def stream_pack_sequences(
     tokenizer: PreTrainedTokenizerFast,
     seq_len: int,
     max_tokens: int,
-) -> list[list[int]]:
+    batch_size: int = 1024,
+) -> np.ndarray:
     """Tokenize on the fly and pack into ``seq_len`` blocks until budget hit.
 
-    Replaces the old "load everything, then tokenize" pipeline.  The full
-    Python list of documents never exists in memory — only the in-flight
-    buffer (≤ seq_len ints) plus the packed sequences themselves
-    (which are what we actually need).
+    Returns a 2-D ``int32`` numpy array of shape ``(n_seqs, seq_len)``.
+    The numpy buffer lives once in RAM (4 bytes/token) instead of as a
+    ``list[list[int]]`` (28 bytes/token in PyObject overhead).  At 3 B
+    tokens that's a difference of ~12 GB vs ~84 GB — large enough to
+    OOM-kill the process on most pods at the larger end.
+
+    The token buffer is also a flat ``int32`` numpy array (instead of a
+    Python list that gets sliced on every ``seq_len`` boundary), so the
+    streaming step itself uses near-constant ~MB-scale RAM.
+
+    Uses the HF wrapper's call syntax (which dispatches to the Rust
+    ``encode_batch``) so encoding parallelises across CPU cores.
+    ``add_special_tokens=False`` matches the per-doc ``encode()``
+    baseline.
     """
-    buffer: list[int] = []
-    sequences: list[list[int]] = []
     target_seqs = max_tokens // seq_len
+    # Pre-allocate the destination once.  ~12 GB for 3 B tokens.
+    sequences = np.empty((target_seqs, seq_len), dtype=np.int32)
+    n_seqs = 0
+
+    # Token buffer: flat int32 numpy array, grown by chunks of seq_len.
+    # Cheaper than Python list + repeated slicing.
+    buffer = np.empty(seq_len * 4, dtype=np.int32)
+    buf_len = 0
+
+    pending_texts: list[str] = []
     n_docs = 0
+
+    def _flush_batch() -> bool:
+        """Encode pending batch, pack into sequences.  Return True if done."""
+        nonlocal buffer, buf_len, n_seqs
+        if not pending_texts:
+            return False
+        batch_ids = tokenizer(
+            pending_texts,
+            add_special_tokens=False,
+            truncation=False,
+            padding=False,
+        ).input_ids
+        pending_texts.clear()
+
+        for ids in batch_ids:
+            n_new = len(ids)
+            # Grow the buffer if needed (amortised O(1), like list.append).
+            if buf_len + n_new > buffer.shape[0]:
+                new_size = max(buffer.shape[0] * 2, buf_len + n_new)
+                bigger = np.empty(new_size, dtype=np.int32)
+                bigger[:buf_len] = buffer[:buf_len]
+                buffer = bigger
+            buffer[buf_len : buf_len + n_new] = ids
+            buf_len += n_new
+
+            # Drain whole seq_len blocks from the buffer head.
+            while buf_len >= seq_len:
+                sequences[n_seqs] = buffer[:seq_len]
+                n_seqs += 1
+                buffer[: buf_len - seq_len] = buffer[seq_len:buf_len]
+                buf_len -= seq_len
+                if n_seqs >= target_seqs:
+                    return True
+        return False
+
     for text in _iter_docs_proportional(data_dir, langs, total_docs):
         n_docs += 1
-        ids = tokenizer.encode(text)
-        buffer.extend(ids)
-        while len(buffer) >= seq_len:
-            sequences.append(buffer[:seq_len])
-            buffer = buffer[seq_len:]
-            if len(sequences) >= target_seqs:
-                print(f"  [stream] {n_docs:,} docs -> {len(sequences):,} sequences "
-                      f"({len(sequences) * seq_len:,} tokens)")
-                return sequences
+        pending_texts.append(text)
+        if len(pending_texts) >= batch_size:
+            if _flush_batch():
+                print(f"  [stream] {n_docs:,} docs -> {n_seqs:,} sequences "
+                      f"({n_seqs * seq_len:,} tokens)")
+                return sequences[:n_seqs]
         if n_docs % 50_000 == 0:
-            print(f"  [stream] {n_docs:,} docs -> {len(sequences):,} sequences "
-                  f"({len(sequences) * seq_len:,} tokens)")
+            print(f"  [stream] {n_docs:,} docs -> {n_seqs:,} sequences "
+                  f"({n_seqs * seq_len:,} tokens)")
+
+    # Drain any remaining docs in the final partial batch.
+    if _flush_batch():
+        print(f"  [stream] {n_docs:,} docs -> {n_seqs:,} sequences "
+              f"({n_seqs * seq_len:,} tokens)")
+        return sequences[:n_seqs]
+
     print(f"  [stream] corpus exhausted at {n_docs:,} docs -> "
-          f"{len(sequences):,} sequences  ({len(sequences) * seq_len:,} tokens)")
-    return sequences
+          f"{n_seqs:,} sequences  ({n_seqs * seq_len:,} tokens)")
+    return sequences[:n_seqs]
 
 
 class TokenCountCallback(TrainerCallback):
@@ -223,14 +281,30 @@ def main() -> None:
         print(f"[WARN] only packed {actual_tokens:,} tokens "
               f"(target {args.train_tokens:,}); raise --total-docs to feed more.")
 
-    rng = random.Random(args.seed)
-    rng.shuffle(sequences)
+    # In-place row shuffle (numpy-aware; random.Random.shuffle would break
+    # on 2-D arrays because Python tuple-swap semantics over numpy views
+    # share memory and silently corrupt rows).
+    np.random.default_rng(args.seed).shuffle(sequences, axis=0)
     split = max(1, int(len(sequences) * 0.005))
     train_seqs = sequences[split:]
     eval_seqs = sequences[:split]
 
-    train_ds = Dataset.from_dict({"input_ids": train_seqs})
-    eval_ds = Dataset.from_dict({"input_ids": eval_seqs})
+    # Build Dataset via pyarrow large_list (int64 offsets) — Dataset.from_dict
+    # uses pyarrow `list` (int32 offsets) and silently overflows once
+    # n_rows × seq_len > 2^31 ≈ 2.15B, which happens at the 3B-token preset:
+    # 5.86M rows × 512 = 3B → ArrowInvalid.  Same-shape Table, just wider
+    # offset type; downstream Trainer / DataLoader behaviour is unchanged.
+    import pyarrow as pa
+    def _seqs_to_dataset(seqs: np.ndarray) -> Dataset:
+        flat = pa.array(seqs.reshape(-1), type=pa.int32())
+        offsets = pa.array(
+            np.arange(len(seqs) + 1, dtype=np.int64) * seqs.shape[1]
+        )
+        arr = pa.LargeListArray.from_arrays(offsets, flat)
+        return Dataset(pa.Table.from_arrays([arr], names=["input_ids"]))
+
+    train_ds = _seqs_to_dataset(train_seqs)
+    eval_ds = _seqs_to_dataset(eval_seqs)
 
     # ── Training ───────────────────────────────────────────────────────────
     max_steps = len(train_seqs) // args.batch_size

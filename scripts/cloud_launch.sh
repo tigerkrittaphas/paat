@@ -203,7 +203,7 @@ fi
 
 mkdir -p logs/exp_2
 tmux new-session -d -s "$TMUX_SESSION" \
-    "MODELS='$MODELS' PRESET='$PRESET' \
+    "MODELS='$MODELS' PRESET='$PRESET' LM_ROOT='${LM_ROOT:-models/lm}' SKIP_EVAL='${SKIP_EVAL:-0}' \
      bash scripts/exp_2_pretrain_eval.sh 2>&1 | tee logs/exp_2/cloud_run.log; \
      echo ''; echo '═══ Stage 2 finished — sleeping so you can read the output ═══'; \
      sleep 3600"
@@ -252,7 +252,7 @@ fi
 mkdir -p logs/exp_2
 
 tmux new-session -d -s "$TMUX_SESSION" \
-    "MODELS='$MODELS' PRESET='$PRESET' \
+    "MODELS='$MODELS' PRESET='$PRESET' LM_ROOT='${LM_ROOT:-models/lm}' SKIP_EVAL='${SKIP_EVAL:-0}' \
      bash scripts/exp_2_pretrain_eval.sh 2>&1 | tee logs/exp_2/cloud_run.log; \
      echo ''; echo '═══ Stage 2 finished — sleeping so you can read the output ═══'; \
      sleep 3600"

@@ -47,17 +47,28 @@ echo "[2/5] Ensuring uv is installed ..."
 # install (e.g. partial-success from a prior run) is detected.
 export PATH="$HOME/.local/bin:$HOME/.cargo/bin:$PATH"
 if ! command -v uv >/dev/null 2>&1; then
-    # UV_INSTALLER_NO_MODIFY_PATH=1 stops the installer from writing to
-    # ~/.bashrc / ~/.config/fish/conf.d / etc.  On stripped pod images the
-    # fish-config write fails ("Permission denied" on ~/.config/fish) and
-    # the whole installer exits non-zero — even though uv itself installed
-    # fine.  We don't need shell rc edits anyway since we just exported PATH.
+    # PI pod images sometimes ship with a $HOME/.config that the user can't
+    # write into (root-owned, or absent + non-writable parent).  The uv
+    # installer writes a receipt to ~/.config/uv and a shell-rc snippet to
+    # ~/.config/fish/conf.d; both failures cause the installer to exit
+    # non-zero even though `uv` itself installed cleanly into ~/.local/bin.
+    #
+    # Mitigations:
+    #   1. Pre-create $HOME/.config as the current user so the receipt
+    #      writes can succeed.
+    #   2. UV_INSTALLER_NO_MODIFY_PATH=1 skips the shell-rc edits.
+    #   3. Tolerate a non-zero installer exit — the next `command -v` check
+    #      validates that uv actually got installed.
+    mkdir -p "$HOME/.config" 2>/dev/null || true
+
     curl -LsSf https://astral.sh/uv/install.sh \
-        | env UV_INSTALLER_NO_MODIFY_PATH=1 sh
+        | env UV_INSTALLER_NO_MODIFY_PATH=1 sh \
+        || echo "  [warn] uv installer exited non-zero — verifying binary regardless"
 fi
 command -v uv >/dev/null 2>&1 || {
     echo "[FATAL] uv install completed but binary is not on PATH." >&2
     echo "        Looked under: $HOME/.local/bin and $HOME/.cargo/bin" >&2
+    echo "        Try: ls -la \$HOME/.local/bin/uv" >&2
     exit 1
 }
 uv --version
