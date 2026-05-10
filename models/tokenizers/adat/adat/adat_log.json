@@ -1,0 +1,39 @@
+{
+  "config": {
+    "initial_vocab_size": 64000,
+    "target_vocab_size": 32000,
+    "n_iterations": 3,
+    "model_size": "small",
+    "balance_lambda": 1.0,
+    "momentum": 0.9
+  },
+  "iterations": [
+    {
+      "iteration": 1,
+      "vocab_size_before": 64000,
+      "vocab_size_after": 53333,
+      "train_ppl": 3036.113246283038,
+      "n_train_tokens": 5000000,
+      "n_eval_tokens": 2000000,
+      "n_tokens_with_loss": 58882
+    },
+    {
+      "iteration": 2,
+      "vocab_size_before": 53333,
+      "vocab_size_after": 42666,
+      "train_ppl": 1700.7515047019767,
+      "n_train_tokens": 5000000,
+      "n_eval_tokens": 2000000,
+      "n_tokens_with_loss": 52084
+    },
+    {
+      "iteration": 3,
+      "vocab_size_before": 42666,
+      "vocab_size_after": 32000,
+      "train_ppl": 860.5660682370511,
+      "n_train_tokens": 5000000,
+      "n_eval_tokens": 2000000,
+      "n_tokens_with_loss": 41388
+    }
+  ]
+}
