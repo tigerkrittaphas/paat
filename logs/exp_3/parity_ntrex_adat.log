@@ -1,0 +1,179 @@
+Tokenizer:  models/tokenizers/adat/adat
+FLORES dir: data/raw/ntrex
+Languages:  78
+Split:      devtest
+
+Vocab size: 32,000
+
+  [  af] tok/sent= 44.39  tok/byte=0.3260  unk=0.0000  sentences=1997
+  [  am] tok/sent= 76.94  tok/byte=0.3606  unk=0.0218  sentences=1997
+  [  ar] tok/sent= 85.67  tok/byte=0.4074  unk=0.0000  sentences=1997
+  [  az] tok/sent= 47.07  tok/byte=0.2999  unk=0.0000  sentences=1997
+  [  be] tok/sent= 80.55  tok/byte=0.3456  unk=0.0001  sentences=1997
+  [  bg] tok/sent= 75.09  tok/byte=0.3067  unk=0.0000  sentences=1997
+  [  bn] tok/sent=106.72  tok/byte=0.3267  unk=0.0001  sentences=1997
+  [  ca] tok/sent= 45.26  tok/byte=0.3122  unk=0.0000  sentences=1997
+  [  cs] tok/sent= 45.97  tok/byte=0.3400  unk=0.0000  sentences=1997
+  [  cy] tok/sent= 55.96  tok/byte=0.4074  unk=0.0001  sentences=1997
+  [  da] tok/sent= 41.37  tok/byte=0.3207  unk=0.0000  sentences=1997
+  [  de] tok/sent= 46.89  tok/byte=0.3096  unk=0.0000  sentences=1997
+  [  el] tok/sent=119.70  tok/byte=0.4418  unk=0.0000  sentences=1997
+  [  en] tok/sent= 36.92  tok/byte=0.2976  unk=0.0000  sentences=1997
+  [  es] tok/sent= 44.76  tok/byte=0.3026  unk=0.0000  sentences=1997
+  [  et] tok/sent= 43.36  tok/byte=0.3386  unk=0.0000  sentences=1997
+  [  eu] tok/sent= 44.48  tok/byte=0.3212  unk=0.0000  sentences=1997
+  [  fa] tok/sent= 76.71  tok/byte=0.3549  unk=0.0120  sentences=1997
+  [  fi] tok/sent= 46.20  tok/byte=0.3269  unk=0.0000  sentences=1997
+  [ fil] tok/sent= 47.75  tok/byte=0.3246  unk=0.0000  sentences=1997
+  [  fr] tok/sent= 48.37  tok/byte=0.3109  unk=0.0000  sentences=1997
+  [  ga] tok/sent= 59.55  tok/byte=0.3787  unk=0.0000  sentences=1997
+  [  gl] tok/sent= 42.35  tok/byte=0.3041  unk=0.0000  sentences=1997
+  [  gu] tok/sent=105.92  tok/byte=0.3285  unk=0.0003  sentences=1997
+  [  ha] tok/sent= 48.86  tok/byte=0.3557  unk=0.0004  sentences=1997
+  [  hi] tok/sent=109.96  tok/byte=0.3274  unk=0.0000  sentences=1997
+  [  hu] tok/sent= 53.89  tok/byte=0.3513  unk=0.0000  sentences=1997
+  [  hy] tok/sent=118.92  tok/byte=0.4903  unk=0.0004  sentences=1997
+  [  id] tok/sent= 38.68  tok/byte=0.2684  unk=0.0000  sentences=1997
+  [  ig] tok/sent= 57.28  tok/byte=0.3881  unk=0.0003  sentences=1997
+  [  is] tok/sent= 46.59  tok/byte=0.3192  unk=0.0000  sentences=1997
+  [  it] tok/sent= 44.91  tok/byte=0.3054  unk=0.0000  sentences=1997
+  [  iw] tok/sent= 83.91  tok/byte=0.4656  unk=0.0001  sentences=1997
+  [  ja] tok/sent= 57.40  tok/byte=0.3537  unk=0.0178  sentences=1997
+  [  ka] tok/sent=127.29  tok/byte=0.3560  unk=0.0000  sentences=1997
+  [  kk] tok/sent= 78.66  tok/byte=0.3272  unk=0.0000  sentences=1997
+  [  km] tok/sent=137.70  tok/byte=0.3431  unk=0.0005  sentences=1997
+  [  kn] tok/sent=120.06  tok/byte=0.3319  unk=0.0052  sentences=1997
+  [  ko] tok/sent= 58.31  tok/byte=0.3676  unk=0.0197  sentences=1997
+  [  ku] tok/sent= 50.45  tok/byte=0.3716  unk=0.0000  sentences=1997
+  [  ky] tok/sent= 73.30  tok/byte=0.3176  unk=0.0000  sentences=1997
+  [  lb] tok/sent= 52.27  tok/byte=0.3578  unk=0.0000  sentences=1997
+  [  lo] tok/sent=127.77  tok/byte=0.3537  unk=0.0784  sentences=1997
+  [  lt] tok/sent= 47.99  tok/byte=0.3414  unk=0.0005  sentences=1997
+  [  mi] tok/sent= 59.42  tok/byte=0.4102  unk=0.0001  sentences=1997
+  [  mk] tok/sent= 67.32  tok/byte=0.2757  unk=0.0005  sentences=1997
+  [  ml] tok/sent=141.12  tok/byte=0.3352  unk=0.0024  sentences=1997
+  [  mn] tok/sent= 87.79  tok/byte=0.3688  unk=0.0000  sentences=1997
+  [  mr] tok/sent=116.18  tok/byte=0.3324  unk=0.0013  sentences=1997
+  [  mt] tok/sent= 62.38  tok/byte=0.4228  unk=0.0000  sentences=1997
+  [  my] tok/sent=147.68  tok/byte=0.3398  unk=0.0011  sentences=1997
+  [  nl] tok/sent= 44.60  tok/byte=0.3039  unk=0.0002  sentences=1997
+  [  no] tok/sent= 40.17  tok/byte=0.3109  unk=0.0000  sentences=1997
+  [  ny] tok/sent= 52.78  tok/byte=0.3696  unk=0.0000  sentences=1997
+  [  pl] tok/sent= 53.38  tok/byte=0.3571  unk=0.0000  sentences=1997
+  [  ps] tok/sent= 82.77  tok/byte=0.3849  unk=0.0082  sentences=1997
+  [  pt] tok/sent= 41.34  tok/byte=0.3027  unk=0.0000  sentences=1997
+  [  ro] tok/sent= 52.96  tok/byte=0.3411  unk=0.0000  sentences=1997
+  [  ru] tok/sent= 81.22  tok/byte=0.3235  unk=0.0001  sentences=1997
+  [  si] tok/sent=113.87  tok/byte=0.3316  unk=0.0006  sentences=1997
+  [  sk] tok/sent= 46.61  tok/byte=0.3384  unk=0.0000  sentences=1997
+  [  sl] tok/sent= 46.70  tok/byte=0.3588  unk=0.0000  sentences=1997
+  [  sm] tok/sent= 57.87  tok/byte=0.4105  unk=0.0000  sentences=1997
+  [  so] tok/sent= 51.50  tok/byte=0.3514  unk=0.0000  sentences=1997
+  [  sq] tok/sent= 48.51  tok/byte=0.3165  unk=0.0000  sentences=1997
+  [  sr] tok/sent= 74.14  tok/byte=0.3367  unk=0.0000  sentences=1997
+  [  sv] tok/sent= 40.73  tok/byte=0.3092  unk=0.0001  sentences=1997
+  [  ta] tok/sent=141.82  tok/byte=0.3340  unk=0.0001  sentences=1997
+  [  te] tok/sent=111.62  tok/byte=0.3344  unk=0.0062  sentences=1997
+  [  th] tok/sent=114.15  tok/byte=0.3482  unk=0.0000  sentences=1997
+  [  tr] tok/sent= 42.41  tok/byte=0.2924  unk=0.0000  sentences=1997
+  [  uk] tok/sent= 77.95  tok/byte=0.3258  unk=0.0000  sentences=1997
+  [  ur] tok/sent= 69.79  tok/byte=0.3159  unk=0.0000  sentences=1997
+  [  vi] tok/sent= 52.86  tok/byte=0.2966  unk=0.0001  sentences=1997
+  [  xh] tok/sent= 54.54  tok/byte=0.4046  unk=0.0000  sentences=1997
+  [  yo] tok/sent= 81.79  tok/byte=0.4040  unk=0.0017  sentences=1997
+  [  zh] tok/sent= 42.35  tok/byte=0.3560  unk=0.0176  sentences=1997
+  [  zu] tok/sent= 52.04  tok/byte=0.4023  unk=0.0000  sentences=1997
+
+ lang   tok/sent   tok/byte  fertility*   unk_rate
+--------------------------------------------------------
+    en      36.92     0.2976       1.754    0.00000
+    id      38.68     0.2684       1.923    0.00000
+    no      40.17     0.3109       1.950    0.00000
+    sv      40.73     0.3092       2.024    0.00006
+    pt      41.34     0.3027       1.873    0.00000
+    da      41.37     0.3207       2.025    0.00000
+    gl      42.35     0.3041       1.881    0.00000
+    zh      42.35     0.3560      24.854    0.01759
+    tr      42.41     0.2924       2.468    0.00000
+    et      43.36     0.3386       2.651    0.00000
+    af      44.39     0.3260       1.978    0.00000
+    eu      44.48     0.3212       2.505    0.00000
+    nl      44.60     0.3039       1.903    0.00017
+    es      44.76     0.3026       1.839    0.00000
+    it      44.91     0.3054       1.951    0.00000
+    ca      45.26     0.3122       1.883    0.00000
+    cs      45.97     0.3400       2.449    0.00000
+    fi      46.20     0.3269       3.003    0.00000
+    is      46.59     0.3192       2.220    0.00000
+    sk      46.61     0.3384       2.448    0.00000
+    sl      46.70     0.3588       2.345    0.00000
+    de      46.89     0.3096       2.192    0.00000
+    az      47.07     0.2999       2.614    0.00000
+   fil      47.75     0.3246       2.007    0.00000
+    lt      47.99     0.3414       2.744    0.00052
+    fr      48.37     0.3109       1.980    0.00000
+    sq      48.51     0.3165       1.998    0.00000
+    ha      48.86     0.3557       1.949    0.00037
+    ku      50.45     0.3716       2.361    0.00000
+    so      51.50     0.3514       2.321    0.00000
+    zu      52.04     0.4023       3.558    0.00000
+    lb      52.27     0.3578       2.395    0.00000
+    ny      52.78     0.3696       2.729    0.00002
+    vi      52.86     0.2966       1.775    0.00014
+    ro      52.96     0.3411       2.206    0.00000
+    pl      53.38     0.3571       2.727    0.00003
+    hu      53.89     0.3513       2.827    0.00000
+    xh      54.54     0.4046       3.564    0.00000
+    cy      55.96     0.4074       2.381    0.00006
+    ig      57.28     0.3881       2.502    0.00033
+    ja      57.40     0.3537      40.878    0.01782
+    sm      57.87     0.4105       1.972    0.00003
+    ko      58.31     0.3676       3.792    0.01966
+    mi      59.42     0.4102       2.073    0.00005
+    ga      59.55     0.3787       2.341    0.00001
+    mt      62.38     0.4228       3.252    0.00000
+    mk      67.32     0.2757       3.134    0.00050
+    ur      69.79     0.3159       2.590    0.00001
+    ky      73.30     0.3176       4.372    0.00001
+    sr      74.14     0.3367       3.625    0.00000
+    bg      75.09     0.3067       3.506    0.00000
+    fa      76.71     0.3549       3.195    0.01195
+    am      76.94     0.3606       4.748    0.02184
+    uk      77.95     0.3258       4.093    0.00000
+    kk      78.67     0.3272       4.622    0.00000
+    be      80.55     0.3456       4.294    0.00006
+    ru      81.22     0.3235       4.154    0.00006
+    yo      81.79     0.4040       3.167    0.00173
+    ps      82.77     0.3849       3.061    0.00824
+    iw      83.91     0.4656       4.800    0.00010
+    ar      85.67     0.4074       4.423    0.00005
+    mn      87.79     0.3688       4.761    0.00000
+    gu     105.92     0.3285       5.199    0.00032
+    bn     106.72     0.3267       5.697    0.00009
+    hi     109.96     0.3274       4.227    0.00001
+    te     111.62     0.3344       7.010    0.00619
+    si     113.87     0.3316       5.606    0.00058
+    th     114.15     0.3482      21.179    0.00000
+    mr     116.18     0.3324       6.218    0.00130
+    hy     118.92     0.4903       6.537    0.00043
+    el     119.70     0.4418       5.173    0.00003
+    kn     120.06     0.3319       7.511    0.00522
+    ka     127.29     0.3560       7.684    0.00000
+    lo     127.77     0.3537      19.261    0.07845
+    km     137.70     0.3431      20.054    0.00051
+    ml     141.12     0.3352       9.188    0.00245
+    ta     141.82     0.3340       8.545    0.00008
+    my     147.68     0.3398      12.621    0.00110
+--------------------------------------------------------
+   ALL      69.93                  4.914           
+
+  Primary metrics (parallel-sentence, robust to script/whitespace):
+    Tokens/sentence mean: 69.93   std: 30.16
+    Tokens/sentence max:  147.68   min: 36.92   ratio: 4.00x
+    Gini (tokens/sentence): 0.2291   (0 = perfect equality; headline fairness metric)
+    Gini (tokens/byte):     0.0634
+
+  Legacy fertility (*unreliable for CJK/Thai — whitespace-split):
+    mean: 4.914   std: 6.024   ratio: 23.31x
+
+Report saved to results/parity_ntrex/adat.json
