@@ -250,67 +250,76 @@ def load_bible_for_lang(subset_id: str) -> dict[tuple[str, int, int], str] | Non
 def load_all_bibles_single_pass(
     subset_ids: list[str],
 ) -> dict[str, dict[tuple[str, int, int], str]]:
-    """Load all requested language Bibles in ONE iteration over the combined table.
+    """Load all requested language Bibles by streaming ``corpus.json`` directly.
 
-    Calls ``load_dataset("bible-nlp/biblenlp-corpus")`` once (no config —
-    the multi-language combined table), then iterates a single time,
-    bucketing rows into per-subset_id dicts.  Avoids the 96x cost of
-    re-instantiating and re-filtering the dataset per language.
+    Bypasses the HF ``datasets`` pipeline.  The dataset-script path builds a
+    ~3M-row Arrow table from corpus.json (single-threaded Python string ops,
+    ~hours on a laptop) before yielding the first row — we don't need any
+    of that to bucket rows by language, so we read the raw JSON with ijson.
+
+    ``corpus.json`` schema (top-level dict, one entry per language):
+
+        {
+          "<lang_id>": [
+            {"verses": ["BOOK CH:V", ...], "text": "...", "file": "...", ...},
+            ...
+          ],
+          ...
+        }
 
     Returns ``{subset_id: {(book, ch, v): text}}`` for each subset_id that
-    had at least one parseable row.  Subsets with zero rows are absent.
-
-    Raises if the combined table lacks the language/text/vref columns we
-    need — caller should fall back to per-language loads in that case.
+    had at least one parseable row.
     """
-    from datasets import load_dataset
+    import ijson  # type: ignore[import-not-found]
+    from huggingface_hub import hf_hub_download
 
     print(
-        f"[bible] one-pass load: fetching combined biblenlp table "
+        f"[bible] direct-json load: locating corpus.json blob "
         f"for {len(subset_ids)} languages ..."
     )
-    ds = load_dataset("bible-nlp/biblenlp-corpus", trust_remote_code=True)
-    split_name = next(iter(ds.keys()))
-    rows = ds[split_name]
-    cols = set(rows.column_names)
-
-    lang_col = "language" if "language" in cols else ("iso" if "iso" in cols else None)
-    text_col = next((c for c in ("text", "translation", "verse") if c in cols), None)
-    vref_col = next((c for c in ("vref", "ref", "verse_id") if c in cols), None)
-    if lang_col is None or text_col is None or vref_col is None:
-        raise RuntimeError(
-            f"biblenlp combined-table schema not recognised "
-            f"(cols={sorted(cols)}); single-pass loader cannot bucket by language."
+    corpus_path = Path(
+        hf_hub_download(
+            repo_id="bible-nlp/biblenlp-corpus",
+            filename="corpus.json",
+            repo_type="dataset",
         )
+    )
+    size_gb = corpus_path.stat().st_size / 1e9
+    print(f"[bible] direct-json load: streaming {corpus_path} ({size_gb:.1f} GB) with ijson ...")
 
     want = set(subset_ids)
     out: dict[str, dict[tuple[str, int, int], str]] = {}
+    n_seen = 0
+    with corpus_path.open("rb") as fh:
+        for lang, entries in ijson.kvitems(fh, ""):
+            n_seen += 1
+            if lang not in want:
+                continue
+            d: dict[tuple[str, int, int], str] = {}
+            for entry in entries:
+                if not isinstance(entry, dict):
+                    continue
+                txt = entry.get("text")
+                if not txt or not str(txt).strip():
+                    continue
+                verses = entry.get("verses")
+                if not verses:
+                    continue
+                # An entry can span multiple verses (e.g. a verse range);
+                # we key on the first vref to match the existing per-lang
+                # loader's behaviour.
+                key = parse_vref(str(verses[0]))
+                if key is None:
+                    continue
+                d.setdefault(key, str(txt).strip())
+            if d:
+                out[lang] = d
+                print(f"  [{lang}] loaded {len(d):,} verses (direct-json)")
 
-    # Materialise the three columns as Python lists and iterate manually —
-    # ~10x faster than ``for ex in rows`` because we skip the per-row dict
-    # construction inside HF Datasets.
-    print(f"[bible] one-pass load: extracting columns ({lang_col}, {vref_col}, {text_col}) ...")
-    langs = rows[lang_col]
-    vrefs = rows[vref_col]
-    texts = rows[text_col]
-    n_rows = len(langs)
-    print(f"[bible] one-pass load: iterating {n_rows:,} rows ...")
-
-    for i, (lang, vref, txt) in enumerate(zip(langs, vrefs, texts)):
-        if i and i % 1_000_000 == 0:
-            print(f"  [bible] {i:,}/{n_rows:,} rows scanned")
-        if lang not in want:
-            continue
-        key = parse_vref(str(vref))
-        if key is None:
-            continue
-        if not txt or not txt.strip():
-            continue
-        d = out.setdefault(lang, {})
-        d.setdefault(key, txt.strip())
-
-    for sub, v in out.items():
-        print(f"  [{sub}] loaded {len(v):,} verses (one-pass)")
+    print(
+        f"[bible] direct-json load: scanned {n_seen} top-level langs, "
+        f"kept {len(out)} matching subset_ids."
+    )
     return out
 
 

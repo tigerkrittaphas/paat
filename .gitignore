@@ -32,6 +32,17 @@ runs/
 wandb/
 checkpoints/
 results/
+# Whitelist headline comparison summaries (gitignore negation requires
+# un-ignoring each parent directory before the leaf file).
+!results/
+results/*
+!results/parity_ntrex/
+!results/parity_bible/
+results/parity_ntrex/*
+results/parity_bible/*
+!results/parity_ntrex/comparison.json
+!results/parity_bible/comparison.json
+!results/parity_cross_domain.json
 
 # OS
 .DS_Store
