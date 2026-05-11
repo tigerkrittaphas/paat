@@ -89,7 +89,7 @@
     "fertility_ratio": 22.3745,
     "n_languages": 78
   },
-  "paat_a10": {
+  "paat_a100": {
     "mean_tokens_per_sentence": 63.1666,
     "std_tokens_per_sentence": 19.7391,
     "max_tokens_per_sentence": 119.8993,

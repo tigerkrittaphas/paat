@@ -1,0 +1,1363 @@
+[cross-domain] 43 languages in strict intersection
+  ar az be bn cs da de en es fa fil fr gu ha hi hu id it iw ja kn lt ml mr my nl ny pl pt ro ru so sr sv ta te th tr uk ur vi yo zh
+  [bpe/flores] recomputing gini on intersection ...
+  [  ar] tok/sent= 52.43  tok/byte=0.2512  unk=0.0000  sentences=1012
+  [  az] tok/sent= 51.65  tok/byte=0.3139  unk=0.0000  sentences=1012
+  [  be] tok/sent= 63.02  tok/byte=0.2354  unk=0.0000  sentences=1012
+  [  bn] tok/sent= 99.07  tok/byte=0.2909  unk=0.0000  sentences=1012
+  [  cs] tok/sent= 48.14  tok/byte=0.3421  unk=0.0000  sentences=1012
+  [  da] tok/sent= 42.91  tok/byte=0.3147  unk=0.0000  sentences=1012
+  [  de] tok/sent= 49.84  tok/byte=0.3226  unk=0.0000  sentences=1012
+  [  en] tok/sent= 37.46  tok/byte=0.2870  unk=0.0000  sentences=1012
+  [  es] tok/sent= 47.39  tok/byte=0.2999  unk=0.0000  sentences=1012
+  [  fa] tok/sent= 51.96  tok/byte=0.2353  unk=0.0000  sentences=1012
+  [ fil] tok/sent= 52.06  tok/byte=0.3169  unk=0.0000  sentences=1012
+  [  fr] tok/sent= 51.70  tok/byte=0.3192  unk=0.0000  sentences=1012
+  [  gu] tok/sent= 92.88  tok/byte=0.2839  unk=0.0000  sentences=1012
+  [  ha] tok/sent= 51.14  tok/byte=0.3655  unk=0.0000  sentences=1012
+  [  hi] tok/sent= 90.61  tok/byte=0.2720  unk=0.0000  sentences=1012
+  [  hu] tok/sent= 51.81  tok/byte=0.3436  unk=0.0000  sentences=1012
+  [  id] tok/sent= 39.80  tok/byte=0.2827  unk=0.0000  sentences=1012
+  [  it] tok/sent= 48.36  tok/byte=0.3112  unk=0.0000  sentences=1012
+  [  iw] tok/sent= 47.10  tok/byte=0.2604  unk=0.0000  sentences=1012
+  [  ja] tok/sent= 50.73  tok/byte=0.3072  unk=0.0000  sentences=1012
+  [  kn] tok/sent=107.16  tok/byte=0.2889  unk=0.0000  sentences=1012
+  [  lt] tok/sent= 46.74  tok/byte=0.3400  unk=0.0000  sentences=1012
+  [  ml] tok/sent=122.09  tok/byte=0.3001  unk=0.0000  sentences=1012
+  [  mr] tok/sent=102.60  tok/byte=0.2921  unk=0.0000  sentences=1012
+  [  my] tok/sent=115.58  tok/byte=0.2513  unk=0.0000  sentences=1012
+  [  nl] tok/sent= 44.88  tok/byte=0.3074  unk=0.0000  sentences=1012
+  [  ny] tok/sent= 54.18  tok/byte=0.3717  unk=0.0000  sentences=1012
+  [  pl] tok/sent= 52.14  tok/byte=0.3559  unk=0.0000  sentences=1012
+  [  pt] tok/sent= 44.73  tok/byte=0.3070  unk=0.0000  sentences=1012
+  [  ro] tok/sent= 50.36  tok/byte=0.3247  unk=0.0000  sentences=1012
+  [  ru] tok/sent= 52.94  tok/byte=0.2058  unk=0.0000  sentences=1012
+  [  so] tok/sent= 54.39  tok/byte=0.3623  unk=0.0000  sentences=1012
+  [  sr] tok/sent= 50.36  tok/byte=0.2141  unk=0.0000  sentences=1012
+  [  sv] tok/sent= 42.69  tok/byte=0.3145  unk=0.0000  sentences=1012
+  [  ta] tok/sent=120.95  tok/byte=0.2903  unk=0.0000  sentences=1012
+  [  te] tok/sent=103.69  tok/byte=0.2967  unk=0.0000  sentences=1012
+  [  th] tok/sent= 81.59  tok/byte=0.2263  unk=0.0000  sentences=1012
+  [  tr] tok/sent= 46.48  tok/byte=0.3181  unk=0.0000  sentences=1012
+  [  uk] tok/sent= 54.37  tok/byte=0.2238  unk=0.0000  sentences=1012
+  [  ur] tok/sent= 52.93  tok/byte=0.2312  unk=0.0000  sentences=1012
+  [  vi] tok/sent= 47.18  tok/byte=0.2601  unk=0.0000  sentences=1012
+  [  yo] tok/sent= 74.18  tok/byte=0.4446  unk=0.0000  sentences=1012
+  [  zh] tok/sent= 43.30  tok/byte=0.3628  unk=0.0000  sentences=1012
+  [bpe/ntrex] recomputing gini on intersection ...
+  [  ar] tok/sent= 53.28  tok/byte=0.2534  unk=0.0000  sentences=1997
+  [  az] tok/sent= 49.02  tok/byte=0.3123  unk=0.0000  sentences=1997
+  [  be] tok/sent= 55.45  tok/byte=0.2379  unk=0.0000  sentences=1997
+  [  bn] tok/sent= 94.90  tok/byte=0.2905  unk=0.0000  sentences=1997
+  [  cs] tok/sent= 45.91  tok/byte=0.3395  unk=0.0000  sentences=1997
+  [  da] tok/sent= 41.01  tok/byte=0.3179  unk=0.0000  sentences=1997
+  [  de] tok/sent= 48.54  tok/byte=0.3205  unk=0.0000  sentences=1997
+  [  en] tok/sent= 36.32  tok/byte=0.2928  unk=0.0000  sentences=1997
+  [  es] tok/sent= 44.59  tok/byte=0.3015  unk=0.0000  sentences=1997
+  [  fa] tok/sent= 50.22  tok/byte=0.2323  unk=0.0000  sentences=1997
+  [ fil] tok/sent= 46.37  tok/byte=0.3152  unk=0.0000  sentences=1997
+  [  fr] tok/sent= 49.80  tok/byte=0.3201  unk=0.0000  sentences=1997
+  [  gu] tok/sent= 90.62  tok/byte=0.2810  unk=0.0000  sentences=1997
+  [  ha] tok/sent= 50.08  tok/byte=0.3646  unk=0.0000  sentences=1997
+  [  hi] tok/sent= 91.44  tok/byte=0.2723  unk=0.0000  sentences=1997
+  [  hu] tok/sent= 52.54  tok/byte=0.3425  unk=0.0000  sentences=1997
+  [  id] tok/sent= 39.94  tok/byte=0.2772  unk=0.0000  sentences=1997
+  [  it] tok/sent= 45.53  tok/byte=0.3096  unk=0.0000  sentences=1997
+  [  iw] tok/sent= 47.52  tok/byte=0.2637  unk=0.0000  sentences=1997
+  [  ja] tok/sent= 50.46  tok/byte=0.3109  unk=0.0000  sentences=1997
+  [  kn] tok/sent=104.87  tok/byte=0.2899  unk=0.0000  sentences=1997
+  [  lt] tok/sent= 48.06  tok/byte=0.3419  unk=0.0000  sentences=1997
+  [  ml] tok/sent=127.03  tok/byte=0.3017  unk=0.0000  sentences=1997
+  [  mr] tok/sent=102.48  tok/byte=0.2932  unk=0.0000  sentences=1997
+  [  my] tok/sent=110.46  tok/byte=0.2542  unk=0.0000  sentences=1997
+  [  nl] tok/sent= 45.24  tok/byte=0.3082  unk=0.0000  sentences=1997
+  [  ny] tok/sent= 53.17  tok/byte=0.3724  unk=0.0000  sentences=1997
+  [  pl] tok/sent= 52.38  tok/byte=0.3505  unk=0.0000  sentences=1997
+  [  pt] tok/sent= 42.19  tok/byte=0.3089  unk=0.0000  sentences=1997
+  [  ro] tok/sent= 50.55  tok/byte=0.3256  unk=0.0000  sentences=1997
+  [  ru] tok/sent= 52.66  tok/byte=0.2097  unk=0.0000  sentences=1997
+  [  so] tok/sent= 52.99  tok/byte=0.3616  unk=0.0000  sentences=1997
+  [  sr] tok/sent= 58.41  tok/byte=0.2652  unk=0.0000  sentences=1997
+  [  sv] tok/sent= 41.11  tok/byte=0.3122  unk=0.0000  sentences=1997
+  [  ta] tok/sent=124.29  tok/byte=0.2927  unk=0.0000  sentences=1997
+  [  te] tok/sent= 98.35  tok/byte=0.2947  unk=0.0000  sentences=1997
+  [  th] tok/sent= 75.69  tok/byte=0.2309  unk=0.0000  sentences=1997
+  [  tr] tok/sent= 46.13  tok/byte=0.3180  unk=0.0000  sentences=1997
+  [  uk] tok/sent= 53.94  tok/byte=0.2255  unk=0.0000  sentences=1997
+  [  ur] tok/sent= 50.59  tok/byte=0.2290  unk=0.0000  sentences=1997
+  [  vi] tok/sent= 46.45  tok/byte=0.2607  unk=0.0000  sentences=1997
+  [  yo] tok/sent= 83.05  tok/byte=0.4102  unk=0.0000  sentences=1997
+  [  zh] tok/sent= 43.13  tok/byte=0.3625  unk=0.0000  sentences=1997
+  [bpe/bible] recomputing gini on intersection ...
+  [  ar] tok/sent= 99.40  tok/byte=0.4515  unk=0.0000  sentences=2179
+  [  az] tok/sent= 40.17  tok/byte=0.3348  unk=0.0000  sentences=2179
+  [  be] tok/sent= 42.31  tok/byte=0.2560  unk=0.0000  sentences=2179
+  [  bn] tok/sent= 80.53  tok/byte=0.2827  unk=0.0000  sentences=2179
+  [  cs] tok/sent= 40.12  tok/byte=0.3772  unk=0.0000  sentences=2179
+  [  da] tok/sent= 36.93  tok/byte=0.3341  unk=0.0000  sentences=2179
+  [  de] tok/sent= 39.62  tok/byte=0.3371  unk=0.0000  sentences=2179
+  [  en] tok/sent= 34.56  tok/byte=0.3077  unk=0.0000  sentences=2179
+  [  es] tok/sent= 38.57  tok/byte=0.3285  unk=0.0000  sentences=2179
+  [  fa] tok/sent= 39.92  tok/byte=0.2461  unk=0.0000  sentences=2179
+  [ fil] tok/sent= 44.13  tok/byte=0.3166  unk=0.0000  sentences=2179
+  [  fr] tok/sent= 42.14  tok/byte=0.3497  unk=0.0000  sentences=2179
+  [  gu] tok/sent= 74.46  tok/byte=0.2755  unk=0.0000  sentences=2179
+  [  ha] tok/sent= 42.18  tok/byte=0.3705  unk=0.0000  sentences=2179
+  [  hi] tok/sent= 71.24  tok/byte=0.2644  unk=0.0000  sentences=2179
+  [  hu] tok/sent= 42.19  tok/byte=0.3594  unk=0.0000  sentences=2179
+  [  id] tok/sent= 49.70  tok/byte=0.2755  unk=0.0000  sentences=2179
+  [  it] tok/sent= 40.52  tok/byte=0.3507  unk=0.0000  sentences=2179
+  [  iw] tok/sent= 31.36  tok/byte=0.2667  unk=0.0000  sentences=2179
+  [  ja] tok/sent= 50.33  tok/byte=0.2930  unk=0.0000  sentences=2179
+  [  kn] tok/sent= 91.86  tok/byte=0.2875  unk=0.0000  sentences=2179
+  [  lt] tok/sent= 41.43  tok/byte=0.3616  unk=0.0000  sentences=2179
+  [  ml] tok/sent= 95.54  tok/byte=0.2945  unk=0.0000  sentences=2179
+  [  mr] tok/sent= 86.31  tok/byte=0.2903  unk=0.0000  sentences=2179
+  [  my] tok/sent=143.99  tok/byte=0.2754  unk=0.0000  sentences=2179
+  [  nl] tok/sent= 38.01  tok/byte=0.3349  unk=0.0000  sentences=2179
+  [  ny] tok/sent= 45.33  tok/byte=0.3802  unk=0.0000  sentences=2179
+  [  pl] tok/sent= 44.01  tok/byte=0.3781  unk=0.0000  sentences=2179
+  [  pt] tok/sent= 40.82  tok/byte=0.3260  unk=0.0000  sentences=2179
+  [  ro] tok/sent= 57.22  tok/byte=0.3006  unk=0.0000  sentences=2179
+  [  ru] tok/sent= 37.92  tok/byte=0.2302  unk=0.0000  sentences=2179
+  [  so] tok/sent= 45.78  tok/byte=0.3858  unk=0.0000  sentences=2179
+  [  sr] tok/sent= 36.63  tok/byte=0.3935  unk=0.0000  sentences=2179
+  [  sv] tok/sent= 84.88  tok/byte=0.3220  unk=0.0000  sentences=2179
+  [  ta] tok/sent=105.87  tok/byte=0.2886  unk=0.0000  sentences=2179
+  [  te] tok/sent= 86.84  tok/byte=0.2952  unk=0.0000  sentences=2179
+  [  th] tok/sent= 77.27  tok/byte=0.2286  unk=0.0000  sentences=2179
+  [  tr] tok/sent= 40.39  tok/byte=0.3407  unk=0.0000  sentences=2179
+  [  uk] tok/sent= 40.50  tok/byte=0.2533  unk=0.0000  sentences=2179
+  [  ur] tok/sent= 71.99  tok/byte=0.2678  unk=0.0000  sentences=2179
+  [  vi] tok/sent= 42.30  tok/byte=0.2899  unk=0.0000  sentences=2179
+  [  yo] tok/sent= 72.10  tok/byte=0.4537  unk=0.0000  sentences=2179
+  [  zh] tok/sent= 34.78  tok/byte=0.3658  unk=0.0000  sentences=2179
+  [parity_bpe/flores] recomputing gini on intersection ...
+  [  ar] tok/sent= 59.66  tok/byte=0.2858  unk=0.0000  sentences=1012
+  [  az] tok/sent= 59.24  tok/byte=0.3599  unk=0.0000  sentences=1012
+  [  be] tok/sent= 61.68  tok/byte=0.2304  unk=0.0000  sentences=1012
+  [  bn] tok/sent= 62.53  tok/byte=0.1836  unk=0.0000  sentences=1012
+  [  cs] tok/sent= 53.52  tok/byte=0.3803  unk=0.0000  sentences=1012
+  [  da] tok/sent= 47.45  tok/byte=0.3480  unk=0.0000  sentences=1012
+  [  de] tok/sent= 54.26  tok/byte=0.3512  unk=0.0000  sentences=1012
+  [  en] tok/sent= 41.01  tok/byte=0.3142  unk=0.0000  sentences=1012
+  [  es] tok/sent= 52.06  tok/byte=0.3295  unk=0.0000  sentences=1012
+  [  fa] tok/sent= 58.87  tok/byte=0.2665  unk=0.0000  sentences=1012
+  [ fil] tok/sent= 56.75  tok/byte=0.3454  unk=0.0000  sentences=1012
+  [  fr] tok/sent= 56.07  tok/byte=0.3461  unk=0.0000  sentences=1012
+  [  gu] tok/sent= 62.71  tok/byte=0.1917  unk=0.0000  sentences=1012
+  [  ha] tok/sent= 54.06  tok/byte=0.3863  unk=0.0000  sentences=1012
+  [  hi] tok/sent= 62.35  tok/byte=0.1872  unk=0.0000  sentences=1012
+  [  hu] tok/sent= 57.47  tok/byte=0.3812  unk=0.0000  sentences=1012
+  [  id] tok/sent= 44.79  tok/byte=0.3182  unk=0.0000  sentences=1012
+  [  it] tok/sent= 52.80  tok/byte=0.3398  unk=0.0000  sentences=1012
+  [  iw] tok/sent= 53.17  tok/byte=0.2939  unk=0.0000  sentences=1012
+  [  ja] tok/sent= 59.71  tok/byte=0.3616  unk=0.0000  sentences=1012
+  [  kn] tok/sent= 62.32  tok/byte=0.1680  unk=0.0000  sentences=1012
+  [  lt] tok/sent= 51.75  tok/byte=0.3764  unk=0.0000  sentences=1012
+  [  ml] tok/sent= 62.89  tok/byte=0.1546  unk=0.0000  sentences=1012
+  [  mr] tok/sent= 62.88  tok/byte=0.1790  unk=0.0000  sentences=1012
+  [  my] tok/sent= 62.64  tok/byte=0.1362  unk=0.0000  sentences=1012
+  [  nl] tok/sent= 49.33  tok/byte=0.3379  unk=0.0000  sentences=1012
+  [  ny] tok/sent= 57.97  tok/byte=0.3977  unk=0.0000  sentences=1012
+  [  pl] tok/sent= 57.82  tok/byte=0.3947  unk=0.0000  sentences=1012
+  [  pt] tok/sent= 49.12  tok/byte=0.3372  unk=0.0000  sentences=1012
+  [  ro] tok/sent= 55.29  tok/byte=0.3565  unk=0.0000  sentences=1012
+  [  ru] tok/sent= 60.13  tok/byte=0.2337  unk=0.0000  sentences=1012
+  [  so] tok/sent= 59.28  tok/byte=0.3948  unk=0.0000  sentences=1012
+  [  sr] tok/sent= 56.89  tok/byte=0.2419  unk=0.0000  sentences=1012
+  [  sv] tok/sent= 46.73  tok/byte=0.3442  unk=0.0000  sentences=1012
+  [  ta] tok/sent= 62.93  tok/byte=0.1511  unk=0.0000  sentences=1012
+  [  te] tok/sent= 61.97  tok/byte=0.1773  unk=0.0000  sentences=1012
+  [  th] tok/sent= 61.06  tok/byte=0.1694  unk=0.0000  sentences=1012
+  [  tr] tok/sent= 52.33  tok/byte=0.3581  unk=0.0000  sentences=1012
+  [  uk] tok/sent= 60.63  tok/byte=0.2495  unk=0.0000  sentences=1012
+  [  ur] tok/sent= 61.32  tok/byte=0.2678  unk=0.0000  sentences=1012
+  [  vi] tok/sent= 57.76  tok/byte=0.3184  unk=0.0000  sentences=1012
+  [  yo] tok/sent= 62.24  tok/byte=0.3730  unk=0.0000  sentences=1012
+  [  zh] tok/sent= 43.58  tok/byte=0.3651  unk=0.0000  sentences=1012
+  [parity_bpe/ntrex] recomputing gini on intersection ...
+  [  ar] tok/sent= 60.56  tok/byte=0.2880  unk=0.0000  sentences=1997
+  [  az] tok/sent= 56.21  tok/byte=0.3582  unk=0.0000  sentences=1997
+  [  be] tok/sent= 54.58  tok/byte=0.2342  unk=0.0000  sentences=1997
+  [  bn] tok/sent= 59.54  tok/byte=0.1823  unk=0.0000  sentences=1997
+  [  cs] tok/sent= 51.14  tok/byte=0.3782  unk=0.0000  sentences=1997
+  [  da] tok/sent= 45.17  tok/byte=0.3501  unk=0.0000  sentences=1997
+  [  de] tok/sent= 53.00  tok/byte=0.3500  unk=0.0000  sentences=1997
+  [  en] tok/sent= 39.92  tok/byte=0.3218  unk=0.0000  sentences=1997
+  [  es] tok/sent= 48.78  tok/byte=0.3298  unk=0.0000  sentences=1997
+  [  fa] tok/sent= 57.96  tok/byte=0.2681  unk=0.0000  sentences=1997
+  [ fil] tok/sent= 50.62  tok/byte=0.3441  unk=0.0000  sentences=1997
+  [  fr] tok/sent= 53.64  tok/byte=0.3448  unk=0.0000  sentences=1997
+  [  gu] tok/sent= 60.87  tok/byte=0.1888  unk=0.0000  sentences=1997
+  [  ha] tok/sent= 53.07  tok/byte=0.3863  unk=0.0000  sentences=1997
+  [  hi] tok/sent= 62.74  tok/byte=0.1868  unk=0.0000  sentences=1997
+  [  hu] tok/sent= 58.19  tok/byte=0.3794  unk=0.0000  sentences=1997
+  [  id] tok/sent= 45.25  tok/byte=0.3140  unk=0.0000  sentences=1997
+  [  it] tok/sent= 49.91  tok/byte=0.3394  unk=0.0000  sentences=1997
+  [  iw] tok/sent= 53.23  tok/byte=0.2954  unk=0.0000  sentences=1997
+  [  ja] tok/sent= 59.56  tok/byte=0.3670  unk=0.0000  sentences=1997
+  [  kn] tok/sent= 60.32  tok/byte=0.1668  unk=0.0000  sentences=1997
+  [  lt] tok/sent= 52.96  tok/byte=0.3767  unk=0.0000  sentences=1997
+  [  ml] tok/sent= 64.35  tok/byte=0.1529  unk=0.0000  sentences=1997
+  [  mr] tok/sent= 62.78  tok/byte=0.1796  unk=0.0000  sentences=1997
+  [  my] tok/sent= 58.14  tok/byte=0.1338  unk=0.0000  sentences=1997
+  [  nl] tok/sent= 49.81  tok/byte=0.3394  unk=0.0000  sentences=1997
+  [  ny] tok/sent= 56.64  tok/byte=0.3967  unk=0.0000  sentences=1997
+  [  pl] tok/sent= 58.17  tok/byte=0.3892  unk=0.0000  sentences=1997
+  [  pt] tok/sent= 46.32  tok/byte=0.3392  unk=0.0000  sentences=1997
+  [  ro] tok/sent= 55.28  tok/byte=0.3561  unk=0.0000  sentences=1997
+  [  ru] tok/sent= 59.90  tok/byte=0.2386  unk=0.0000  sentences=1997
+  [  so] tok/sent= 57.78  tok/byte=0.3943  unk=0.0000  sentences=1997
+  [  sr] tok/sent= 63.69  tok/byte=0.2892  unk=0.0000  sentences=1997
+  [  sv] tok/sent= 44.80  tok/byte=0.3402  unk=0.0000  sentences=1997
+  [  ta] tok/sent= 65.07  tok/byte=0.1533  unk=0.0000  sentences=1997
+  [  te] tok/sent= 58.47  tok/byte=0.1752  unk=0.0000  sentences=1997
+  [  th] tok/sent= 57.50  tok/byte=0.1754  unk=0.0000  sentences=1997
+  [  tr] tok/sent= 52.04  tok/byte=0.3588  unk=0.0000  sentences=1997
+  [  uk] tok/sent= 60.15  tok/byte=0.2514  unk=0.0000  sentences=1997
+  [  ur] tok/sent= 58.59  tok/byte=0.2652  unk=0.0000  sentences=1997
+  [  vi] tok/sent= 57.45  tok/byte=0.3224  unk=0.0000  sentences=1997
+  [  yo] tok/sent=100.74  tok/byte=0.4976  unk=0.0000  sentences=1997
+  [  zh] tok/sent= 43.58  tok/byte=0.3663  unk=0.0000  sentences=1997
+  [parity_bpe/bible] recomputing gini on intersection ...
+  [  ar] tok/sent= 93.43  tok/byte=0.4244  unk=0.0000  sentences=2179
+  [  az] tok/sent= 45.11  tok/byte=0.3760  unk=0.0000  sentences=2179
+  [  be] tok/sent= 42.19  tok/byte=0.2553  unk=0.0000  sentences=2179
+  [  bn] tok/sent= 51.33  tok/byte=0.1802  unk=0.0000  sentences=2179
+  [  cs] tok/sent= 43.58  tok/byte=0.4098  unk=0.0000  sentences=2179
+  [  da] tok/sent= 39.13  tok/byte=0.3540  unk=0.0000  sentences=2179
+  [  de] tok/sent= 42.23  tok/byte=0.3593  unk=0.0000  sentences=2179
+  [  en] tok/sent= 36.45  tok/byte=0.3245  unk=0.0000  sentences=2179
+  [  es] tok/sent= 41.44  tok/byte=0.3529  unk=0.0000  sentences=2179
+  [  fa] tok/sent= 44.56  tok/byte=0.2748  unk=0.0000  sentences=2179
+  [ fil] tok/sent= 48.66  tok/byte=0.3491  unk=0.0000  sentences=2179
+  [  fr] tok/sent= 44.40  tok/byte=0.3685  unk=0.0000  sentences=2179
+  [  gu] tok/sent= 50.98  tok/byte=0.1886  unk=0.0000  sentences=2179
+  [  ha] tok/sent= 44.57  tok/byte=0.3915  unk=0.0000  sentences=2179
+  [  hi] tok/sent= 51.95  tok/byte=0.1928  unk=0.0000  sentences=2179
+  [  hu] tok/sent= 46.91  tok/byte=0.3996  unk=0.0000  sentences=2179
+  [  id] tok/sent= 56.41  tok/byte=0.3127  unk=0.0000  sentences=2179
+  [  it] tok/sent= 43.67  tok/byte=0.3780  unk=0.0000  sentences=2179
+  [  iw] tok/sent= 35.38  tok/byte=0.3008  unk=0.0000  sentences=2179
+  [  ja] tok/sent= 60.10  tok/byte=0.3498  unk=0.0000  sentences=2179
+  [  kn] tok/sent= 52.90  tok/byte=0.1656  unk=0.0000  sentences=2179
+  [  lt] tok/sent= 45.09  tok/byte=0.3935  unk=0.0000  sentences=2179
+  [  ml] tok/sent= 48.75  tok/byte=0.1503  unk=0.0000  sentences=2179
+  [  mr] tok/sent= 52.63  tok/byte=0.1770  unk=0.0000  sentences=2179
+  [  my] tok/sent=122.88  tok/byte=0.2350  unk=0.0000  sentences=2179
+  [  nl] tok/sent= 40.93  tok/byte=0.3606  unk=0.0000  sentences=2179
+  [  ny] tok/sent= 48.29  tok/byte=0.4051  unk=0.0000  sentences=2179
+  [  pl] tok/sent= 48.31  tok/byte=0.4151  unk=0.0000  sentences=2179
+  [  pt] tok/sent= 44.52  tok/byte=0.3556  unk=0.0000  sentences=2179
+  [  ro] tok/sent= 59.22  tok/byte=0.3111  unk=0.0000  sentences=2179
+  [  ru] tok/sent= 42.51  tok/byte=0.2581  unk=0.0000  sentences=2179
+  [  so] tok/sent= 49.02  tok/byte=0.4132  unk=0.0000  sentences=2179
+  [  sr] tok/sent= 38.29  tok/byte=0.4112  unk=0.0000  sentences=2179
+  [  sv] tok/sent= 91.60  tok/byte=0.3475  unk=0.0000  sentences=2179
+  [  ta] tok/sent= 54.80  tok/byte=0.1494  unk=0.0000  sentences=2179
+  [  te] tok/sent= 50.94  tok/byte=0.1732  unk=0.0000  sentences=2179
+  [  th] tok/sent= 64.53  tok/byte=0.1909  unk=0.0000  sentences=2179
+  [  tr] tok/sent= 44.73  tok/byte=0.3774  unk=0.0000  sentences=2179
+  [  uk] tok/sent= 43.79  tok/byte=0.2739  unk=0.0000  sentences=2179
+  [  ur] tok/sent= 52.91  tok/byte=0.1969  unk=0.0000  sentences=2179
+  [  vi] tok/sent= 50.03  tok/byte=0.3429  unk=0.0000  sentences=2179
+  [  yo] tok/sent= 54.82  tok/byte=0.3449  unk=0.0000  sentences=2179
+  [  zh] tok/sent= 35.80  tok/byte=0.3766  unk=0.0000  sentences=2179
+  [adat/flores] recomputing gini on intersection ...
+  [  ar] tok/sent= 83.91  tok/byte=0.4019  unk=0.0000  sentences=1012
+  [  az] tok/sent= 50.00  tok/byte=0.3038  unk=0.0000  sentences=1012
+  [  be] tok/sent= 92.77  tok/byte=0.3466  unk=0.0000  sentences=1012
+  [  bn] tok/sent=111.29  tok/byte=0.3268  unk=0.0003  sentences=1012
+  [  cs] tok/sent= 48.09  tok/byte=0.3417  unk=0.0000  sentences=1012
+  [  da] tok/sent= 43.37  tok/byte=0.3180  unk=0.0000  sentences=1012
+  [  de] tok/sent= 48.04  tok/byte=0.3109  unk=0.0000  sentences=1012
+  [  en] tok/sent= 38.09  tok/byte=0.2918  unk=0.0000  sentences=1012
+  [  es] tok/sent= 48.15  tok/byte=0.3048  unk=0.0000  sentences=1012
+  [  fa] tok/sent= 80.08  tok/byte=0.3626  unk=0.0214  sentences=1012
+  [ fil] tok/sent= 53.86  tok/byte=0.3278  unk=0.0000  sentences=1012
+  [  fr] tok/sent= 50.69  tok/byte=0.3129  unk=0.0000  sentences=1012
+  [  gu] tok/sent=107.99  tok/byte=0.3301  unk=0.0008  sentences=1012
+  [  ha] tok/sent= 50.32  tok/byte=0.3597  unk=0.0006  sentences=1012
+  [  hi] tok/sent=109.29  tok/byte=0.3281  unk=0.0000  sentences=1012
+  [  hu] tok/sent= 53.60  tok/byte=0.3555  unk=0.0000  sentences=1012
+  [  id] tok/sent= 38.73  tok/byte=0.2752  unk=0.0000  sentences=1012
+  [  it] tok/sent= 47.90  tok/byte=0.3082  unk=0.0000  sentences=1012
+  [  iw] tok/sent= 85.31  tok/byte=0.4716  unk=0.0000  sentences=1012
+  [  ja] tok/sent= 58.16  tok/byte=0.3522  unk=0.0219  sentences=1012
+  [  kn] tok/sent=124.31  tok/byte=0.3351  unk=0.0040  sentences=1012
+  [  lt] tok/sent= 47.14  tok/byte=0.3428  unk=0.0000  sentences=1012
+  [  ml] tok/sent=136.69  tok/byte=0.3360  unk=0.0025  sentences=1012
+  [  mr] tok/sent=116.75  tok/byte=0.3323  unk=0.0010  sentences=1012
+  [  my] tok/sent=157.31  tok/byte=0.3420  unk=0.0023  sentences=1012
+  [  nl] tok/sent= 44.28  tok/byte=0.3034  unk=0.0000  sentences=1012
+  [  ny] tok/sent= 54.27  tok/byte=0.3723  unk=0.0000  sentences=1012
+  [  pl] tok/sent= 53.55  tok/byte=0.3656  unk=0.0000  sentences=1012
+  [  pt] tok/sent= 44.23  tok/byte=0.3035  unk=0.0000  sentences=1012
+  [  ro] tok/sent= 53.41  tok/byte=0.3444  unk=0.0000  sentences=1012
+  [  ru] tok/sent= 84.09  tok/byte=0.3269  unk=0.0000  sentences=1012
+  [  so] tok/sent= 53.49  tok/byte=0.3563  unk=0.0000  sentences=1012
+  [  sr] tok/sent= 69.28  tok/byte=0.2946  unk=0.0000  sentences=1012
+  [  sv] tok/sent= 42.71  tok/byte=0.3146  unk=0.0000  sentences=1012
+  [  ta] tok/sent=138.98  tok/byte=0.3336  unk=0.0001  sentences=1012
+  [  te] tok/sent=117.14  tok/byte=0.3352  unk=0.0036  sentences=1012
+  [  th] tok/sent=125.58  tok/byte=0.3483  unk=0.0001  sentences=1012
+  [  tr] tok/sent= 43.10  tok/byte=0.2949  unk=0.0001  sentences=1012
+  [  uk] tok/sent= 80.46  tok/byte=0.3311  unk=0.0000  sentences=1012
+  [  ur] tok/sent= 74.14  tok/byte=0.3238  unk=0.0001  sentences=1012
+  [  vi] tok/sent= 52.87  tok/byte=0.2914  unk=0.0000  sentences=1012
+  [  yo] tok/sent= 73.59  tok/byte=0.4411  unk=0.0012  sentences=1012
+  [  zh] tok/sent= 42.68  tok/byte=0.3576  unk=0.0182  sentences=1012
+  [adat/ntrex] recomputing gini on intersection ...
+  [  ar] tok/sent= 85.67  tok/byte=0.4074  unk=0.0000  sentences=1997
+  [  az] tok/sent= 47.07  tok/byte=0.2999  unk=0.0000  sentences=1997
+  [  be] tok/sent= 80.55  tok/byte=0.3456  unk=0.0001  sentences=1997
+  [  bn] tok/sent=106.72  tok/byte=0.3267  unk=0.0001  sentences=1997
+  [  cs] tok/sent= 45.97  tok/byte=0.3400  unk=0.0000  sentences=1997
+  [  da] tok/sent= 41.37  tok/byte=0.3207  unk=0.0000  sentences=1997
+  [  de] tok/sent= 46.89  tok/byte=0.3096  unk=0.0000  sentences=1997
+  [  en] tok/sent= 36.92  tok/byte=0.2976  unk=0.0000  sentences=1997
+  [  es] tok/sent= 44.76  tok/byte=0.3026  unk=0.0000  sentences=1997
+  [  fa] tok/sent= 76.71  tok/byte=0.3549  unk=0.0120  sentences=1997
+  [ fil] tok/sent= 47.75  tok/byte=0.3246  unk=0.0000  sentences=1997
+  [  fr] tok/sent= 48.37  tok/byte=0.3109  unk=0.0000  sentences=1997
+  [  gu] tok/sent=105.92  tok/byte=0.3285  unk=0.0003  sentences=1997
+  [  ha] tok/sent= 48.86  tok/byte=0.3557  unk=0.0004  sentences=1997
+  [  hi] tok/sent=109.96  tok/byte=0.3274  unk=0.0000  sentences=1997
+  [  hu] tok/sent= 53.89  tok/byte=0.3513  unk=0.0000  sentences=1997
+  [  id] tok/sent= 38.68  tok/byte=0.2684  unk=0.0000  sentences=1997
+  [  it] tok/sent= 44.91  tok/byte=0.3054  unk=0.0000  sentences=1997
+  [  iw] tok/sent= 83.91  tok/byte=0.4656  unk=0.0001  sentences=1997
+  [  ja] tok/sent= 57.40  tok/byte=0.3537  unk=0.0178  sentences=1997
+  [  kn] tok/sent=120.06  tok/byte=0.3319  unk=0.0052  sentences=1997
+  [  lt] tok/sent= 47.99  tok/byte=0.3414  unk=0.0005  sentences=1997
+  [  ml] tok/sent=141.12  tok/byte=0.3352  unk=0.0024  sentences=1997
+  [  mr] tok/sent=116.18  tok/byte=0.3324  unk=0.0013  sentences=1997
+  [  my] tok/sent=147.68  tok/byte=0.3398  unk=0.0011  sentences=1997
+  [  nl] tok/sent= 44.60  tok/byte=0.3039  unk=0.0002  sentences=1997
+  [  ny] tok/sent= 52.78  tok/byte=0.3696  unk=0.0000  sentences=1997
+  [  pl] tok/sent= 53.38  tok/byte=0.3571  unk=0.0000  sentences=1997
+  [  pt] tok/sent= 41.34  tok/byte=0.3027  unk=0.0000  sentences=1997
+  [  ro] tok/sent= 52.96  tok/byte=0.3411  unk=0.0000  sentences=1997
+  [  ru] tok/sent= 81.22  tok/byte=0.3235  unk=0.0001  sentences=1997
+  [  so] tok/sent= 51.50  tok/byte=0.3514  unk=0.0000  sentences=1997
+  [  sr] tok/sent= 74.14  tok/byte=0.3367  unk=0.0000  sentences=1997
+  [  sv] tok/sent= 40.73  tok/byte=0.3092  unk=0.0001  sentences=1997
+  [  ta] tok/sent=141.82  tok/byte=0.3340  unk=0.0001  sentences=1997
+  [  te] tok/sent=111.62  tok/byte=0.3344  unk=0.0062  sentences=1997
+  [  th] tok/sent=114.15  tok/byte=0.3482  unk=0.0000  sentences=1997
+  [  tr] tok/sent= 42.41  tok/byte=0.2924  unk=0.0000  sentences=1997
+  [  uk] tok/sent= 77.95  tok/byte=0.3258  unk=0.0000  sentences=1997
+  [  ur] tok/sent= 69.79  tok/byte=0.3159  unk=0.0000  sentences=1997
+  [  vi] tok/sent= 52.86  tok/byte=0.2966  unk=0.0001  sentences=1997
+  [  yo] tok/sent= 81.79  tok/byte=0.4040  unk=0.0017  sentences=1997
+  [  zh] tok/sent= 42.35  tok/byte=0.3560  unk=0.0176  sentences=1997
+  [adat/bible] recomputing gini on intersection ...
+  [  ar] tok/sent=108.03  tok/byte=0.4907  unk=0.0206  sentences=2179
+  [  az] tok/sent= 40.00  tok/byte=0.3334  unk=0.0000  sentences=2179
+  [  be] tok/sent= 60.87  tok/byte=0.3683  unk=0.0000  sentences=2179
+  [  bn] tok/sent= 93.60  tok/byte=0.3286  unk=0.0002  sentences=2179
+  [  cs] tok/sent= 41.74  tok/byte=0.3924  unk=0.0000  sentences=2179
+  [  da] tok/sent= 38.02  tok/byte=0.3439  unk=0.0000  sentences=2179
+  [  de] tok/sent= 39.65  tok/byte=0.3373  unk=0.0000  sentences=2179
+  [  en] tok/sent= 35.96  tok/byte=0.3201  unk=0.0000  sentences=2179
+  [  es] tok/sent= 40.66  tok/byte=0.3463  unk=0.0000  sentences=2179
+  [  fa] tok/sent= 58.83  tok/byte=0.3627  unk=0.0151  sentences=2179
+  [ fil] tok/sent= 46.94  tok/byte=0.3367  unk=0.0000  sentences=2179
+  [  fr] tok/sent= 41.86  tok/byte=0.3475  unk=0.0000  sentences=2179
+  [  gu] tok/sent= 89.52  tok/byte=0.3312  unk=0.0004  sentences=2179
+  [  ha] tok/sent= 42.61  tok/byte=0.3742  unk=0.0015  sentences=2179
+  [  hi] tok/sent= 89.11  tok/byte=0.3307  unk=0.0000  sentences=2179
+  [  hu] tok/sent= 44.33  tok/byte=0.3776  unk=0.0000  sentences=2179
+  [  id] tok/sent= 48.47  tok/byte=0.2687  unk=0.0000  sentences=2179
+  [  it] tok/sent= 42.02  tok/byte=0.3638  unk=0.0000  sentences=2179
+  [  iw] tok/sent= 54.41  tok/byte=0.4626  unk=0.0184  sentences=2179
+  [  ja] tok/sent= 60.25  tok/byte=0.3507  unk=0.0142  sentences=2179
+  [  kn] tok/sent=107.20  tok/byte=0.3355  unk=0.0006  sentences=2179
+  [  lt] tok/sent= 43.00  tok/byte=0.3753  unk=0.0000  sentences=2179
+  [  ml] tok/sent=109.12  tok/byte=0.3364  unk=0.0006  sentences=2179
+  [  mr] tok/sent= 98.23  tok/byte=0.3304  unk=0.0005  sentences=2179
+  [  my] tok/sent=177.80  tok/byte=0.3400  unk=0.2143  sentences=2179
+  [  nl] tok/sent= 38.57  tok/byte=0.3398  unk=0.0000  sentences=2179
+  [  ny] tok/sent= 45.57  tok/byte=0.3823  unk=0.0000  sentences=2179
+  [  pl] tok/sent= 46.38  tok/byte=0.3985  unk=0.0000  sentences=2179
+  [  pt] tok/sent= 41.21  tok/byte=0.3291  unk=0.0000  sentences=2179
+  [  ro] tok/sent= 70.22  tok/byte=0.3689  unk=0.0018  sentences=2179
+  [  ru] tok/sent= 56.69  tok/byte=0.3442  unk=0.0000  sentences=2179
+  [  so] tok/sent= 46.08  tok/byte=0.3884  unk=0.0000  sentences=2179
+  [  sr] tok/sent= 39.70  tok/byte=0.4264  unk=0.0000  sentences=2179
+  [  sv] tok/sent= 84.62  tok/byte=0.3211  unk=0.0000  sentences=2179
+  [  ta] tok/sent=122.89  tok/byte=0.3350  unk=0.0000  sentences=2179
+  [  te] tok/sent= 98.11  tok/byte=0.3335  unk=0.0002  sentences=2179
+  [  th] tok/sent=117.30  tok/byte=0.3470  unk=0.0510  sentences=2179
+  [  tr] tok/sent= 38.93  tok/byte=0.3284  unk=0.0000  sentences=2179
+  [  uk] tok/sent= 55.61  tok/byte=0.3478  unk=0.0000  sentences=2179
+  [  ur] tok/sent= 87.71  tok/byte=0.3263  unk=0.0000  sentences=2179
+  [  vi] tok/sent= 50.01  tok/byte=0.3428  unk=0.0000  sentences=2179
+  [  yo] tok/sent= 71.78  tok/byte=0.4517  unk=0.0011  sentences=2179
+  [  zh] tok/sent= 34.03  tok/byte=0.3580  unk=0.0362  sentences=2179
+  [unigram/flores] recomputing gini on intersection ...
+  [  ar] tok/sent= 54.68  tok/byte=0.2619  unk=0.0000  sentences=1012
+  [  az] tok/sent= 51.01  tok/byte=0.3100  unk=0.0000  sentences=1012
+  [  be] tok/sent= 68.66  tok/byte=0.2565  unk=0.0000  sentences=1012
+  [  bn] tok/sent= 71.54  tok/byte=0.2100  unk=0.0004  sentences=1012
+  [  cs] tok/sent= 49.51  tok/byte=0.3518  unk=0.0000  sentences=1012
+  [  da] tok/sent= 44.58  tok/byte=0.3270  unk=0.0000  sentences=1012
+  [  de] tok/sent= 50.09  tok/byte=0.3242  unk=0.0000  sentences=1012
+  [  en] tok/sent= 39.24  tok/byte=0.3006  unk=0.0000  sentences=1012
+  [  es] tok/sent= 49.06  tok/byte=0.3105  unk=0.0000  sentences=1012
+  [  fa] tok/sent= 54.72  tok/byte=0.2478  unk=0.0313  sentences=1012
+  [ fil] tok/sent= 54.59  tok/byte=0.3323  unk=0.0000  sentences=1012
+  [  fr] tok/sent= 53.13  tok/byte=0.3280  unk=0.0000  sentences=1012
+  [  gu] tok/sent= 74.68  tok/byte=0.2283  unk=0.0011  sentences=1012
+  [  ha] tok/sent= 52.69  tok/byte=0.3766  unk=0.0006  sentences=1012
+  [  hi] tok/sent= 72.32  tok/byte=0.2171  unk=0.0000  sentences=1012
+  [  hu] tok/sent= 53.75  tok/byte=0.3565  unk=0.0000  sentences=1012
+  [  id] tok/sent= 40.49  tok/byte=0.2877  unk=0.0000  sentences=1012
+  [  it] tok/sent= 49.72  tok/byte=0.3199  unk=0.0000  sentences=1012
+  [  iw] tok/sent= 51.80  tok/byte=0.2863  unk=0.0000  sentences=1012
+  [  ja] tok/sent= 52.71  tok/byte=0.3192  unk=0.0242  sentences=1012
+  [  kn] tok/sent= 77.61  tok/byte=0.2092  unk=0.0064  sentences=1012
+  [  lt] tok/sent= 48.48  tok/byte=0.3526  unk=0.0000  sentences=1012
+  [  ml] tok/sent= 81.74  tok/byte=0.2009  unk=0.0042  sentences=1012
+  [  mr] tok/sent= 80.44  tok/byte=0.2290  unk=0.0014  sentences=1012
+  [  my] tok/sent=111.72  tok/byte=0.2429  unk=0.0032  sentences=1012
+  [  nl] tok/sent= 46.04  tok/byte=0.3154  unk=0.0000  sentences=1012
+  [  ny] tok/sent= 56.59  tok/byte=0.3882  unk=0.0000  sentences=1012
+  [  pl] tok/sent= 53.40  tok/byte=0.3645  unk=0.0000  sentences=1012
+  [  pt] tok/sent= 45.68  tok/byte=0.3135  unk=0.0000  sentences=1012
+  [  ro] tok/sent= 52.25  tok/byte=0.3370  unk=0.0000  sentences=1012
+  [  ru] tok/sent= 59.78  tok/byte=0.2324  unk=0.0000  sentences=1012
+  [  so] tok/sent= 56.04  tok/byte=0.3732  unk=0.0000  sentences=1012
+  [  sr] tok/sent= 55.50  tok/byte=0.2360  unk=0.0000  sentences=1012
+  [  sv] tok/sent= 43.97  tok/byte=0.3238  unk=0.0000  sentences=1012
+  [  ta] tok/sent= 76.91  tok/byte=0.1846  unk=0.0001  sentences=1012
+  [  te] tok/sent= 78.45  tok/byte=0.2245  unk=0.0053  sentences=1012
+  [  th] tok/sent= 73.89  tok/byte=0.2049  unk=0.0001  sentences=1012
+  [  tr] tok/sent= 45.90  tok/byte=0.3141  unk=0.0001  sentences=1012
+  [  uk] tok/sent= 59.72  tok/byte=0.2458  unk=0.0000  sentences=1012
+  [  ur] tok/sent= 56.73  tok/byte=0.2478  unk=0.0001  sentences=1012
+  [  vi] tok/sent= 49.91  tok/byte=0.2751  unk=0.0000  sentences=1012
+  [  yo] tok/sent= 76.58  tok/byte=0.4590  unk=0.0011  sentences=1012
+  [  zh] tok/sent= 40.85  tok/byte=0.3422  unk=0.0191  sentences=1012
+  [unigram/ntrex] recomputing gini on intersection ...
+  [  ar] tok/sent= 55.44  tok/byte=0.2636  unk=0.0001  sentences=1997
+  [  az] tok/sent= 48.11  tok/byte=0.3066  unk=0.0000  sentences=1997
+  [  be] tok/sent= 60.47  tok/byte=0.2594  unk=0.0001  sentences=1997
+  [  bn] tok/sent= 68.11  tok/byte=0.2085  unk=0.0001  sentences=1997
+  [  cs] tok/sent= 47.34  tok/byte=0.3501  unk=0.0000  sentences=1997
+  [  da] tok/sent= 42.56  tok/byte=0.3299  unk=0.0000  sentences=1997
+  [  de] tok/sent= 48.83  tok/byte=0.3224  unk=0.0000  sentences=1997
+  [  en] tok/sent= 37.99  tok/byte=0.3063  unk=0.0000  sentences=1997
+  [  es] tok/sent= 45.60  tok/byte=0.3083  unk=0.0000  sentences=1997
+  [  fa] tok/sent= 53.08  tok/byte=0.2456  unk=0.0173  sentences=1997
+  [ fil] tok/sent= 48.49  tok/byte=0.3296  unk=0.0000  sentences=1997
+  [  fr] tok/sent= 50.90  tok/byte=0.3271  unk=0.0000  sentences=1997
+  [  gu] tok/sent= 72.62  tok/byte=0.2252  unk=0.0005  sentences=1997
+  [  ha] tok/sent= 51.17  tok/byte=0.3725  unk=0.0004  sentences=1997
+  [  hi] tok/sent= 72.74  tok/byte=0.2166  unk=0.0000  sentences=1997
+  [  hu] tok/sent= 53.93  tok/byte=0.3516  unk=0.0000  sentences=1997
+  [  id] tok/sent= 40.48  tok/byte=0.2809  unk=0.0000  sentences=1997
+  [  it] tok/sent= 46.76  tok/byte=0.3179  unk=0.0000  sentences=1997
+  [  iw] tok/sent= 51.93  tok/byte=0.2882  unk=0.0002  sentences=1997
+  [  ja] tok/sent= 52.37  tok/byte=0.3227  unk=0.0195  sentences=1997
+  [  kn] tok/sent= 74.22  tok/byte=0.2052  unk=0.0084  sentences=1997
+  [  lt] tok/sent= 49.51  tok/byte=0.3522  unk=0.0005  sentences=1997
+  [  ml] tok/sent= 83.87  tok/byte=0.1992  unk=0.0041  sentences=1997
+  [  mr] tok/sent= 79.76  tok/byte=0.2282  unk=0.0019  sentences=1997
+  [  my] tok/sent= 96.82  tok/byte=0.2228  unk=0.0017  sentences=1997
+  [  nl] tok/sent= 46.45  tok/byte=0.3165  unk=0.0002  sentences=1997
+  [  ny] tok/sent= 55.03  tok/byte=0.3854  unk=0.0000  sentences=1997
+  [  pl] tok/sent= 53.28  tok/byte=0.3564  unk=0.0000  sentences=1997
+  [  pt] tok/sent= 42.84  tok/byte=0.3137  unk=0.0000  sentences=1997
+  [  ro] tok/sent= 51.72  tok/byte=0.3332  unk=0.0000  sentences=1997
+  [  ru] tok/sent= 58.96  tok/byte=0.2348  unk=0.0001  sentences=1997
+  [  so] tok/sent= 54.27  tok/byte=0.3703  unk=0.0000  sentences=1997
+  [  sr] tok/sent= 63.65  tok/byte=0.2890  unk=0.0000  sentences=1997
+  [  sv] tok/sent= 42.36  tok/byte=0.3216  unk=0.0001  sentences=1997
+  [  ta] tok/sent= 79.41  tok/byte=0.1870  unk=0.0001  sentences=1997
+  [  te] tok/sent= 72.87  tok/byte=0.2183  unk=0.0095  sentences=1997
+  [  th] tok/sent= 68.33  tok/byte=0.2085  unk=0.0000  sentences=1997
+  [  tr] tok/sent= 45.26  tok/byte=0.3120  unk=0.0000  sentences=1997
+  [  uk] tok/sent= 58.83  tok/byte=0.2459  unk=0.0000  sentences=1997
+  [  ur] tok/sent= 54.02  tok/byte=0.2445  unk=0.0000  sentences=1997
+  [  vi] tok/sent= 49.26  tok/byte=0.2764  unk=0.0002  sentences=1997
+  [  yo] tok/sent= 85.00  tok/byte=0.4198  unk=0.0017  sentences=1997
+  [  zh] tok/sent= 40.62  tok/byte=0.3414  unk=0.0183  sentences=1997
+  [unigram/bible] recomputing gini on intersection ...
+  [  ar] tok/sent=103.34  tok/byte=0.4694  unk=0.0216  sentences=2179
+  [  az] tok/sent= 42.07  tok/byte=0.3507  unk=0.0000  sentences=2179
+  [  be] tok/sent= 47.60  tok/byte=0.2880  unk=0.0000  sentences=2179
+  [  bn] tok/sent= 63.66  tok/byte=0.2235  unk=0.0003  sentences=2179
+  [  cs] tok/sent= 42.78  tok/byte=0.4022  unk=0.0000  sentences=2179
+  [  da] tok/sent= 39.61  tok/byte=0.3583  unk=0.0000  sentences=2179
+  [  de] tok/sent= 41.58  tok/byte=0.3538  unk=0.0000  sentences=2179
+  [  en] tok/sent= 36.84  tok/byte=0.3280  unk=0.0000  sentences=2179
+  [  es] tok/sent= 40.97  tok/byte=0.3489  unk=0.0000  sentences=2179
+  [  fa] tok/sent= 42.48  tok/byte=0.2619  unk=0.0210  sentences=2179
+  [ fil] tok/sent= 47.63  tok/byte=0.3417  unk=0.0000  sentences=2179
+  [  fr] tok/sent= 43.96  tok/byte=0.3649  unk=0.0000  sentences=2179
+  [  gu] tok/sent= 62.55  tok/byte=0.2314  unk=0.0005  sentences=2179
+  [  ha] tok/sent= 44.86  tok/byte=0.3940  unk=0.0014  sentences=2179
+  [  hi] tok/sent= 61.45  tok/byte=0.2281  unk=0.0000  sentences=2179
+  [  hu] tok/sent= 45.93  tok/byte=0.3912  unk=0.0000  sentences=2179
+  [  id] tok/sent= 51.09  tok/byte=0.2832  unk=0.0000  sentences=2179
+  [  it] tok/sent= 43.59  tok/byte=0.3773  unk=0.0000  sentences=2179
+  [  iw] tok/sent= 35.16  tok/byte=0.2990  unk=0.0285  sentences=2179
+  [  ja] tok/sent= 55.76  tok/byte=0.3246  unk=0.0153  sentences=2179
+  [  kn] tok/sent= 67.12  tok/byte=0.2101  unk=0.0010  sentences=2179
+  [  lt] tok/sent= 44.73  tok/byte=0.3904  unk=0.0000  sentences=2179
+  [  ml] tok/sent= 65.88  tok/byte=0.2030  unk=0.0009  sentences=2179
+  [  mr] tok/sent= 68.70  tok/byte=0.2311  unk=0.0008  sentences=2179
+  [  my] tok/sent=139.82  tok/byte=0.2674  unk=0.2725  sentences=2179
+  [  nl] tok/sent= 39.82  tok/byte=0.3508  unk=0.0000  sentences=2179
+  [  ny] tok/sent= 47.26  tok/byte=0.3964  unk=0.0000  sentences=2179
+  [  pl] tok/sent= 45.77  tok/byte=0.3932  unk=0.0000  sentences=2179
+  [  pt] tok/sent= 42.68  tok/byte=0.3409  unk=0.0000  sentences=2179
+  [  ro] tok/sent= 60.58  tok/byte=0.3183  unk=0.0020  sentences=2179
+  [  ru] tok/sent= 44.04  tok/byte=0.2674  unk=0.0000  sentences=2179
+  [  so] tok/sent= 48.48  tok/byte=0.4086  unk=0.0000  sentences=2179
+  [  sr] tok/sent= 40.32  tok/byte=0.4331  unk=0.0000  sentences=2179
+  [  sv] tok/sent= 88.02  tok/byte=0.3340  unk=0.0000  sentences=2179
+  [  ta] tok/sent= 68.93  tok/byte=0.1879  unk=0.0000  sentences=2179
+  [  te] tok/sent= 64.16  tok/byte=0.2181  unk=0.0004  sentences=2179
+  [  th] tok/sent= 72.73  tok/byte=0.2152  unk=0.0823  sentences=2179
+  [  tr] tok/sent= 41.28  tok/byte=0.3483  unk=0.0000  sentences=2179
+  [  uk] tok/sent= 45.75  tok/byte=0.2862  unk=0.0000  sentences=2179
+  [  ur] tok/sent= 62.59  tok/byte=0.2328  unk=0.0000  sentences=2179
+  [  vi] tok/sent= 46.75  tok/byte=0.3204  unk=0.0000  sentences=2179
+  [  yo] tok/sent= 75.03  tok/byte=0.4721  unk=0.0011  sentences=2179
+  [  zh] tok/sent= 32.94  tok/byte=0.3465  unk=0.0374  sentences=2179
+  [paat_a033/flores] recomputing gini on intersection ...
+  [  ar] tok/sent= 78.80  tok/byte=0.3775  unk=0.0000  sentences=1012
+  [  az] tok/sent= 51.07  tok/byte=0.3103  unk=0.0000  sentences=1012
+  [  be] tok/sent= 84.34  tok/byte=0.3151  unk=0.0000  sentences=1012
+  [  bn] tok/sent= 96.87  tok/byte=0.2844  unk=0.0003  sentences=1012
+  [  cs] tok/sent= 48.65  tok/byte=0.3457  unk=0.0000  sentences=1012
+  [  da] tok/sent= 44.07  tok/byte=0.3232  unk=0.0000  sentences=1012
+  [  de] tok/sent= 48.28  tok/byte=0.3125  unk=0.0000  sentences=1012
+  [  en] tok/sent= 38.81  tok/byte=0.2973  unk=0.0000  sentences=1012
+  [  es] tok/sent= 48.85  tok/byte=0.3092  unk=0.0000  sentences=1012
+  [  fa] tok/sent= 72.78  tok/byte=0.3296  unk=0.0236  sentences=1012
+  [ fil] tok/sent= 53.77  tok/byte=0.3273  unk=0.0000  sentences=1012
+  [  fr] tok/sent= 51.03  tok/byte=0.3150  unk=0.0000  sentences=1012
+  [  gu] tok/sent=104.17  tok/byte=0.3184  unk=0.0008  sentences=1012
+  [  ha] tok/sent= 50.31  tok/byte=0.3595  unk=0.0006  sentences=1012
+  [  hi] tok/sent=108.38  tok/byte=0.3254  unk=0.0000  sentences=1012
+  [  hu] tok/sent= 53.29  tok/byte=0.3535  unk=0.0000  sentences=1012
+  [  id] tok/sent= 39.40  tok/byte=0.2799  unk=0.0000  sentences=1012
+  [  it] tok/sent= 48.45  tok/byte=0.3118  unk=0.0000  sentences=1012
+  [  iw] tok/sent= 84.93  tok/byte=0.4695  unk=0.0000  sentences=1012
+  [  ja] tok/sent= 58.16  tok/byte=0.3522  unk=0.0219  sentences=1012
+  [  kn] tok/sent=115.92  tok/byte=0.3125  unk=0.0043  sentences=1012
+  [  lt] tok/sent= 47.60  tok/byte=0.3462  unk=0.0000  sentences=1012
+  [  ml] tok/sent=135.03  tok/byte=0.3319  unk=0.0026  sentences=1012
+  [  mr] tok/sent=112.81  tok/byte=0.3211  unk=0.0010  sentences=1012
+  [  my] tok/sent=146.41  tok/byte=0.3183  unk=0.0024  sentences=1012
+  [  nl] tok/sent= 45.02  tok/byte=0.3084  unk=0.0000  sentences=1012
+  [  ny] tok/sent= 54.27  tok/byte=0.3723  unk=0.0000  sentences=1012
+  [  pl] tok/sent= 54.08  tok/byte=0.3692  unk=0.0000  sentences=1012
+  [  pt] tok/sent= 44.72  tok/byte=0.3070  unk=0.0000  sentences=1012
+  [  ro] tok/sent= 53.53  tok/byte=0.3452  unk=0.0000  sentences=1012
+  [  ru] tok/sent= 79.41  tok/byte=0.3087  unk=0.0000  sentences=1012
+  [  so] tok/sent= 53.41  tok/byte=0.3557  unk=0.0000  sentences=1012
+  [  sr] tok/sent= 66.35  tok/byte=0.2821  unk=0.0000  sentences=1012
+  [  sv] tok/sent= 43.43  tok/byte=0.3199  unk=0.0000  sentences=1012
+  [  ta] tok/sent=137.13  tok/byte=0.3291  unk=0.0001  sentences=1012
+  [  te] tok/sent=115.23  tok/byte=0.3297  unk=0.0036  sentences=1012
+  [  th] tok/sent=119.96  tok/byte=0.3327  unk=0.0001  sentences=1012
+  [  tr] tok/sent= 43.94  tok/byte=0.3007  unk=0.0001  sentences=1012
+  [  uk] tok/sent= 75.34  tok/byte=0.3101  unk=0.0000  sentences=1012
+  [  ur] tok/sent= 70.67  tok/byte=0.3087  unk=0.0001  sentences=1012
+  [  vi] tok/sent= 54.64  tok/byte=0.3012  unk=0.0000  sentences=1012
+  [  yo] tok/sent= 73.43  tok/byte=0.4401  unk=0.0012  sentences=1012
+  [  zh] tok/sent= 42.88  tok/byte=0.3592  unk=0.0182  sentences=1012
+  [paat_a033/ntrex] recomputing gini on intersection ...
+  [  ar] tok/sent= 80.47  tok/byte=0.3827  unk=0.0000  sentences=1997
+  [  az] tok/sent= 47.86  tok/byte=0.3050  unk=0.0000  sentences=1997
+  [  be] tok/sent= 73.22  tok/byte=0.3141  unk=0.0001  sentences=1997
+  [  bn] tok/sent= 92.16  tok/byte=0.2821  unk=0.0001  sentences=1997
+  [  cs] tok/sent= 46.43  tok/byte=0.3433  unk=0.0000  sentences=1997
+  [  da] tok/sent= 41.95  tok/byte=0.3251  unk=0.0000  sentences=1997
+  [  de] tok/sent= 47.19  tok/byte=0.3116  unk=0.0000  sentences=1997
+  [  en] tok/sent= 37.54  tok/byte=0.3026  unk=0.0000  sentences=1997
+  [  es] tok/sent= 45.39  tok/byte=0.3069  unk=0.0000  sentences=1997
+  [  fa] tok/sent= 70.38  tok/byte=0.3256  unk=0.0130  sentences=1997
+  [ fil] tok/sent= 47.72  tok/byte=0.3244  unk=0.0000  sentences=1997
+  [  fr] tok/sent= 48.62  tok/byte=0.3125  unk=0.0000  sentences=1997
+  [  gu] tok/sent=102.43  tok/byte=0.3176  unk=0.0003  sentences=1997
+  [  ha] tok/sent= 48.76  tok/byte=0.3550  unk=0.0004  sentences=1997
+  [  hi] tok/sent=108.85  tok/byte=0.3241  unk=0.0000  sentences=1997
+  [  hu] tok/sent= 53.69  tok/byte=0.3500  unk=0.0000  sentences=1997
+  [  id] tok/sent= 39.27  tok/byte=0.2725  unk=0.0000  sentences=1997
+  [  it] tok/sent= 45.29  tok/byte=0.3080  unk=0.0000  sentences=1997
+  [  iw] tok/sent= 83.52  tok/byte=0.4634  unk=0.0001  sentences=1997
+  [  ja] tok/sent= 57.40  tok/byte=0.3537  unk=0.0178  sentences=1997
+  [  kn] tok/sent=110.23  tok/byte=0.3047  unk=0.0057  sentences=1997
+  [  lt] tok/sent= 48.44  tok/byte=0.3446  unk=0.0005  sentences=1997
+  [  ml] tok/sent=139.05  tok/byte=0.3303  unk=0.0025  sentences=1997
+  [  mr] tok/sent=111.69  tok/byte=0.3196  unk=0.0014  sentences=1997
+  [  my] tok/sent=147.23  tok/byte=0.3387  unk=0.0011  sentences=1997
+  [  nl] tok/sent= 45.17  tok/byte=0.3077  unk=0.0002  sentences=1997
+  [  ny] tok/sent= 52.78  tok/byte=0.3697  unk=0.0000  sentences=1997
+  [  pl] tok/sent= 53.94  tok/byte=0.3609  unk=0.0000  sentences=1997
+  [  pt] tok/sent= 41.79  tok/byte=0.3060  unk=0.0000  sentences=1997
+  [  ro] tok/sent= 53.01  tok/byte=0.3414  unk=0.0000  sentences=1997
+  [  ru] tok/sent= 76.53  tok/byte=0.3048  unk=0.0001  sentences=1997
+  [  so] tok/sent= 51.49  tok/byte=0.3514  unk=0.0000  sentences=1997
+  [  sr] tok/sent= 71.97  tok/byte=0.3268  unk=0.0000  sentences=1997
+  [  sv] tok/sent= 41.33  tok/byte=0.3138  unk=0.0001  sentences=1997
+  [  ta] tok/sent=139.83  tok/byte=0.3293  unk=0.0001  sentences=1997
+  [  te] tok/sent=109.83  tok/byte=0.3291  unk=0.0063  sentences=1997
+  [  th] tok/sent=108.92  tok/byte=0.3323  unk=0.0000  sentences=1997
+  [  tr] tok/sent= 43.17  tok/byte=0.2976  unk=0.0000  sentences=1997
+  [  uk] tok/sent= 73.10  tok/byte=0.3056  unk=0.0000  sentences=1997
+  [  ur] tok/sent= 66.56  tok/byte=0.3013  unk=0.0000  sentences=1997
+  [  vi] tok/sent= 54.22  tok/byte=0.3042  unk=0.0001  sentences=1997
+  [  yo] tok/sent= 81.62  tok/byte=0.4032  unk=0.0017  sentences=1997
+  [  zh] tok/sent= 42.60  tok/byte=0.3580  unk=0.0175  sentences=1997
+  [paat_a033/bible] recomputing gini on intersection ...
+  [  ar] tok/sent=103.60  tok/byte=0.4706  unk=0.0215  sentences=2179
+  [  az] tok/sent= 40.66  tok/byte=0.3389  unk=0.0000  sentences=2179
+  [  be] tok/sent= 55.80  tok/byte=0.3376  unk=0.0000  sentences=2179
+  [  bn] tok/sent= 82.45  tok/byte=0.2894  unk=0.0003  sentences=2179
+  [  cs] tok/sent= 41.88  tok/byte=0.3938  unk=0.0000  sentences=2179
+  [  da] tok/sent= 38.29  tok/byte=0.3464  unk=0.0000  sentences=2179
+  [  de] tok/sent= 39.91  tok/byte=0.3395  unk=0.0000  sentences=2179
+  [  en] tok/sent= 36.49  tok/byte=0.3248  unk=0.0000  sentences=2179
+  [  es] tok/sent= 41.00  tok/byte=0.3491  unk=0.0000  sentences=2179
+  [  fa] tok/sent= 54.40  tok/byte=0.3354  unk=0.0164  sentences=2179
+  [ fil] tok/sent= 46.85  tok/byte=0.3361  unk=0.0000  sentences=2179
+  [  fr] tok/sent= 42.25  tok/byte=0.3506  unk=0.0000  sentences=2179
+  [  gu] tok/sent= 86.44  tok/byte=0.3198  unk=0.0004  sentences=2179
+  [  ha] tok/sent= 42.72  tok/byte=0.3752  unk=0.0015  sentences=2179
+  [  hi] tok/sent= 88.90  tok/byte=0.3299  unk=0.0000  sentences=2179
+  [  hu] tok/sent= 44.26  tok/byte=0.3770  unk=0.0000  sentences=2179
+  [  id] tok/sent= 49.42  tok/byte=0.2739  unk=0.0000  sentences=2179
+  [  it] tok/sent= 42.22  tok/byte=0.3655  unk=0.0000  sentences=2179
+  [  iw] tok/sent= 54.44  tok/byte=0.4629  unk=0.0184  sentences=2179
+  [  ja] tok/sent= 60.25  tok/byte=0.3507  unk=0.0142  sentences=2179
+  [  kn] tok/sent= 98.60  tok/byte=0.3086  unk=0.0007  sentences=2179
+  [  lt] tok/sent= 43.21  tok/byte=0.3771  unk=0.0000  sentences=2179
+  [  ml] tok/sent=108.71  tok/byte=0.3351  unk=0.0006  sentences=2179
+  [  mr] tok/sent= 95.10  tok/byte=0.3198  unk=0.0006  sentences=2179
+  [  my] tok/sent=168.74  tok/byte=0.3227  unk=0.2258  sentences=2179
+  [  nl] tok/sent= 39.05  tok/byte=0.3440  unk=0.0000  sentences=2179
+  [  ny] tok/sent= 45.65  tok/byte=0.3830  unk=0.0000  sentences=2179
+  [  pl] tok/sent= 46.87  tok/byte=0.4027  unk=0.0000  sentences=2179
+  [  pt] tok/sent= 41.61  tok/byte=0.3323  unk=0.0000  sentences=2179
+  [  ro] tok/sent= 67.32  tok/byte=0.3537  unk=0.0018  sentences=2179
+  [  ru] tok/sent= 53.45  tok/byte=0.3245  unk=0.0000  sentences=2179
+  [  so] tok/sent= 46.04  tok/byte=0.3880  unk=0.0000  sentences=2179
+  [  sr] tok/sent= 39.78  tok/byte=0.4273  unk=0.0000  sentences=2179
+  [  sv] tok/sent= 85.83  tok/byte=0.3257  unk=0.0000  sentences=2179
+  [  ta] tok/sent=121.69  tok/byte=0.3317  unk=0.0000  sentences=2179
+  [  te] tok/sent= 97.79  tok/byte=0.3324  unk=0.0002  sentences=2179
+  [  th] tok/sent=115.41  tok/byte=0.3414  unk=0.0519  sentences=2179
+  [  tr] tok/sent= 39.47  tok/byte=0.3329  unk=0.0000  sentences=2179
+  [  uk] tok/sent= 52.51  tok/byte=0.3284  unk=0.0000  sentences=2179
+  [  ur] tok/sent= 87.51  tok/byte=0.3256  unk=0.0000  sentences=2179
+  [  vi] tok/sent= 52.19  tok/byte=0.3577  unk=0.0000  sentences=2179
+  [  yo] tok/sent= 71.40  tok/byte=0.4493  unk=0.0011  sentences=2179
+  [  zh] tok/sent= 34.27  tok/byte=0.3605  unk=0.0359  sentences=2179
+  [paat_a067/flores] recomputing gini on intersection ...
+  [  ar] tok/sent= 72.55  tok/byte=0.3475  unk=0.0000  sentences=1012
+  [  az] tok/sent= 52.05  tok/byte=0.3163  unk=0.0000  sentences=1012
+  [  be] tok/sent= 77.38  tok/byte=0.2891  unk=0.0000  sentences=1012
+  [  bn] tok/sent= 86.88  tok/byte=0.2551  unk=0.0003  sentences=1012
+  [  cs] tok/sent= 49.40  tok/byte=0.3510  unk=0.0000  sentences=1012
+  [  da] tok/sent= 44.91  tok/byte=0.3294  unk=0.0000  sentences=1012
+  [  de] tok/sent= 48.88  tok/byte=0.3164  unk=0.0000  sentences=1012
+  [  en] tok/sent= 39.79  tok/byte=0.3048  unk=0.0000  sentences=1012
+  [  es] tok/sent= 49.40  tok/byte=0.3127  unk=0.0000  sentences=1012
+  [  fa] tok/sent= 67.09  tok/byte=0.3038  unk=0.0256  sentences=1012
+  [ fil] tok/sent= 54.18  tok/byte=0.3297  unk=0.0000  sentences=1012
+  [  fr] tok/sent= 51.48  tok/byte=0.3178  unk=0.0000  sentences=1012
+  [  gu] tok/sent= 92.31  tok/byte=0.2822  unk=0.0009  sentences=1012
+  [  ha] tok/sent= 50.35  tok/byte=0.3598  unk=0.0006  sentences=1012
+  [  hi] tok/sent=105.79  tok/byte=0.3176  unk=0.0000  sentences=1012
+  [  hu] tok/sent= 53.57  tok/byte=0.3553  unk=0.0000  sentences=1012
+  [  id] tok/sent= 40.32  tok/byte=0.2864  unk=0.0000  sentences=1012
+  [  it] tok/sent= 49.06  tok/byte=0.3157  unk=0.0000  sentences=1012
+  [  iw] tok/sent= 83.73  tok/byte=0.4628  unk=0.0000  sentences=1012
+  [  ja] tok/sent= 58.17  tok/byte=0.3523  unk=0.0219  sentences=1012
+  [  kn] tok/sent= 99.82  tok/byte=0.2691  unk=0.0050  sentences=1012
+  [  lt] tok/sent= 48.28  tok/byte=0.3512  unk=0.0000  sentences=1012
+  [  ml] tok/sent=126.19  tok/byte=0.3102  unk=0.0027  sentences=1012
+  [  mr] tok/sent=109.40  tok/byte=0.3114  unk=0.0010  sentences=1012
+  [  my] tok/sent=108.08  tok/byte=0.2350  unk=0.0033  sentences=1012
+  [  nl] tok/sent= 46.09  tok/byte=0.3157  unk=0.0000  sentences=1012
+  [  ny] tok/sent= 54.16  tok/byte=0.3715  unk=0.0000  sentences=1012
+  [  pl] tok/sent= 54.36  tok/byte=0.3711  unk=0.0000  sentences=1012
+  [  pt] tok/sent= 45.53  tok/byte=0.3125  unk=0.0000  sentences=1012
+  [  ro] tok/sent= 53.59  tok/byte=0.3456  unk=0.0000  sentences=1012
+  [  ru] tok/sent= 75.03  tok/byte=0.2916  unk=0.0000  sentences=1012
+  [  so] tok/sent= 53.53  tok/byte=0.3565  unk=0.0000  sentences=1012
+  [  sr] tok/sent= 63.85  tok/byte=0.2715  unk=0.0000  sentences=1012
+  [  sv] tok/sent= 44.38  tok/byte=0.3269  unk=0.0000  sentences=1012
+  [  ta] tok/sent=129.75  tok/byte=0.3114  unk=0.0001  sentences=1012
+  [  te] tok/sent=108.94  tok/byte=0.3117  unk=0.0038  sentences=1012
+  [  th] tok/sent=113.22  tok/byte=0.3140  unk=0.0001  sentences=1012
+  [  tr] tok/sent= 44.88  tok/byte=0.3071  unk=0.0001  sentences=1012
+  [  uk] tok/sent= 71.89  tok/byte=0.2959  unk=0.0000  sentences=1012
+  [  ur] tok/sent= 66.73  tok/byte=0.2915  unk=0.0001  sentences=1012
+  [  vi] tok/sent= 55.99  tok/byte=0.3086  unk=0.0000  sentences=1012
+  [  yo] tok/sent= 73.36  tok/byte=0.4397  unk=0.0012  sentences=1012
+  [  zh] tok/sent= 43.03  tok/byte=0.3605  unk=0.0181  sentences=1012
+  [paat_a067/ntrex] recomputing gini on intersection ...
+  [  ar] tok/sent= 73.85  tok/byte=0.3512  unk=0.0001  sentences=1997
+  [  az] tok/sent= 48.85  tok/byte=0.3113  unk=0.0000  sentences=1997
+  [  be] tok/sent= 67.72  tok/byte=0.2905  unk=0.0001  sentences=1997
+  [  bn] tok/sent= 82.05  tok/byte=0.2512  unk=0.0001  sentences=1997
+  [  cs] tok/sent= 47.27  tok/byte=0.3496  unk=0.0000  sentences=1997
+  [  da] tok/sent= 42.73  tok/byte=0.3312  unk=0.0000  sentences=1997
+  [  de] tok/sent= 47.66  tok/byte=0.3147  unk=0.0000  sentences=1997
+  [  en] tok/sent= 38.46  tok/byte=0.3101  unk=0.0000  sentences=1997
+  [  es] tok/sent= 45.89  tok/byte=0.3103  unk=0.0000  sentences=1997
+  [  fa] tok/sent= 65.02  tok/byte=0.3008  unk=0.0141  sentences=1997
+  [ fil] tok/sent= 48.14  tok/byte=0.3272  unk=0.0000  sentences=1997
+  [  fr] tok/sent= 49.11  tok/byte=0.3156  unk=0.0000  sentences=1997
+  [  gu] tok/sent= 90.18  tok/byte=0.2796  unk=0.0004  sentences=1997
+  [  ha] tok/sent= 48.75  tok/byte=0.3549  unk=0.0004  sentences=1997
+  [  hi] tok/sent=106.04  tok/byte=0.3157  unk=0.0000  sentences=1997
+  [  hu] tok/sent= 54.02  tok/byte=0.3521  unk=0.0000  sentences=1997
+  [  id] tok/sent= 40.29  tok/byte=0.2796  unk=0.0000  sentences=1997
+  [  it] tok/sent= 45.96  tok/byte=0.3125  unk=0.0000  sentences=1997
+  [  iw] tok/sent= 82.30  tok/byte=0.4567  unk=0.0001  sentences=1997
+  [  ja] tok/sent= 57.41  tok/byte=0.3537  unk=0.0178  sentences=1997
+  [  kn] tok/sent= 96.00  tok/byte=0.2654  unk=0.0065  sentences=1997
+  [  lt] tok/sent= 49.14  tok/byte=0.3495  unk=0.0005  sentences=1997
+  [  ml] tok/sent=129.36  tok/byte=0.3073  unk=0.0027  sentences=1997
+  [  mr] tok/sent=108.01  tok/byte=0.3091  unk=0.0014  sentences=1997
+  [  my] tok/sent=119.79  tok/byte=0.2756  unk=0.0014  sentences=1997
+  [  nl] tok/sent= 46.28  tok/byte=0.3153  unk=0.0002  sentences=1997
+  [  ny] tok/sent= 52.72  tok/byte=0.3692  unk=0.0000  sentences=1997
+  [  pl] tok/sent= 54.37  tok/byte=0.3638  unk=0.0000  sentences=1997
+  [  pt] tok/sent= 42.62  tok/byte=0.3121  unk=0.0000  sentences=1997
+  [  ro] tok/sent= 53.14  tok/byte=0.3423  unk=0.0000  sentences=1997
+  [  ru] tok/sent= 73.10  tok/byte=0.2911  unk=0.0001  sentences=1997
+  [  so] tok/sent= 51.50  tok/byte=0.3515  unk=0.0000  sentences=1997
+  [  sr] tok/sent= 69.89  tok/byte=0.3174  unk=0.0000  sentences=1997
+  [  sv] tok/sent= 42.24  tok/byte=0.3207  unk=0.0001  sentences=1997
+  [  ta] tok/sent=133.70  tok/byte=0.3149  unk=0.0001  sentences=1997
+  [  te] tok/sent=102.41  tok/byte=0.3068  unk=0.0067  sentences=1997
+  [  th] tok/sent=102.88  tok/byte=0.3139  unk=0.0000  sentences=1997
+  [  tr] tok/sent= 44.19  tok/byte=0.3047  unk=0.0000  sentences=1997
+  [  uk] tok/sent= 70.04  tok/byte=0.2928  unk=0.0000  sentences=1997
+  [  ur] tok/sent= 63.12  tok/byte=0.2857  unk=0.0000  sentences=1997
+  [  vi] tok/sent= 55.60  tok/byte=0.3120  unk=0.0001  sentences=1997
+  [  yo] tok/sent= 81.56  tok/byte=0.4028  unk=0.0017  sentences=1997
+  [  zh] tok/sent= 42.74  tok/byte=0.3592  unk=0.0174  sentences=1997
+  [paat_a067/bible] recomputing gini on intersection ...
+  [  ar] tok/sent=102.37  tok/byte=0.4650  unk=0.0218  sentences=2179
+  [  az] tok/sent= 41.33  tok/byte=0.3445  unk=0.0000  sentences=2179
+  [  be] tok/sent= 51.99  tok/byte=0.3146  unk=0.0000  sentences=2179
+  [  bn] tok/sent= 74.56  tok/byte=0.2618  unk=0.0003  sentences=2179
+  [  cs] tok/sent= 42.55  tok/byte=0.4000  unk=0.0000  sentences=2179
+  [  da] tok/sent= 38.74  tok/byte=0.3504  unk=0.0000  sentences=2179
+  [  de] tok/sent= 40.23  tok/byte=0.3423  unk=0.0000  sentences=2179
+  [  en] tok/sent= 36.94  tok/byte=0.3289  unk=0.0000  sentences=2179
+  [  es] tok/sent= 41.11  tok/byte=0.3501  unk=0.0000  sentences=2179
+  [  fa] tok/sent= 51.33  tok/byte=0.3164  unk=0.0174  sentences=2179
+  [ fil] tok/sent= 47.07  tok/byte=0.3377  unk=0.0000  sentences=2179
+  [  fr] tok/sent= 42.40  tok/byte=0.3519  unk=0.0000  sentences=2179
+  [  gu] tok/sent= 75.52  tok/byte=0.2794  unk=0.0004  sentences=2179
+  [  ha] tok/sent= 42.67  tok/byte=0.3748  unk=0.0015  sentences=2179
+  [  hi] tok/sent= 88.23  tok/byte=0.3274  unk=0.0000  sentences=2179
+  [  hu] tok/sent= 44.65  tok/byte=0.3804  unk=0.0000  sentences=2179
+  [  id] tok/sent= 50.72  tok/byte=0.2812  unk=0.0000  sentences=2179
+  [  it] tok/sent= 42.55  tok/byte=0.3684  unk=0.0000  sentences=2179
+  [  iw] tok/sent= 53.37  tok/byte=0.4539  unk=0.0187  sentences=2179
+  [  ja] tok/sent= 60.25  tok/byte=0.3507  unk=0.0142  sentences=2179
+  [  kn] tok/sent= 88.40  tok/byte=0.2767  unk=0.0007  sentences=2179
+  [  lt] tok/sent= 43.78  tok/byte=0.3821  unk=0.0000  sentences=2179
+  [  ml] tok/sent=104.45  tok/byte=0.3220  unk=0.0006  sentences=2179
+  [  mr] tok/sent= 92.79  tok/byte=0.3121  unk=0.0006  sentences=2179
+  [  my] tok/sent=137.72  tok/byte=0.2634  unk=0.2767  sentences=2179
+  [  nl] tok/sent= 39.73  tok/byte=0.3501  unk=0.0000  sentences=2179
+  [  ny] tok/sent= 45.52  tok/byte=0.3818  unk=0.0000  sentences=2179
+  [  pl] tok/sent= 46.97  tok/byte=0.4036  unk=0.0000  sentences=2179
+  [  pt] tok/sent= 42.18  tok/byte=0.3369  unk=0.0000  sentences=2179
+  [  ro] tok/sent= 65.48  tok/byte=0.3440  unk=0.0019  sentences=2179
+  [  ru] tok/sent= 51.47  tok/byte=0.3125  unk=0.0000  sentences=2179
+  [  so] tok/sent= 46.10  tok/byte=0.3885  unk=0.0000  sentences=2179
+  [  sr] tok/sent= 39.90  tok/byte=0.4286  unk=0.0000  sentences=2179
+  [  sv] tok/sent= 87.81  tok/byte=0.3332  unk=0.0000  sentences=2179
+  [  ta] tok/sent=118.91  tok/byte=0.3241  unk=0.0000  sentences=2179
+  [  te] tok/sent= 91.89  tok/byte=0.3124  unk=0.0002  sentences=2179
+  [  th] tok/sent=106.43  tok/byte=0.3149  unk=0.0562  sentences=2179
+  [  tr] tok/sent= 40.11  tok/byte=0.3384  unk=0.0000  sentences=2179
+  [  uk] tok/sent= 50.99  tok/byte=0.3189  unk=0.0000  sentences=2179
+  [  ur] tok/sent= 87.11  tok/byte=0.3241  unk=0.0000  sentences=2179
+  [  vi] tok/sent= 52.52  tok/byte=0.3599  unk=0.0000  sentences=2179
+  [  yo] tok/sent= 71.36  tok/byte=0.4491  unk=0.0011  sentences=2179
+  [  zh] tok/sent= 34.27  tok/byte=0.3605  unk=0.0359  sentences=2179
+  [paat_a100/flores] recomputing gini on intersection ...
+  [  ar] tok/sent= 70.59  tok/byte=0.3382  unk=0.0000  sentences=1012
+  [  az] tok/sent= 52.33  tok/byte=0.3180  unk=0.0000  sentences=1012
+  [  be] tok/sent= 74.36  tok/byte=0.2778  unk=0.0000  sentences=1012
+  [  bn] tok/sent= 79.22  tok/byte=0.2326  unk=0.0004  sentences=1012
+  [  cs] tok/sent= 50.38  tok/byte=0.3580  unk=0.0000  sentences=1012
+  [  da] tok/sent= 45.98  tok/byte=0.3372  unk=0.0000  sentences=1012
+  [  de] tok/sent= 49.59  tok/byte=0.3210  unk=0.0000  sentences=1012
+  [  en] tok/sent= 40.78  tok/byte=0.3124  unk=0.0000  sentences=1012
+  [  es] tok/sent= 50.40  tok/byte=0.3190  unk=0.0000  sentences=1012
+  [  fa] tok/sent= 65.55  tok/byte=0.2968  unk=0.0262  sentences=1012
+  [ fil] tok/sent= 54.13  tok/byte=0.3295  unk=0.0000  sentences=1012
+  [  fr] tok/sent= 52.15  tok/byte=0.3220  unk=0.0000  sentences=1012
+  [  gu] tok/sent= 85.46  tok/byte=0.2612  unk=0.0010  sentences=1012
+  [  ha] tok/sent= 50.55  tok/byte=0.3613  unk=0.0006  sentences=1012
+  [  hi] tok/sent= 98.04  tok/byte=0.2944  unk=0.0000  sentences=1012
+  [  hu] tok/sent= 53.54  tok/byte=0.3551  unk=0.0000  sentences=1012
+  [  id] tok/sent= 41.98  tok/byte=0.2983  unk=0.0000  sentences=1012
+  [  it] tok/sent= 50.00  tok/byte=0.3218  unk=0.0000  sentences=1012
+  [  iw] tok/sent= 82.32  tok/byte=0.4550  unk=0.0000  sentences=1012
+  [  ja] tok/sent= 58.20  tok/byte=0.3524  unk=0.0219  sentences=1012
+  [  kn] tok/sent= 85.80  tok/byte=0.2313  unk=0.0058  sentences=1012
+  [  lt] tok/sent= 48.84  tok/byte=0.3552  unk=0.0000  sentences=1012
+  [  ml] tok/sent=117.38  tok/byte=0.2885  unk=0.0030  sentences=1012
+  [  mr] tok/sent=102.09  tok/byte=0.2906  unk=0.0011  sentences=1012
+  [  my] tok/sent= 95.29  tok/byte=0.2071  unk=0.0038  sentences=1012
+  [  nl] tok/sent= 46.83  tok/byte=0.3208  unk=0.0000  sentences=1012
+  [  ny] tok/sent= 54.36  tok/byte=0.3729  unk=0.0000  sentences=1012
+  [  pl] tok/sent= 54.74  tok/byte=0.3736  unk=0.0000  sentences=1012
+  [  pt] tok/sent= 46.65  tok/byte=0.3201  unk=0.0000  sentences=1012
+  [  ro] tok/sent= 54.20  tok/byte=0.3496  unk=0.0000  sentences=1012
+  [  ru] tok/sent= 73.03  tok/byte=0.2839  unk=0.0000  sentences=1012
+  [  so] tok/sent= 53.76  tok/byte=0.3581  unk=0.0000  sentences=1012
+  [  sr] tok/sent= 62.09  tok/byte=0.2640  unk=0.0000  sentences=1012
+  [  sv] tok/sent= 45.22  tok/byte=0.3331  unk=0.0000  sentences=1012
+  [  ta] tok/sent=116.14  tok/byte=0.2787  unk=0.0001  sentences=1012
+  [  te] tok/sent= 95.93  tok/byte=0.2745  unk=0.0044  sentences=1012
+  [  th] tok/sent= 99.68  tok/byte=0.2765  unk=0.0001  sentences=1012
+  [  tr] tok/sent= 46.53  tok/byte=0.3184  unk=0.0001  sentences=1012
+  [  uk] tok/sent= 69.12  tok/byte=0.2845  unk=0.0000  sentences=1012
+  [  ur] tok/sent= 64.08  tok/byte=0.2799  unk=0.0001  sentences=1012
+  [  vi] tok/sent= 58.36  tok/byte=0.3217  unk=0.0000  sentences=1012
+  [  yo] tok/sent= 73.38  tok/byte=0.4398  unk=0.0012  sentences=1012
+  [  zh] tok/sent= 43.12  tok/byte=0.3612  unk=0.0181  sentences=1012
+  [paat_a100/ntrex] recomputing gini on intersection ...
+  [  ar] tok/sent= 71.87  tok/byte=0.3418  unk=0.0001  sentences=1997
+  [  az] tok/sent= 48.96  tok/byte=0.3120  unk=0.0000  sentences=1997
+  [  be] tok/sent= 65.01  tok/byte=0.2789  unk=0.0001  sentences=1997
+  [  bn] tok/sent= 74.48  tok/byte=0.2280  unk=0.0001  sentences=1997
+  [  cs] tok/sent= 48.02  tok/byte=0.3551  unk=0.0000  sentences=1997
+  [  da] tok/sent= 43.72  tok/byte=0.3389  unk=0.0000  sentences=1997
+  [  de] tok/sent= 48.28  tok/byte=0.3188  unk=0.0000  sentences=1997
+  [  en] tok/sent= 39.28  tok/byte=0.3167  unk=0.0000  sentences=1997
+  [  es] tok/sent= 46.66  tok/byte=0.3154  unk=0.0000  sentences=1997
+  [  fa] tok/sent= 63.39  tok/byte=0.2932  unk=0.0145  sentences=1997
+  [ fil] tok/sent= 48.10  tok/byte=0.3270  unk=0.0000  sentences=1997
+  [  fr] tok/sent= 49.75  tok/byte=0.3197  unk=0.0000  sentences=1997
+  [  gu] tok/sent= 83.34  tok/byte=0.2585  unk=0.0004  sentences=1997
+  [  ha] tok/sent= 49.04  tok/byte=0.3570  unk=0.0004  sentences=1997
+  [  hi] tok/sent= 98.07  tok/byte=0.2920  unk=0.0000  sentences=1997
+  [  hu] tok/sent= 53.92  tok/byte=0.3515  unk=0.0000  sentences=1997
+  [  id] tok/sent= 41.88  tok/byte=0.2907  unk=0.0000  sentences=1997
+  [  it] tok/sent= 46.73  tok/byte=0.3178  unk=0.0000  sentences=1997
+  [  iw] tok/sent= 80.96  tok/byte=0.4492  unk=0.0001  sentences=1997
+  [  ja] tok/sent= 57.41  tok/byte=0.3537  unk=0.0178  sentences=1997
+  [  kn] tok/sent= 82.46  tok/byte=0.2280  unk=0.0076  sentences=1997
+  [  lt] tok/sent= 49.63  tok/byte=0.3530  unk=0.0005  sentences=1997
+  [  ml] tok/sent=118.90  tok/byte=0.2824  unk=0.0029  sentences=1997
+  [  mr] tok/sent=100.49  tok/byte=0.2875  unk=0.0015  sentences=1997
+  [  my] tok/sent=114.70  tok/byte=0.2639  unk=0.0014  sentences=1997
+  [  nl] tok/sent= 46.93  tok/byte=0.3197  unk=0.0002  sentences=1997
+  [  ny] tok/sent= 52.92  tok/byte=0.3706  unk=0.0000  sentences=1997
+  [  pl] tok/sent= 54.78  tok/byte=0.3665  unk=0.0000  sentences=1997
+  [  pt] tok/sent= 43.62  tok/byte=0.3194  unk=0.0000  sentences=1997
+  [  ro] tok/sent= 53.80  tok/byte=0.3466  unk=0.0000  sentences=1997
+  [  ru] tok/sent= 71.07  tok/byte=0.2831  unk=0.0001  sentences=1997
+  [  so] tok/sent= 51.86  tok/byte=0.3539  unk=0.0000  sentences=1997
+  [  sr] tok/sent= 68.56  tok/byte=0.3113  unk=0.0000  sentences=1997
+  [  sv] tok/sent= 43.00  tok/byte=0.3265  unk=0.0001  sentences=1997
+  [  ta] tok/sent=119.90  tok/byte=0.2824  unk=0.0001  sentences=1997
+  [  te] tok/sent= 89.52  tok/byte=0.2682  unk=0.0077  sentences=1997
+  [  th] tok/sent= 91.12  tok/byte=0.2780  unk=0.0000  sentences=1997
+  [  tr] tok/sent= 45.57  tok/byte=0.3142  unk=0.0000  sentences=1997
+  [  uk] tok/sent= 67.23  tok/byte=0.2810  unk=0.0000  sentences=1997
+  [  ur] tok/sent= 60.65  tok/byte=0.2745  unk=0.0000  sentences=1997
+  [  vi] tok/sent= 57.81  tok/byte=0.3244  unk=0.0001  sentences=1997
+  [  yo] tok/sent= 81.61  tok/byte=0.4031  unk=0.0017  sentences=1997
+  [  zh] tok/sent= 42.79  tok/byte=0.3597  unk=0.0174  sentences=1997
+  [paat_a100/bible] recomputing gini on intersection ...
+  [  ar] tok/sent=100.32  tok/byte=0.4557  unk=0.0222  sentences=2179
+  [  az] tok/sent= 41.22  tok/byte=0.3436  unk=0.0000  sentences=2179
+  [  be] tok/sent= 50.44  tok/byte=0.3052  unk=0.0000  sentences=2179
+  [  bn] tok/sent= 67.47  tok/byte=0.2369  unk=0.0003  sentences=2179
+  [  cs] tok/sent= 42.96  tok/byte=0.4039  unk=0.0000  sentences=2179
+  [  da] tok/sent= 39.41  tok/byte=0.3565  unk=0.0000  sentences=2179
+  [  de] tok/sent= 40.97  tok/byte=0.3486  unk=0.0000  sentences=2179
+  [  en] tok/sent= 37.48  tok/byte=0.3337  unk=0.0000  sentences=2179
+  [  es] tok/sent= 41.60  tok/byte=0.3543  unk=0.0000  sentences=2179
+  [  fa] tok/sent= 49.64  tok/byte=0.3060  unk=0.0180  sentences=2179
+  [ fil] tok/sent= 47.03  tok/byte=0.3374  unk=0.0000  sentences=2179
+  [  fr] tok/sent= 42.77  tok/byte=0.3550  unk=0.0000  sentences=2179
+  [  gu] tok/sent= 70.34  tok/byte=0.2602  unk=0.0005  sentences=2179
+  [  ha] tok/sent= 42.77  tok/byte=0.3756  unk=0.0015  sentences=2179
+  [  hi] tok/sent= 83.09  tok/byte=0.3084  unk=0.0000  sentences=2179
+  [  hu] tok/sent= 44.57  tok/byte=0.3797  unk=0.0000  sentences=2179
+  [  id] tok/sent= 53.14  tok/byte=0.2946  unk=0.0000  sentences=2179
+  [  it] tok/sent= 43.08  tok/byte=0.3729  unk=0.0000  sentences=2179
+  [  iw] tok/sent= 52.95  tok/byte=0.4502  unk=0.0189  sentences=2179
+  [  ja] tok/sent= 60.25  tok/byte=0.3507  unk=0.0142  sentences=2179
+  [  kn] tok/sent= 77.33  tok/byte=0.2420  unk=0.0009  sentences=2179
+  [  lt] tok/sent= 44.13  tok/byte=0.3852  unk=0.0000  sentences=2179
+  [  ml] tok/sent= 98.70  tok/byte=0.3042  unk=0.0006  sentences=2179
+  [  mr] tok/sent= 85.29  tok/byte=0.2869  unk=0.0006  sentences=2179
+  [  my] tok/sent=125.41  tok/byte=0.2398  unk=0.3038  sentences=2179
+  [  nl] tok/sent= 39.90  tok/byte=0.3515  unk=0.0000  sentences=2179
+  [  ny] tok/sent= 45.66  tok/byte=0.3831  unk=0.0000  sentences=2179
+  [  pl] tok/sent= 47.16  tok/byte=0.4052  unk=0.0000  sentences=2179
+  [  pt] tok/sent= 42.96  tok/byte=0.3431  unk=0.0000  sentences=2179
+  [  ro] tok/sent= 64.18  tok/byte=0.3372  unk=0.0019  sentences=2179
+  [  ru] tok/sent= 50.79  tok/byte=0.3083  unk=0.0000  sentences=2179
+  [  so] tok/sent= 46.17  tok/byte=0.3892  unk=0.0000  sentences=2179
+  [  sr] tok/sent= 40.01  tok/byte=0.4298  unk=0.0000  sentences=2179
+  [  sv] tok/sent= 89.22  tok/byte=0.3385  unk=0.0000  sentences=2179
+  [  ta] tok/sent=108.99  tok/byte=0.2971  unk=0.0000  sentences=2179
+  [  te] tok/sent= 82.00  tok/byte=0.2788  unk=0.0003  sentences=2179
+  [  th] tok/sent= 98.34  tok/byte=0.2910  unk=0.0609  sentences=2179
+  [  tr] tok/sent= 41.05  tok/byte=0.3463  unk=0.0000  sentences=2179
+  [  uk] tok/sent= 49.87  tok/byte=0.3119  unk=0.0000  sentences=2179
+  [  ur] tok/sent= 82.46  tok/byte=0.3068  unk=0.0000  sentences=2179
+  [  vi] tok/sent= 54.10  tok/byte=0.3708  unk=0.0000  sentences=2179
+  [  yo] tok/sent= 71.35  tok/byte=0.4490  unk=0.0011  sentences=2179
+  [  zh] tok/sent= 34.27  tok/byte=0.3605  unk=0.0359  sentences=2179
+  [paat_a20_l0/flores] recomputing gini on intersection ...
+  [  ar] tok/sent= 54.88  tok/byte=0.2629  unk=0.0000  sentences=1012
+  [  az] tok/sent= 55.13  tok/byte=0.3350  unk=0.0000  sentences=1012
+  [  be] tok/sent= 64.40  tok/byte=0.2406  unk=0.0000  sentences=1012
+  [  bn] tok/sent= 68.89  tok/byte=0.2023  unk=0.0002  sentences=1012
+  [  cs] tok/sent= 50.93  tok/byte=0.3619  unk=0.0000  sentences=1012
+  [  da] tok/sent= 45.87  tok/byte=0.3364  unk=0.0000  sentences=1012
+  [  de] tok/sent= 50.83  tok/byte=0.3290  unk=0.0000  sentences=1012
+  [  en] tok/sent= 40.79  tok/byte=0.3125  unk=0.0000  sentences=1012
+  [  es] tok/sent= 50.49  tok/byte=0.3195  unk=0.0000  sentences=1012
+  [  fa] tok/sent= 55.19  tok/byte=0.2499  unk=0.0311  sentences=1012
+  [ fil] tok/sent= 53.58  tok/byte=0.3261  unk=0.0000  sentences=1012
+  [  fr] tok/sent= 53.81  tok/byte=0.3322  unk=0.0000  sentences=1012
+  [  gu] tok/sent= 69.14  tok/byte=0.2114  unk=0.0003  sentences=1012
+  [  ha] tok/sent= 50.51  tok/byte=0.3610  unk=0.0006  sentences=1012
+  [  hi] tok/sent= 66.43  tok/byte=0.1994  unk=0.0000  sentences=1012
+  [  hu] tok/sent= 54.38  tok/byte=0.3606  unk=0.0000  sentences=1012
+  [  id] tok/sent= 42.21  tok/byte=0.2999  unk=0.0000  sentences=1012
+  [  it] tok/sent= 50.76  tok/byte=0.3267  unk=0.0000  sentences=1012
+  [  iw] tok/sent= 51.35  tok/byte=0.2839  unk=0.0000  sentences=1012
+  [  ja] tok/sent= 53.82  tok/byte=0.3259  unk=0.0216  sentences=1012
+  [  kn] tok/sent= 71.30  tok/byte=0.1922  unk=0.0068  sentences=1012
+  [  lt] tok/sent= 49.04  tok/byte=0.3567  unk=0.0000  sentences=1012
+  [  ml] tok/sent= 73.04  tok/byte=0.1795  unk=0.0047  sentences=1012
+  [  mr] tok/sent= 72.78  tok/byte=0.2072  unk=0.0000  sentences=1012
+  [  my] tok/sent= 89.63  tok/byte=0.1948  unk=0.0038  sentences=1012
+  [  nl] tok/sent= 47.44  tok/byte=0.3250  unk=0.0000  sentences=1012
+  [  ny] tok/sent= 54.17  tok/byte=0.3716  unk=0.0000  sentences=1012
+  [  pl] tok/sent= 55.04  tok/byte=0.3757  unk=0.0000  sentences=1012
+  [  pt] tok/sent= 47.43  tok/byte=0.3255  unk=0.0000  sentences=1012
+  [  ro] tok/sent= 52.84  tok/byte=0.3408  unk=0.0000  sentences=1012
+  [  ru] tok/sent= 58.08  tok/byte=0.2258  unk=0.0000  sentences=1012
+  [  so] tok/sent= 53.58  tok/byte=0.3569  unk=0.0000  sentences=1012
+  [  sr] tok/sent= 54.32  tok/byte=0.2310  unk=0.0000  sentences=1012
+  [  sv] tok/sent= 44.74  tok/byte=0.3296  unk=0.0000  sentences=1012
+  [  ta] tok/sent= 71.12  tok/byte=0.1707  unk=0.0002  sentences=1012
+  [  te] tok/sent= 70.65  tok/byte=0.2021  unk=0.0035  sentences=1012
+  [  th] tok/sent= 70.79  tok/byte=0.1963  unk=0.0001  sentences=1012
+  [  tr] tok/sent= 49.05  tok/byte=0.3357  unk=0.0001  sentences=1012
+  [  uk] tok/sent= 57.71  tok/byte=0.2375  unk=0.0000  sentences=1012
+  [  ur] tok/sent= 55.44  tok/byte=0.2422  unk=0.0001  sentences=1012
+  [  vi] tok/sent= 54.59  tok/byte=0.3009  unk=0.0000  sentences=1012
+  [  yo] tok/sent= 73.21  tok/byte=0.4388  unk=0.0012  sentences=1012
+  [  zh] tok/sent= 42.42  tok/byte=0.3553  unk=0.0216  sentences=1012
+  [paat_a20_l0/ntrex] recomputing gini on intersection ...
+  [  ar] tok/sent= 55.85  tok/byte=0.2656  unk=0.0001  sentences=1997
+  [  az] tok/sent= 52.11  tok/byte=0.3321  unk=0.0000  sentences=1997
+  [  be] tok/sent= 56.92  tok/byte=0.2442  unk=0.0001  sentences=1997
+  [  bn] tok/sent= 65.49  tok/byte=0.2005  unk=0.0000  sentences=1997
+  [  cs] tok/sent= 48.55  tok/byte=0.3591  unk=0.0000  sentences=1997
+  [  da] tok/sent= 43.82  tok/byte=0.3397  unk=0.0000  sentences=1997
+  [  de] tok/sent= 49.55  tok/byte=0.3272  unk=0.0000  sentences=1997
+  [  en] tok/sent= 39.36  tok/byte=0.3173  unk=0.0000  sentences=1997
+  [  es] tok/sent= 46.91  tok/byte=0.3172  unk=0.0000  sentences=1997
+  [  fa] tok/sent= 53.59  tok/byte=0.2479  unk=0.0171  sentences=1997
+  [ fil] tok/sent= 47.64  tok/byte=0.3238  unk=0.0000  sentences=1997
+  [  fr] tok/sent= 51.54  tok/byte=0.3313  unk=0.0000  sentences=1997
+  [  gu] tok/sent= 67.33  tok/byte=0.2088  unk=0.0001  sentences=1997
+  [  ha] tok/sent= 49.27  tok/byte=0.3587  unk=0.0004  sentences=1997
+  [  hi] tok/sent= 66.57  tok/byte=0.1982  unk=0.0000  sentences=1997
+  [  hu] tok/sent= 54.59  tok/byte=0.3558  unk=0.0000  sentences=1997
+  [  id] tok/sent= 42.53  tok/byte=0.2952  unk=0.0000  sentences=1997
+  [  it] tok/sent= 47.67  tok/byte=0.3241  unk=0.0000  sentences=1997
+  [  iw] tok/sent= 51.42  tok/byte=0.2853  unk=0.0002  sentences=1997
+  [  ja] tok/sent= 53.66  tok/byte=0.3306  unk=0.0177  sentences=1997
+  [  kn] tok/sent= 68.53  tok/byte=0.1895  unk=0.0090  sentences=1997
+  [  lt] tok/sent= 50.15  tok/byte=0.3567  unk=0.0005  sentences=1997
+  [  ml] tok/sent= 74.67  tok/byte=0.1774  unk=0.0046  sentences=1997
+  [  mr] tok/sent= 72.63  tok/byte=0.2078  unk=0.0001  sentences=1997
+  [  my] tok/sent= 92.84  tok/byte=0.2136  unk=0.0016  sentences=1997
+  [  nl] tok/sent= 47.63  tok/byte=0.3245  unk=0.0002  sentences=1997
+  [  ny] tok/sent= 52.65  tok/byte=0.3687  unk=0.0000  sentences=1997
+  [  pl] tok/sent= 54.91  tok/byte=0.3674  unk=0.0000  sentences=1997
+  [  pt] tok/sent= 44.41  tok/byte=0.3252  unk=0.0000  sentences=1997
+  [  ro] tok/sent= 52.80  tok/byte=0.3401  unk=0.0000  sentences=1997
+  [  ru] tok/sent= 57.55  tok/byte=0.2292  unk=0.0001  sentences=1997
+  [  so] tok/sent= 51.81  tok/byte=0.3536  unk=0.0000  sentences=1997
+  [  sr] tok/sent= 62.34  tok/byte=0.2831  unk=0.0000  sentences=1997
+  [  sv] tok/sent= 42.79  tok/byte=0.3249  unk=0.0001  sentences=1997
+  [  ta] tok/sent= 73.38  tok/byte=0.1728  unk=0.0002  sentences=1997
+  [  te] tok/sent= 65.56  tok/byte=0.1964  unk=0.0104  sentences=1997
+  [  th] tok/sent= 65.56  tok/byte=0.2000  unk=0.0000  sentences=1997
+  [  tr] tok/sent= 48.38  tok/byte=0.3335  unk=0.0000  sentences=1997
+  [  uk] tok/sent= 56.87  tok/byte=0.2377  unk=0.0000  sentences=1997
+  [  ur] tok/sent= 52.83  tok/byte=0.2391  unk=0.0000  sentences=1997
+  [  vi] tok/sent= 53.88  tok/byte=0.3024  unk=0.0001  sentences=1997
+  [  yo] tok/sent= 81.49  tok/byte=0.4025  unk=0.0017  sentences=1997
+  [  zh] tok/sent= 42.19  tok/byte=0.3546  unk=0.0201  sentences=1997
+  [paat_a20_l0/bible] recomputing gini on intersection ...
+  [  ar] tok/sent= 99.36  tok/byte=0.4513  unk=0.0000  sentences=2179
+  [  az] tok/sent= 43.38  tok/byte=0.3616  unk=0.0000  sentences=2179
+  [  be] tok/sent= 45.05  tok/byte=0.2726  unk=0.0000  sentences=2179
+  [  bn] tok/sent= 57.83  tok/byte=0.2030  unk=0.0000  sentences=2179
+  [  cs] tok/sent= 42.81  tok/byte=0.4025  unk=0.0000  sentences=2179
+  [  da] tok/sent= 39.60  tok/byte=0.3582  unk=0.0000  sentences=2179
+  [  de] tok/sent= 41.12  tok/byte=0.3499  unk=0.0000  sentences=2179
+  [  en] tok/sent= 37.38  tok/byte=0.3328  unk=0.0000  sentences=2179
+  [  es] tok/sent= 41.10  tok/byte=0.3500  unk=0.0000  sentences=2179
+  [  fa] tok/sent= 42.36  tok/byte=0.2612  unk=0.0210  sentences=2179
+  [ fil] tok/sent= 46.51  tok/byte=0.3337  unk=0.0000  sentences=2179
+  [  fr] tok/sent= 43.80  tok/byte=0.3635  unk=0.0000  sentences=2179
+  [  gu] tok/sent= 58.45  tok/byte=0.2163  unk=0.0000  sentences=2179
+  [  ha] tok/sent= 42.67  tok/byte=0.3748  unk=0.0015  sentences=2179
+  [  hi] tok/sent= 56.24  tok/byte=0.2087  unk=0.0000  sentences=2179
+  [  hu] tok/sent= 45.22  tok/byte=0.3852  unk=0.0000  sentences=2179
+  [  id] tok/sent= 52.04  tok/byte=0.2885  unk=0.0000  sentences=2179
+  [  it] tok/sent= 43.38  tok/byte=0.3756  unk=0.0000  sentences=2179
+  [  iw] tok/sent= 34.64  tok/byte=0.2945  unk=0.0000  sentences=2179
+  [  ja] tok/sent= 56.24  tok/byte=0.3274  unk=0.0138  sentences=2179
+  [  kn] tok/sent= 62.19  tok/byte=0.1946  unk=0.0010  sentences=2179
+  [  lt] tok/sent= 44.42  tok/byte=0.3877  unk=0.0000  sentences=2179
+  [  ml] tok/sent= 57.51  tok/byte=0.1773  unk=0.0011  sentences=2179
+  [  mr] tok/sent= 63.62  tok/byte=0.2140  unk=0.0000  sentences=2179
+  [  my] tok/sent=121.92  tok/byte=0.2332  unk=0.3126  sentences=2179
+  [  nl] tok/sent= 40.32  tok/byte=0.3553  unk=0.0000  sentences=2179
+  [  ny] tok/sent= 45.58  tok/byte=0.3824  unk=0.0000  sentences=2179
+  [  pl] tok/sent= 46.97  tok/byte=0.4036  unk=0.0000  sentences=2179
+  [  pt] tok/sent= 43.16  tok/byte=0.3447  unk=0.0000  sentences=2179
+  [  ro] tok/sent= 58.54  tok/byte=0.3076  unk=0.0021  sentences=2179
+  [  ru] tok/sent= 42.24  tok/byte=0.2564  unk=0.0000  sentences=2179
+  [  so] tok/sent= 45.99  tok/byte=0.3876  unk=0.0000  sentences=2179
+  [  sr] tok/sent= 39.72  tok/byte=0.4267  unk=0.0000  sentences=2179
+  [  sv] tok/sent= 88.37  tok/byte=0.3353  unk=0.0000  sentences=2179
+  [  ta] tok/sent= 62.39  tok/byte=0.1701  unk=0.0000  sentences=2179
+  [  te] tok/sent= 58.35  tok/byte=0.1983  unk=0.0001  sentences=2179
+  [  th] tok/sent= 69.07  tok/byte=0.2043  unk=0.0867  sentences=2179
+  [  tr] tok/sent= 42.90  tok/byte=0.3619  unk=0.0000  sentences=2179
+  [  uk] tok/sent= 43.83  tok/byte=0.2741  unk=0.0000  sentences=2179
+  [  ur] tok/sent= 57.26  tok/byte=0.2130  unk=0.0000  sentences=2179
+  [  vi] tok/sent= 51.13  tok/byte=0.3504  unk=0.0000  sentences=2179
+  [  yo] tok/sent= 71.06  tok/byte=0.4472  unk=0.0011  sentences=2179
+  [  zh] tok/sent= 33.83  tok/byte=0.3559  unk=0.0379  sentences=2179
+  [paat_a50_l0/flores] recomputing gini on intersection ...
+  [  ar] tok/sent= 55.43  tok/byte=0.2655  unk=0.0000  sentences=1012
+  [  az] tok/sent= 57.10  tok/byte=0.3470  unk=0.0000  sentences=1012
+  [  be] tok/sent= 62.83  tok/byte=0.2347  unk=0.0000  sentences=1012
+  [  bn] tok/sent= 64.67  tok/byte=0.1899  unk=0.0002  sentences=1012
+  [  cs] tok/sent= 52.68  tok/byte=0.3743  unk=0.0000  sentences=1012
+  [  da] tok/sent= 47.95  tok/byte=0.3517  unk=0.0000  sentences=1012
+  [  de] tok/sent= 52.10  tok/byte=0.3372  unk=0.0000  sentences=1012
+  [  en] tok/sent= 43.01  tok/byte=0.3295  unk=0.0000  sentences=1012
+  [  es] tok/sent= 52.09  tok/byte=0.3297  unk=0.0000  sentences=1012
+  [  fa] tok/sent= 55.89  tok/byte=0.2531  unk=0.0307  sentences=1012
+  [ fil] tok/sent= 54.05  tok/byte=0.3290  unk=0.0000  sentences=1012
+  [  fr] tok/sent= 55.01  tok/byte=0.3396  unk=0.0000  sentences=1012
+  [  gu] tok/sent= 64.70  tok/byte=0.1978  unk=0.0003  sentences=1012
+  [  ha] tok/sent= 50.92  tok/byte=0.3639  unk=0.0006  sentences=1012
+  [  hi] tok/sent= 61.90  tok/byte=0.1858  unk=0.0000  sentences=1012
+  [  hu] tok/sent= 55.23  tok/byte=0.3663  unk=0.0000  sentences=1012
+  [  id] tok/sent= 45.00  tok/byte=0.3197  unk=0.0000  sentences=1012
+  [  it] tok/sent= 52.25  tok/byte=0.3363  unk=0.0000  sentences=1012
+  [  iw] tok/sent= 53.01  tok/byte=0.2930  unk=0.0000  sentences=1012
+  [  ja] tok/sent= 54.45  tok/byte=0.3297  unk=0.0213  sentences=1012
+  [  kn] tok/sent= 64.35  tok/byte=0.1735  unk=0.0076  sentences=1012
+  [  lt] tok/sent= 50.42  tok/byte=0.3667  unk=0.0000  sentences=1012
+  [  ml] tok/sent= 67.08  tok/byte=0.1649  unk=0.0052  sentences=1012
+  [  mr] tok/sent= 68.10  tok/byte=0.1938  unk=0.0000  sentences=1012
+  [  my] tok/sent= 89.64  tok/byte=0.1949  unk=0.0038  sentences=1012
+  [  nl] tok/sent= 49.49  tok/byte=0.3390  unk=0.0000  sentences=1012
+  [  ny] tok/sent= 54.31  tok/byte=0.3726  unk=0.0000  sentences=1012
+  [  pl] tok/sent= 55.59  tok/byte=0.3794  unk=0.0000  sentences=1012
+  [  pt] tok/sent= 49.21  tok/byte=0.3378  unk=0.0000  sentences=1012
+  [  ro] tok/sent= 54.06  tok/byte=0.3486  unk=0.0000  sentences=1012
+  [  ru] tok/sent= 58.02  tok/byte=0.2255  unk=0.0000  sentences=1012
+  [  so] tok/sent= 54.26  tok/byte=0.3614  unk=0.0000  sentences=1012
+  [  sr] tok/sent= 54.85  tok/byte=0.2332  unk=0.0000  sentences=1012
+  [  sv] tok/sent= 46.57  tok/byte=0.3430  unk=0.0000  sentences=1012
+  [  ta] tok/sent= 65.32  tok/byte=0.1568  unk=0.0002  sentences=1012
+  [  te] tok/sent= 64.95  tok/byte=0.1859  unk=0.0038  sentences=1012
+  [  th] tok/sent= 66.58  tok/byte=0.1847  unk=0.0001  sentences=1012
+  [  tr] tok/sent= 51.30  tok/byte=0.3510  unk=0.0001  sentences=1012
+  [  uk] tok/sent= 57.67  tok/byte=0.2374  unk=0.0000  sentences=1012
+  [  ur] tok/sent= 56.03  tok/byte=0.2447  unk=0.0001  sentences=1012
+  [  vi] tok/sent= 57.79  tok/byte=0.3185  unk=0.0000  sentences=1012
+  [  yo] tok/sent= 73.27  tok/byte=0.4391  unk=0.0012  sentences=1012
+  [  zh] tok/sent= 43.06  tok/byte=0.3607  unk=0.0213  sentences=1012
+  [paat_a50_l0/ntrex] recomputing gini on intersection ...
+  [  ar] tok/sent= 56.38  tok/byte=0.2681  unk=0.0001  sentences=1997
+  [  az] tok/sent= 54.17  tok/byte=0.3452  unk=0.0000  sentences=1997
+  [  be] tok/sent= 55.45  tok/byte=0.2379  unk=0.0001  sentences=1997
+  [  bn] tok/sent= 61.38  tok/byte=0.1879  unk=0.0000  sentences=1997
+  [  cs] tok/sent= 50.05  tok/byte=0.3702  unk=0.0000  sentences=1997
+  [  da] tok/sent= 45.73  tok/byte=0.3545  unk=0.0000  sentences=1997
+  [  de] tok/sent= 50.77  tok/byte=0.3353  unk=0.0000  sentences=1997
+  [  en] tok/sent= 41.37  tok/byte=0.3335  unk=0.0000  sentences=1997
+  [  es] tok/sent= 48.44  tok/byte=0.3275  unk=0.0000  sentences=1997
+  [  fa] tok/sent= 54.20  tok/byte=0.2507  unk=0.0169  sentences=1997
+  [ fil] tok/sent= 48.17  tok/byte=0.3274  unk=0.0000  sentences=1997
+  [  fr] tok/sent= 52.54  tok/byte=0.3377  unk=0.0000  sentences=1997
+  [  gu] tok/sent= 62.64  tok/byte=0.1942  unk=0.0001  sentences=1997
+  [  ha] tok/sent= 49.65  tok/byte=0.3614  unk=0.0004  sentences=1997
+  [  hi] tok/sent= 61.65  tok/byte=0.1836  unk=0.0000  sentences=1997
+  [  hu] tok/sent= 55.46  tok/byte=0.3616  unk=0.0000  sentences=1997
+  [  id] tok/sent= 45.43  tok/byte=0.3153  unk=0.0000  sentences=1997
+  [  it] tok/sent= 48.85  tok/byte=0.3322  unk=0.0000  sentences=1997
+  [  iw] tok/sent= 53.04  tok/byte=0.2943  unk=0.0002  sentences=1997
+  [  ja] tok/sent= 54.28  tok/byte=0.3344  unk=0.0175  sentences=1997
+  [  kn] tok/sent= 61.79  tok/byte=0.1708  unk=0.0100  sentences=1997
+  [  lt] tok/sent= 51.44  tok/byte=0.3659  unk=0.0005  sentences=1997
+  [  ml] tok/sent= 68.19  tok/byte=0.1620  unk=0.0051  sentences=1997
+  [  mr] tok/sent= 68.16  tok/byte=0.1950  unk=0.0001  sentences=1997
+  [  my] tok/sent= 91.70  tok/byte=0.2110  unk=0.0016  sentences=1997
+  [  nl] tok/sent= 49.50  tok/byte=0.3372  unk=0.0002  sentences=1997
+  [  ny] tok/sent= 52.84  tok/byte=0.3701  unk=0.0000  sentences=1997
+  [  pl] tok/sent= 55.54  tok/byte=0.3716  unk=0.0000  sentences=1997
+  [  pt] tok/sent= 46.14  tok/byte=0.3379  unk=0.0000  sentences=1997
+  [  ro] tok/sent= 54.06  tok/byte=0.3482  unk=0.0000  sentences=1997
+  [  ru] tok/sent= 57.44  tok/byte=0.2288  unk=0.0001  sentences=1997
+  [  so] tok/sent= 52.58  tok/byte=0.3588  unk=0.0000  sentences=1997
+  [  sr] tok/sent= 62.71  tok/byte=0.2848  unk=0.0000  sentences=1997
+  [  sv] tok/sent= 44.37  tok/byte=0.3369  unk=0.0001  sentences=1997
+  [  ta] tok/sent= 67.10  tok/byte=0.1580  unk=0.0002  sentences=1997
+  [  te] tok/sent= 60.71  tok/byte=0.1819  unk=0.0113  sentences=1997
+  [  th] tok/sent= 61.90  tok/byte=0.1888  unk=0.0000  sentences=1997
+  [  tr] tok/sent= 50.68  tok/byte=0.3494  unk=0.0000  sentences=1997
+  [  uk] tok/sent= 56.83  tok/byte=0.2376  unk=0.0000  sentences=1997
+  [  ur] tok/sent= 53.43  tok/byte=0.2419  unk=0.0000  sentences=1997
+  [  vi] tok/sent= 57.24  tok/byte=0.3212  unk=0.0001  sentences=1997
+  [  yo] tok/sent= 81.54  tok/byte=0.4027  unk=0.0017  sentences=1997
+  [  zh] tok/sent= 42.72  tok/byte=0.3590  unk=0.0198  sentences=1997
+  [paat_a50_l0/bible] recomputing gini on intersection ...
+  [  ar] tok/sent= 96.28  tok/byte=0.4373  unk=0.0000  sentences=2179
+  [  az] tok/sent= 44.45  tok/byte=0.3705  unk=0.0000  sentences=2179
+  [  be] tok/sent= 44.10  tok/byte=0.2668  unk=0.0000  sentences=2179
+  [  bn] tok/sent= 55.32  tok/byte=0.1942  unk=0.0000  sentences=2179
+  [  cs] tok/sent= 43.82  tok/byte=0.4119  unk=0.0000  sentences=2179
+  [  da] tok/sent= 40.57  tok/byte=0.3669  unk=0.0000  sentences=2179
+  [  de] tok/sent= 42.05  tok/byte=0.3578  unk=0.0000  sentences=2179
+  [  en] tok/sent= 38.74  tok/byte=0.3449  unk=0.0000  sentences=2179
+  [  es] tok/sent= 42.13  tok/byte=0.3588  unk=0.0000  sentences=2179
+  [  fa] tok/sent= 42.60  tok/byte=0.2626  unk=0.0209  sentences=2179
+  [ fil] tok/sent= 46.98  tok/byte=0.3370  unk=0.0000  sentences=2179
+  [  fr] tok/sent= 44.32  tok/byte=0.3678  unk=0.0000  sentences=2179
+  [  gu] tok/sent= 53.55  tok/byte=0.1981  unk=0.0000  sentences=2179
+  [  ha] tok/sent= 43.02  tok/byte=0.3779  unk=0.0015  sentences=2179
+  [  hi] tok/sent= 53.33  tok/byte=0.1979  unk=0.0000  sentences=2179
+  [  hu] tok/sent= 45.88  tok/byte=0.3908  unk=0.0000  sentences=2179
+  [  id] tok/sent= 56.20  tok/byte=0.3116  unk=0.0000  sentences=2179
+  [  it] tok/sent= 44.29  tok/byte=0.3834  unk=0.0000  sentences=2179
+  [  iw] tok/sent= 35.51  tok/byte=0.3020  unk=0.0000  sentences=2179
+  [  ja] tok/sent= 56.48  tok/byte=0.3288  unk=0.0137  sentences=2179
+  [  kn] tok/sent= 56.41  tok/byte=0.1766  unk=0.0011  sentences=2179
+  [  lt] tok/sent= 45.23  tok/byte=0.3948  unk=0.0000  sentences=2179
+  [  ml] tok/sent= 53.94  tok/byte=0.1663  unk=0.0011  sentences=2179
+  [  mr] tok/sent= 60.75  tok/byte=0.2043  unk=0.0000  sentences=2179
+  [  my] tok/sent=121.92  tok/byte=0.2332  unk=0.3126  sentences=2179
+  [  nl] tok/sent= 41.74  tok/byte=0.3678  unk=0.0000  sentences=2179
+  [  ny] tok/sent= 45.69  tok/byte=0.3833  unk=0.0000  sentences=2179
+  [  pl] tok/sent= 47.40  tok/byte=0.4073  unk=0.0000  sentences=2179
+  [  pt] tok/sent= 44.71  tok/byte=0.3571  unk=0.0000  sentences=2179
+  [  ro] tok/sent= 58.56  tok/byte=0.3077  unk=0.0021  sentences=2179
+  [  ru] tok/sent= 42.22  tok/byte=0.2563  unk=0.0000  sentences=2179
+  [  so] tok/sent= 46.45  tok/byte=0.3915  unk=0.0000  sentences=2179
+  [  sr] tok/sent= 40.14  tok/byte=0.4312  unk=0.0000  sentences=2179
+  [  sv] tok/sent= 91.08  tok/byte=0.3456  unk=0.0000  sentences=2179
+  [  ta] tok/sent= 57.11  tok/byte=0.1557  unk=0.0000  sentences=2179
+  [  te] tok/sent= 54.69  tok/byte=0.1859  unk=0.0001  sentences=2179
+  [  th] tok/sent= 63.92  tok/byte=0.1891  unk=0.0936  sentences=2179
+  [  tr] tok/sent= 44.38  tok/byte=0.3743  unk=0.0000  sentences=2179
+  [  uk] tok/sent= 43.78  tok/byte=0.2738  unk=0.0000  sentences=2179
+  [  ur] tok/sent= 54.70  tok/byte=0.2035  unk=0.0000  sentences=2179
+  [  vi] tok/sent= 53.13  tok/byte=0.3641  unk=0.0000  sentences=2179
+  [  yo] tok/sent= 71.06  tok/byte=0.4471  unk=0.0011  sentences=2179
+  [  zh] tok/sent= 34.06  tok/byte=0.3583  unk=0.0377  sentences=2179
+  [paat_a100_l0/flores] recomputing gini on intersection ...
+  [  ar] tok/sent= 56.52  tok/byte=0.2707  unk=0.0000  sentences=1012
+  [  az] tok/sent= 59.64  tok/byte=0.3624  unk=0.0000  sentences=1012
+  [  be] tok/sent= 60.38  tok/byte=0.2256  unk=0.0000  sentences=1012
+  [  bn] tok/sent= 59.21  tok/byte=0.1739  unk=0.0003  sentences=1012
+  [  cs] tok/sent= 54.61  tok/byte=0.3881  unk=0.0000  sentences=1012
+  [  da] tok/sent= 50.22  tok/byte=0.3683  unk=0.0000  sentences=1012
+  [  de] tok/sent= 53.80  tok/byte=0.3482  unk=0.0000  sentences=1012
+  [  en] tok/sent= 45.68  tok/byte=0.3500  unk=0.0000  sentences=1012
+  [  es] tok/sent= 54.60  tok/byte=0.3456  unk=0.0000  sentences=1012
+  [  fa] tok/sent= 56.95  tok/byte=0.2579  unk=0.0301  sentences=1012
+  [ fil] tok/sent= 55.03  tok/byte=0.3349  unk=0.0000  sentences=1012
+  [  fr] tok/sent= 56.50  tok/byte=0.3488  unk=0.0000  sentences=1012
+  [  gu] tok/sent= 61.50  tok/byte=0.1880  unk=0.0003  sentences=1012
+  [  ha] tok/sent= 51.41  tok/byte=0.3674  unk=0.0006  sentences=1012
+  [  hi] tok/sent= 59.53  tok/byte=0.1787  unk=0.0000  sentences=1012
+  [  hu] tok/sent= 56.73  tok/byte=0.3763  unk=0.0000  sentences=1012
+  [  id] tok/sent= 47.99  tok/byte=0.3409  unk=0.0000  sentences=1012
+  [  it] tok/sent= 54.21  tok/byte=0.3488  unk=0.0000  sentences=1012
+  [  iw] tok/sent= 55.50  tok/byte=0.3068  unk=0.0000  sentences=1012
+  [  ja] tok/sent= 55.38  tok/byte=0.3354  unk=0.0210  sentences=1012
+  [  kn] tok/sent= 62.23  tok/byte=0.1678  unk=0.0078  sentences=1012
+  [  lt] tok/sent= 52.71  tok/byte=0.3834  unk=0.0000  sentences=1012
+  [  ml] tok/sent= 67.05  tok/byte=0.1648  unk=0.0052  sentences=1012
+  [  mr] tok/sent= 67.19  tok/byte=0.1913  unk=0.0000  sentences=1012
+  [  my] tok/sent= 89.63  tok/byte=0.1948  unk=0.0038  sentences=1012
+  [  nl] tok/sent= 51.39  tok/byte=0.3521  unk=0.0000  sentences=1012
+  [  ny] tok/sent= 54.66  tok/byte=0.3750  unk=0.0000  sentences=1012
+  [  pl] tok/sent= 56.95  tok/byte=0.3887  unk=0.0000  sentences=1012
+  [  pt] tok/sent= 51.64  tok/byte=0.3544  unk=0.0000  sentences=1012
+  [  ro] tok/sent= 55.84  tok/byte=0.3601  unk=0.0000  sentences=1012
+  [  ru] tok/sent= 58.32  tok/byte=0.2267  unk=0.0000  sentences=1012
+  [  so] tok/sent= 55.36  tok/byte=0.3687  unk=0.0000  sentences=1012
+  [  sr] tok/sent= 55.47  tok/byte=0.2359  unk=0.0000  sentences=1012
+  [  sv] tok/sent= 49.15  tok/byte=0.3621  unk=0.0000  sentences=1012
+  [  ta] tok/sent= 63.68  tok/byte=0.1529  unk=0.0002  sentences=1012
+  [  te] tok/sent= 63.51  tok/byte=0.1817  unk=0.0039  sentences=1012
+  [  th] tok/sent= 62.60  tok/byte=0.1736  unk=0.0001  sentences=1012
+  [  tr] tok/sent= 53.85  tok/byte=0.3685  unk=0.0001  sentences=1012
+  [  uk] tok/sent= 57.64  tok/byte=0.2372  unk=0.0000  sentences=1012
+  [  ur] tok/sent= 57.10  tok/byte=0.2494  unk=0.0001  sentences=1012
+  [  vi] tok/sent= 59.46  tok/byte=0.3277  unk=0.0000  sentences=1012
+  [  yo] tok/sent= 73.33  tok/byte=0.4395  unk=0.0012  sentences=1012
+  [  zh] tok/sent= 43.23  tok/byte=0.3622  unk=0.0212  sentences=1012
+  [paat_a100_l0/ntrex] recomputing gini on intersection ...
+  [  ar] tok/sent= 57.27  tok/byte=0.2723  unk=0.0001  sentences=1997
+  [  az] tok/sent= 56.60  tok/byte=0.3607  unk=0.0000  sentences=1997
+  [  be] tok/sent= 53.51  tok/byte=0.2296  unk=0.0001  sentences=1997
+  [  bn] tok/sent= 56.17  tok/byte=0.1720  unk=0.0000  sentences=1997
+  [  cs] tok/sent= 51.83  tok/byte=0.3833  unk=0.0000  sentences=1997
+  [  da] tok/sent= 47.72  tok/byte=0.3699  unk=0.0000  sentences=1997
+  [  de] tok/sent= 52.46  tok/byte=0.3464  unk=0.0000  sentences=1997
+  [  en] tok/sent= 43.87  tok/byte=0.3536  unk=0.0000  sentences=1997
+  [  es] tok/sent= 50.69  tok/byte=0.3427  unk=0.0000  sentences=1997
+  [  fa] tok/sent= 55.14  tok/byte=0.2551  unk=0.0166  sentences=1997
+  [ fil] tok/sent= 49.02  tok/byte=0.3332  unk=0.0000  sentences=1997
+  [  fr] tok/sent= 53.83  tok/byte=0.3460  unk=0.0000  sentences=1997
+  [  gu] tok/sent= 59.24  tok/byte=0.1837  unk=0.0001  sentences=1997
+  [  ha] tok/sent= 50.11  tok/byte=0.3648  unk=0.0004  sentences=1997
+  [  hi] tok/sent= 59.14  tok/byte=0.1761  unk=0.0000  sentences=1997
+  [  hu] tok/sent= 56.96  tok/byte=0.3713  unk=0.0000  sentences=1997
+  [  id] tok/sent= 48.25  tok/byte=0.3349  unk=0.0000  sentences=1997
+  [  it] tok/sent= 50.73  tok/byte=0.3450  unk=0.0000  sentences=1997
+  [  iw] tok/sent= 55.20  tok/byte=0.3063  unk=0.0001  sentences=1997
+  [  ja] tok/sent= 54.85  tok/byte=0.3379  unk=0.0173  sentences=1997
+  [  kn] tok/sent= 59.51  tok/byte=0.1645  unk=0.0104  sentences=1997
+  [  lt] tok/sent= 53.65  tok/byte=0.3816  unk=0.0005  sentences=1997
+  [  ml] tok/sent= 68.13  tok/byte=0.1618  unk=0.0051  sentences=1997
+  [  mr] tok/sent= 67.36  tok/byte=0.1928  unk=0.0001  sentences=1997
+  [  my] tok/sent= 89.65  tok/byte=0.2063  unk=0.0017  sentences=1997
+  [  nl] tok/sent= 51.34  tok/byte=0.3497  unk=0.0001  sentences=1997
+  [  ny] tok/sent= 53.03  tok/byte=0.3714  unk=0.0000  sentences=1997
+  [  pl] tok/sent= 56.98  tok/byte=0.3812  unk=0.0000  sentences=1997
+  [  pt] tok/sent= 48.40  tok/byte=0.3544  unk=0.0000  sentences=1997
+  [  ro] tok/sent= 55.76  tok/byte=0.3592  unk=0.0000  sentences=1997
+  [  ru] tok/sent= 57.77  tok/byte=0.2301  unk=0.0001  sentences=1997
+  [  so] tok/sent= 53.81  tok/byte=0.3672  unk=0.0000  sentences=1997
+  [  sr] tok/sent= 63.22  tok/byte=0.2871  unk=0.0000  sentences=1997
+  [  sv] tok/sent= 46.83  tok/byte=0.3556  unk=0.0001  sentences=1997
+  [  ta] tok/sent= 65.19  tok/byte=0.1535  unk=0.0002  sentences=1997
+  [  te] tok/sent= 59.16  tok/byte=0.1772  unk=0.0116  sentences=1997
+  [  th] tok/sent= 58.49  tok/byte=0.1784  unk=0.0000  sentences=1997
+  [  tr] tok/sent= 53.41  tok/byte=0.3682  unk=0.0000  sentences=1997
+  [  uk] tok/sent= 56.93  tok/byte=0.2380  unk=0.0000  sentences=1997
+  [  ur] tok/sent= 54.55  tok/byte=0.2469  unk=0.0000  sentences=1997
+  [  vi] tok/sent= 58.59  tok/byte=0.3288  unk=0.0001  sentences=1997
+  [  yo] tok/sent= 81.59  tok/byte=0.4030  unk=0.0017  sentences=1997
+  [  zh] tok/sent= 42.93  tok/byte=0.3608  unk=0.0197  sentences=1997
+  [paat_a100_l0/bible] recomputing gini on intersection ...
+  [  ar] tok/sent= 96.28  tok/byte=0.4373  unk=0.0000  sentences=2179
+  [  az] tok/sent= 46.61  tok/byte=0.3885  unk=0.0000  sentences=2179
+  [  be] tok/sent= 43.15  tok/byte=0.2611  unk=0.0000  sentences=2179
+  [  bn] tok/sent= 50.75  tok/byte=0.1782  unk=0.0000  sentences=2179
+  [  cs] tok/sent= 45.24  tok/byte=0.4253  unk=0.0000  sentences=2179
+  [  da] tok/sent= 42.03  tok/byte=0.3802  unk=0.0000  sentences=2179
+  [  de] tok/sent= 42.99  tok/byte=0.3657  unk=0.0000  sentences=2179
+  [  en] tok/sent= 41.04  tok/byte=0.3654  unk=0.0000  sentences=2179
+  [  es] tok/sent= 43.68  tok/byte=0.3720  unk=0.0000  sentences=2179
+  [  fa] tok/sent= 43.22  tok/byte=0.2665  unk=0.0206  sentences=2179
+  [ fil] tok/sent= 47.41  tok/byte=0.3401  unk=0.0000  sentences=2179
+  [  fr] tok/sent= 45.23  tok/byte=0.3754  unk=0.0000  sentences=2179
+  [  gu] tok/sent= 50.99  tok/byte=0.1886  unk=0.0000  sentences=2179
+  [  ha] tok/sent= 43.53  tok/byte=0.3823  unk=0.0014  sentences=2179
+  [  hi] tok/sent= 51.83  tok/byte=0.1923  unk=0.0000  sentences=2179
+  [  hu] tok/sent= 46.89  tok/byte=0.3995  unk=0.0000  sentences=2179
+  [  id] tok/sent= 59.40  tok/byte=0.3293  unk=0.0000  sentences=2179
+  [  it] tok/sent= 45.38  tok/byte=0.3928  unk=0.0000  sentences=2179
+  [  iw] tok/sent= 36.89  tok/byte=0.3137  unk=0.0000  sentences=2179
+  [  ja] tok/sent= 57.18  tok/byte=0.3328  unk=0.0135  sentences=2179
+  [  kn] tok/sent= 55.18  tok/byte=0.1727  unk=0.0011  sentences=2179
+  [  lt] tok/sent= 46.65  tok/byte=0.4072  unk=0.0000  sentences=2179
+  [  ml] tok/sent= 53.91  tok/byte=0.1662  unk=0.0011  sentences=2179
+  [  mr] tok/sent= 60.33  tok/byte=0.2029  unk=0.0000  sentences=2179
+  [  my] tok/sent=121.92  tok/byte=0.2332  unk=0.3126  sentences=2179
+  [  nl] tok/sent= 42.82  tok/byte=0.3773  unk=0.0000  sentences=2179
+  [  ny] tok/sent= 45.82  tok/byte=0.3844  unk=0.0000  sentences=2179
+  [  pl] tok/sent= 48.29  tok/byte=0.4149  unk=0.0000  sentences=2179
+  [  pt] tok/sent= 47.18  tok/byte=0.3768  unk=0.0000  sentences=2179
+  [  ro] tok/sent= 58.77  tok/byte=0.3088  unk=0.0021  sentences=2179
+  [  ru] tok/sent= 42.47  tok/byte=0.2578  unk=0.0000  sentences=2179
+  [  so] tok/sent= 47.15  tok/byte=0.3974  unk=0.0000  sentences=2179
+  [  sr] tok/sent= 40.94  tok/byte=0.4397  unk=0.0000  sentences=2179
+  [  sv] tok/sent= 95.93  tok/byte=0.3639  unk=0.0000  sentences=2179
+  [  ta] tok/sent= 56.25  tok/byte=0.1533  unk=0.0000  sentences=2179
+  [  te] tok/sent= 53.81  tok/byte=0.1829  unk=0.0001  sentences=2179
+  [  th] tok/sent= 61.47  tok/byte=0.1818  unk=0.0974  sentences=2179
+  [  tr] tok/sent= 46.85  tok/byte=0.3952  unk=0.0000  sentences=2179
+  [  uk] tok/sent= 43.80  tok/byte=0.2740  unk=0.0000  sentences=2179
+  [  ur] tok/sent= 53.55  tok/byte=0.1992  unk=0.0000  sentences=2179
+  [  vi] tok/sent= 53.70  tok/byte=0.3681  unk=0.0000  sentences=2179
+  [  yo] tok/sent= 71.15  tok/byte=0.4477  unk=0.0011  sentences=2179
+  [  zh] tok/sent= 34.26  tok/byte=0.3604  unk=0.0374  sentences=2179
+
+Wrote results/parity_cross_domain.json
+
+==============================================================================
+  Cross-domain parity (lower = fairer; gini on 43-lang intersection)
+==============================================================================
+  tokenizer        gini(FLORES)    gini(NTREX)    gini(Bible)       Δ FLORES        Δ NTREX        Δ Bible
+  --------------------------------------------------------------------------------------------------------
+  bpe                    0.1900         0.1948         0.2213         0.0000         0.0000         0.0000
+  parity_bpe             0.0564         0.0759         0.1336        -0.1336        -0.1189        -0.0877
+  adat                   0.2377         0.2393         0.2463         0.0477         0.0445         0.0250
+  unigram                0.1286         0.1300         0.1703        -0.0614        -0.0648        -0.0510
+  paat_a033              0.2244         0.2290         0.2371         0.0344         0.0342         0.0158
+  paat_a067              0.1977         0.2055         0.2179         0.0077         0.0107        -0.0034
+  paat_a100              0.1708         0.1813         0.1992        -0.0192        -0.0135        -0.0221
+  paat_a20_l0            0.0981         0.1068         0.1520        -0.0919        -0.0880        -0.0693
+  paat_a50_l0            0.0784         0.0870         0.1406        -0.1116        -0.1078        -0.0807
+  paat_a100_l0           0.0642         0.0736         0.1352        -0.1258        -0.1212        -0.0861
+
+  Spearman rank correlation between domain pairs (over tokenizers):
+    flores_vs_ntrex        0.9879
+    flores_vs_bible        0.9879
+    ntrex_vs_bible         0.9758
+
+  102 suspicious cells flagged (unk_rate > 0.01 or tok/sent > 3.0× FLORES):
+    {'lang': 'zh', 'tokenizer': 'adat', 'domain': 'flores', 'unk_rate': 0.018242}
+    {'lang': 'ja', 'tokenizer': 'adat', 'domain': 'flores', 'unk_rate': 0.021901}
+    {'lang': 'fa', 'tokenizer': 'adat', 'domain': 'flores', 'unk_rate': 0.021421}
+    {'lang': 'zh', 'tokenizer': 'adat', 'domain': 'ntrex', 'unk_rate': 0.017593}
+    {'lang': 'ja', 'tokenizer': 'adat', 'domain': 'ntrex', 'unk_rate': 0.017824}
+    {'lang': 'fa', 'tokenizer': 'adat', 'domain': 'ntrex', 'unk_rate': 0.011952}
+    {'lang': 'zh', 'tokenizer': 'adat', 'domain': 'bible', 'unk_rate': 0.036165}
+    {'lang': 'iw', 'tokenizer': 'adat', 'domain': 'bible', 'unk_rate': 0.018389}
+    {'lang': 'fa', 'tokenizer': 'adat', 'domain': 'bible', 'unk_rate': 0.015149}
+    {'lang': 'ja', 'tokenizer': 'adat', 'domain': 'bible', 'unk_rate': 0.014161}
+    {'lang': 'ar', 'tokenizer': 'adat', 'domain': 'bible', 'unk_rate': 0.020641}
+    {'lang': 'th', 'tokenizer': 'adat', 'domain': 'bible', 'unk_rate': 0.051025}
+    {'lang': 'my', 'tokenizer': 'adat', 'domain': 'bible', 'unk_rate': 0.214304}
+    {'lang': 'zh', 'tokenizer': 'unigram', 'domain': 'flores', 'unk_rate': 0.019062}
+    {'lang': 'ja', 'tokenizer': 'unigram', 'domain': 'flores', 'unk_rate': 0.024166}
+    ... (87 more in results/parity_cross_domain.json)

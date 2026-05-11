@@ -51,6 +51,8 @@ DEFAULT_TOKENIZERS: dict[str, str] = {
     "paat_a067":    "{tok_root}/paat_a067/paat",
     "paat_a100":    "{tok_root}/paat_a100/paat",
     "paat_a100_l0": "{tok_root}/paat_a100_l0/paat",
+    "paat_a20_l0":  "{tok_root}/paat_a20_l0/paat",
+    "paat_a50_l0":  "{tok_root}/paat_a50_l0/paat",
 }
 
 
