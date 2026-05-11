@@ -1,0 +1,112 @@
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[bible] pass 1 — loading 96 candidate Bibles ...
+[bible] direct-json load: locating corpus.json blob for 96 languages ...
+[bible] direct-json load: streaming /Users/nourmassri/.cache/huggingface/hub/datasets--bible-nlp--biblenlp-corpus/snapshots/89289adb7f473fd64fde3fdeab9267356464f4ca/corpus.json (5.2 GB) with ijson ...
+  [arb] loaded 31,098 verses (direct-json)
+  [azb] loaded 31,053 verses (direct-json)
+  [bel] loaded 31,162 verses (direct-json)
+  [ben] loaded 31,091 verses (direct-json)
+  [ceb] loaded 31,098 verses (direct-json)
+  [ces] loaded 30,863 verses (direct-json)
+  [cmn] loaded 31,024 verses (direct-json)
+  [dan] loaded 31,053 verses (direct-json)
+  [deu] loaded 31,168 verses (direct-json)
+  [eng] loaded 37,504 verses (direct-json)
+  [epo] loaded 31,097 verses (direct-json)
+  [fra] loaded 37,158 verses (direct-json)
+  [guj] loaded 31,099 verses (direct-json)
+  [hat] loaded 31,098 verses (direct-json)
+  [hau] loaded 31,099 verses (direct-json)
+  [heb] loaded 31,097 verses (direct-json)
+  [hin] loaded 31,099 verses (direct-json)
+  [hun] loaded 7,954 verses (direct-json)
+  [ind] loaded 11,077 verses (direct-json)
+  [ita] loaded 31,099 verses (direct-json)
+  [jpn] loaded 7,938 verses (direct-json)
+  [kan] loaded 31,026 verses (direct-json)
+  [lit] loaded 7,081 verses (direct-json)
+  [mal] loaded 31,098 verses (direct-json)
+  [mar] loaded 31,082 verses (direct-json)
+  [mya] loaded 31,087 verses (direct-json)
+  [nld] loaded 34,779 verses (direct-json)
+  [npi] loaded 31,097 verses (direct-json)
+  [nya] loaded 31,099 verses (direct-json)
+  [pan] loaded 31,099 verses (direct-json)
+  [pes] loaded 31,078 verses (direct-json)
+  [pol] loaded 31,098 verses (direct-json)
+  [por] loaded 31,099 verses (direct-json)
+  [ron] loaded 31,097 verses (direct-json)
+  [rus] loaded 31,160 verses (direct-json)
+  [som] loaded 31,098 verses (direct-json)
+  [spa] loaded 36,922 verses (direct-json)
+  [srp] loaded 31,072 verses (direct-json)
+  [swe] loaded 11,913 verses (direct-json)
+  [swh] loaded 31,099 verses (direct-json)
+  [tam] loaded 31,098 verses (direct-json)
+  [tel] loaded 30,999 verses (direct-json)
+  [tgk] loaded 4,344 verses (direct-json)
+  [tgl] loaded 31,098 verses (direct-json)
+  [tha] loaded 31,097 verses (direct-json)
+  [tur] loaded 30,206 verses (direct-json)
+  [ukr] loaded 7,954 verses (direct-json)
+  [urd] loaded 31,099 verses (direct-json)
+  [vie] loaded 31,099 verses (direct-json)
+  [yor] loaded 31,082 verses (direct-json)
+  [zlm] loaded 7,956 verses (direct-json)
+[bible] direct-json load: scanned 835 top-level langs, kept 51 matching subset_ids.
+[bible] strict intersection = 2179 verses across 51 languages
+[bible] cached canonical verse index -> data/raw/bible/_verse_index.json
+[ar] 2179 verses -> data/raw/bible/ar.jsonl
+[az] 2179 verses -> data/raw/bible/az.jsonl
+[be] 2179 verses -> data/raw/bible/be.jsonl
+[bn] 2179 verses -> data/raw/bible/bn.jsonl
+[ceb] 2179 verses -> data/raw/bible/ceb.jsonl
+[cs] 2179 verses -> data/raw/bible/cs.jsonl
+[zh] 2179 verses -> data/raw/bible/zh.jsonl
+[da] 2179 verses -> data/raw/bible/da.jsonl
+[de] 2179 verses -> data/raw/bible/de.jsonl
+[en] 2179 verses -> data/raw/bible/en.jsonl
+[eo] 2179 verses -> data/raw/bible/eo.jsonl
+[fr] 2179 verses -> data/raw/bible/fr.jsonl
+[gu] 2179 verses -> data/raw/bible/gu.jsonl
+[ht] 2179 verses -> data/raw/bible/ht.jsonl
+[ha] 2179 verses -> data/raw/bible/ha.jsonl
+[iw] 2179 verses -> data/raw/bible/iw.jsonl
+[hi] 2179 verses -> data/raw/bible/hi.jsonl
+[hu] 2179 verses -> data/raw/bible/hu.jsonl
+[id] 2179 verses -> data/raw/bible/id.jsonl
+[it] 2179 verses -> data/raw/bible/it.jsonl
+[ja] 2179 verses -> data/raw/bible/ja.jsonl
+[kn] 2179 verses -> data/raw/bible/kn.jsonl
+[lt] 2179 verses -> data/raw/bible/lt.jsonl
+[ml] 2179 verses -> data/raw/bible/ml.jsonl
+[mr] 2179 verses -> data/raw/bible/mr.jsonl
+[my] 2179 verses -> data/raw/bible/my.jsonl
+[nl] 2179 verses -> data/raw/bible/nl.jsonl
+[ne] 2179 verses -> data/raw/bible/ne.jsonl
+[ny] 2179 verses -> data/raw/bible/ny.jsonl
+[pa] 2179 verses -> data/raw/bible/pa.jsonl
+[fa] 2179 verses -> data/raw/bible/fa.jsonl
+[pl] 2179 verses -> data/raw/bible/pl.jsonl
+[pt] 2179 verses -> data/raw/bible/pt.jsonl
+[ro] 2179 verses -> data/raw/bible/ro.jsonl
+[ru] 2179 verses -> data/raw/bible/ru.jsonl
+[so] 2179 verses -> data/raw/bible/so.jsonl
+[es] 2179 verses -> data/raw/bible/es.jsonl
+[sr] 2179 verses -> data/raw/bible/sr.jsonl
+[sv] 2179 verses -> data/raw/bible/sv.jsonl
+[sw] 2179 verses -> data/raw/bible/sw.jsonl
+[ta] 2179 verses -> data/raw/bible/ta.jsonl
+[te] 2179 verses -> data/raw/bible/te.jsonl
+[tg] 2179 verses -> data/raw/bible/tg.jsonl
+[fil] 2179 verses -> data/raw/bible/fil.jsonl
+[th] 2179 verses -> data/raw/bible/th.jsonl
+[tr] 2179 verses -> data/raw/bible/tr.jsonl
+[uk] 2179 verses -> data/raw/bible/uk.jsonl
+[ur] 2179 verses -> data/raw/bible/ur.jsonl
+[vi] 2179 verses -> data/raw/bible/vi.jsonl
+[yo] 2179 verses -> data/raw/bible/yo.jsonl
+[ms] 2179 verses -> data/raw/bible/ms.jsonl
+[bible] skipped 45 languages -> data/raw/bible/_skipped.json
+
+[bible] 51/96 PAAT langs covered, 2179 aligned verses

@@ -1,0 +1,769 @@
+{
+  "intersection_languages": [
+    "ar",
+    "az",
+    "be",
+    "bn",
+    "cs",
+    "da",
+    "de",
+    "en",
+    "es",
+    "fa",
+    "fil",
+    "fr",
+    "gu",
+    "ha",
+    "hi",
+    "hu",
+    "id",
+    "it",
+    "iw",
+    "ja",
+    "kn",
+    "lt",
+    "ml",
+    "mr",
+    "my",
+    "nl",
+    "ny",
+    "pl",
+    "pt",
+    "ro",
+    "ru",
+    "so",
+    "sr",
+    "sv",
+    "ta",
+    "te",
+    "th",
+    "tr",
+    "uk",
+    "ur",
+    "vi",
+    "yo",
+    "zh"
+  ],
+  "n_languages": 43,
+  "per_tokenizer": {
+    "bpe": {
+      "gini_flores": 0.19,
+      "gini_ntrex": 0.1948,
+      "gini_bible": 0.2213,
+      "delta_vs_bpe": {
+        "flores": 0.0,
+        "ntrex": 0.0,
+        "bible": 0.0
+      }
+    },
+    "parity_bpe": {
+      "gini_flores": 0.0564,
+      "gini_ntrex": 0.0759,
+      "gini_bible": 0.1336,
+      "delta_vs_bpe": {
+        "flores": -0.1336,
+        "ntrex": -0.1189,
+        "bible": -0.0877
+      }
+    },
+    "adat": {
+      "gini_flores": 0.2377,
+      "gini_ntrex": 0.2393,
+      "gini_bible": 0.2463,
+      "delta_vs_bpe": {
+        "flores": 0.0477,
+        "ntrex": 0.0445,
+        "bible": 0.025
+      }
+    },
+    "unigram": {
+      "gini_flores": 0.1286,
+      "gini_ntrex": 0.13,
+      "gini_bible": 0.1703,
+      "delta_vs_bpe": {
+        "flores": -0.0614,
+        "ntrex": -0.0648,
+        "bible": -0.051
+      }
+    },
+    "paat_a033": {
+      "gini_flores": 0.2244,
+      "gini_ntrex": 0.229,
+      "gini_bible": 0.2371,
+      "delta_vs_bpe": {
+        "flores": 0.0344,
+        "ntrex": 0.0342,
+        "bible": 0.0158
+      }
+    },
+    "paat_a067": {
+      "gini_flores": 0.1977,
+      "gini_ntrex": 0.2055,
+      "gini_bible": 0.2179,
+      "delta_vs_bpe": {
+        "flores": 0.0077,
+        "ntrex": 0.0107,
+        "bible": -0.0034
+      }
+    },
+    "paat_a100": {
+      "gini_flores": 0.1708,
+      "gini_ntrex": 0.1813,
+      "gini_bible": 0.1992,
+      "delta_vs_bpe": {
+        "flores": -0.0192,
+        "ntrex": -0.0135,
+        "bible": -0.0221
+      }
+    },
+    "paat_a20_l0": {
+      "gini_flores": 0.0981,
+      "gini_ntrex": 0.1068,
+      "gini_bible": 0.152,
+      "delta_vs_bpe": {
+        "flores": -0.0919,
+        "ntrex": -0.088,
+        "bible": -0.0693
+      }
+    },
+    "paat_a50_l0": {
+      "gini_flores": 0.0784,
+      "gini_ntrex": 0.087,
+      "gini_bible": 0.1406,
+      "delta_vs_bpe": {
+        "flores": -0.1116,
+        "ntrex": -0.1078,
+        "bible": -0.0807
+      }
+    },
+    "paat_a100_l0": {
+      "gini_flores": 0.0642,
+      "gini_ntrex": 0.0736,
+      "gini_bible": 0.1352,
+      "delta_vs_bpe": {
+        "flores": -0.1258,
+        "ntrex": -0.1212,
+        "bible": -0.0861
+      }
+    }
+  },
+  "rank_correlation": {
+    "flores_vs_ntrex": 0.9879,
+    "flores_vs_bible": 0.9879,
+    "ntrex_vs_bible": 0.9758
+  },
+  "suspicious_languages": [
+    {
+      "lang": "zh",
+      "tokenizer": "adat",
+      "domain": "flores",
+      "unk_rate": 0.018242
+    },
+    {
+      "lang": "ja",
+      "tokenizer": "adat",
+      "domain": "flores",
+      "unk_rate": 0.021901
+    },
+    {
+      "lang": "fa",
+      "tokenizer": "adat",
+      "domain": "flores",
+      "unk_rate": 0.021421
+    },
+    {
+      "lang": "zh",
+      "tokenizer": "adat",
+      "domain": "ntrex",
+      "unk_rate": 0.017593
+    },
+    {
+      "lang": "ja",
+      "tokenizer": "adat",
+      "domain": "ntrex",
+      "unk_rate": 0.017824
+    },
+    {
+      "lang": "fa",
+      "tokenizer": "adat",
+      "domain": "ntrex",
+      "unk_rate": 0.011952
+    },
+    {
+      "lang": "zh",
+      "tokenizer": "adat",
+      "domain": "bible",
+      "unk_rate": 0.036165
+    },
+    {
+      "lang": "iw",
+      "tokenizer": "adat",
+      "domain": "bible",
+      "unk_rate": 0.018389
+    },
+    {
+      "lang": "fa",
+      "tokenizer": "adat",
+      "domain": "bible",
+      "unk_rate": 0.015149
+    },
+    {
+      "lang": "ja",
+      "tokenizer": "adat",
+      "domain": "bible",
+      "unk_rate": 0.014161
+    },
+    {
+      "lang": "ar",
+      "tokenizer": "adat",
+      "domain": "bible",
+      "unk_rate": 0.020641
+    },
+    {
+      "lang": "th",
+      "tokenizer": "adat",
+      "domain": "bible",
+      "unk_rate": 0.051025
+    },
+    {
+      "lang": "my",
+      "tokenizer": "adat",
+      "domain": "bible",
+      "unk_rate": 0.214304
+    },
+    {
+      "lang": "zh",
+      "tokenizer": "unigram",
+      "domain": "flores",
+      "unk_rate": 0.019062
+    },
+    {
+      "lang": "ja",
+      "tokenizer": "unigram",
+      "domain": "flores",
+      "unk_rate": 0.024166
+    },
+    {
+      "lang": "fa",
+      "tokenizer": "unigram",
+      "domain": "flores",
+      "unk_rate": 0.031348
+    },
+    {
+      "lang": "zh",
+      "tokenizer": "unigram",
+      "domain": "ntrex",
+      "unk_rate": 0.018344
+    },
+    {
+      "lang": "ja",
+      "tokenizer": "unigram",
+      "domain": "ntrex",
+      "unk_rate": 0.019535
+    },
+    {
+      "lang": "fa",
+      "tokenizer": "unigram",
+      "domain": "ntrex",
+      "unk_rate": 0.017272
+    },
+    {
+      "lang": "zh",
+      "tokenizer": "unigram",
+      "domain": "bible",
+      "unk_rate": 0.03737
+    },
+    {
+      "lang": "iw",
+      "tokenizer": "unigram",
+      "domain": "bible",
+      "unk_rate": 0.028451
+    },
+    {
+      "lang": "fa",
+      "tokenizer": "unigram",
+      "domain": "bible",
+      "unk_rate": 0.020979
+    },
+    {
+      "lang": "ja",
+      "tokenizer": "unigram",
+      "domain": "bible",
+      "unk_rate": 0.0153
+    },
+    {
+      "lang": "th",
+      "tokenizer": "unigram",
+      "domain": "bible",
+      "unk_rate": 0.082297
+    },
+    {
+      "lang": "ar",
+      "tokenizer": "unigram",
+      "domain": "bible",
+      "unk_rate": 0.021578
+    },
+    {
+      "lang": "my",
+      "tokenizer": "unigram",
+      "domain": "bible",
+      "unk_rate": 0.272513
+    },
+    {
+      "lang": "zh",
+      "tokenizer": "paat_a033",
+      "domain": "flores",
+      "unk_rate": 0.01816
+    },
+    {
+      "lang": "ja",
+      "tokenizer": "paat_a033",
+      "domain": "flores",
+      "unk_rate": 0.021899
+    },
+    {
+      "lang": "fa",
+      "tokenizer": "paat_a033",
+      "domain": "flores",
+      "unk_rate": 0.023568
+    },
+    {
+      "lang": "zh",
+      "tokenizer": "paat_a033",
+      "domain": "ntrex",
+      "unk_rate": 0.017492
+    },
+    {
+      "lang": "ja",
+      "tokenizer": "paat_a033",
+      "domain": "ntrex",
+      "unk_rate": 0.017824
+    },
+    {
+      "lang": "fa",
+      "tokenizer": "paat_a033",
+      "domain": "ntrex",
+      "unk_rate": 0.013027
+    },
+    {
+      "lang": "zh",
+      "tokenizer": "paat_a033",
+      "domain": "bible",
+      "unk_rate": 0.035917
+    },
+    {
+      "lang": "fa",
+      "tokenizer": "paat_a033",
+      "domain": "bible",
+      "unk_rate": 0.016382
+    },
+    {
+      "lang": "iw",
+      "tokenizer": "paat_a033",
+      "domain": "bible",
+      "unk_rate": 0.018377
+    },
+    {
+      "lang": "ja",
+      "tokenizer": "paat_a033",
+      "domain": "bible",
+      "unk_rate": 0.014161
+    },
+    {
+      "lang": "ar",
+      "tokenizer": "paat_a033",
+      "domain": "bible",
+      "unk_rate": 0.021524
+    },
+    {
+      "lang": "th",
+      "tokenizer": "paat_a033",
+      "domain": "bible",
+      "unk_rate": 0.051862
+    },
+    {
+      "lang": "my",
+      "tokenizer": "paat_a033",
+      "domain": "bible",
+      "unk_rate": 0.225804
+    },
+    {
+      "lang": "zh",
+      "tokenizer": "paat_a067",
+      "domain": "flores",
+      "unk_rate": 0.018095
+    },
+    {
+      "lang": "ja",
+      "tokenizer": "paat_a067",
+      "domain": "flores",
+      "unk_rate": 0.021895
+    },
+    {
+      "lang": "fa",
+      "tokenizer": "paat_a067",
+      "domain": "flores",
+      "unk_rate": 0.02557
+    },
+    {
+      "lang": "zh",
+      "tokenizer": "paat_a067",
+      "domain": "ntrex",
+      "unk_rate": 0.017433
+    },
+    {
+      "lang": "ja",
+      "tokenizer": "paat_a067",
+      "domain": "ntrex",
+      "unk_rate": 0.01782
+    },
+    {
+      "lang": "fa",
+      "tokenizer": "paat_a067",
+      "domain": "ntrex",
+      "unk_rate": 0.014102
+    },
+    {
+      "lang": "zh",
+      "tokenizer": "paat_a067",
+      "domain": "bible",
+      "unk_rate": 0.035917
+    },
+    {
+      "lang": "fa",
+      "tokenizer": "paat_a067",
+      "domain": "bible",
+      "unk_rate": 0.017364
+    },
+    {
+      "lang": "iw",
+      "tokenizer": "paat_a067",
+      "domain": "bible",
+      "unk_rate": 0.018744
+    },
+    {
+      "lang": "ja",
+      "tokenizer": "paat_a067",
+      "domain": "bible",
+      "unk_rate": 0.014161
+    },
+    {
+      "lang": "ar",
+      "tokenizer": "paat_a067",
+      "domain": "bible",
+      "unk_rate": 0.021782
+    },
+    {
+      "lang": "th",
+      "tokenizer": "paat_a067",
+      "domain": "bible",
+      "unk_rate": 0.056237
+    },
+    {
+      "lang": "my",
+      "tokenizer": "paat_a067",
+      "domain": "bible",
+      "unk_rate": 0.276675
+    },
+    {
+      "lang": "zh",
+      "tokenizer": "paat_a100",
+      "domain": "flores",
+      "unk_rate": 0.01806
+    },
+    {
+      "lang": "ja",
+      "tokenizer": "paat_a100",
+      "domain": "flores",
+      "unk_rate": 0.021886
+    },
+    {
+      "lang": "fa",
+      "tokenizer": "paat_a100",
+      "domain": "flores",
+      "unk_rate": 0.026169
+    },
+    {
+      "lang": "zh",
+      "tokenizer": "paat_a100",
+      "domain": "ntrex",
+      "unk_rate": 0.017411
+    },
+    {
+      "lang": "ja",
+      "tokenizer": "paat_a100",
+      "domain": "ntrex",
+      "unk_rate": 0.01782
+    },
+    {
+      "lang": "fa",
+      "tokenizer": "paat_a100",
+      "domain": "ntrex",
+      "unk_rate": 0.014464
+    },
+    {
+      "lang": "zh",
+      "tokenizer": "paat_a100",
+      "domain": "bible",
+      "unk_rate": 0.035918
+    },
+    {
+      "lang": "fa",
+      "tokenizer": "paat_a100",
+      "domain": "bible",
+      "unk_rate": 0.017955
+    },
+    {
+      "lang": "iw",
+      "tokenizer": "paat_a100",
+      "domain": "bible",
+      "unk_rate": 0.018896
+    },
+    {
+      "lang": "ja",
+      "tokenizer": "paat_a100",
+      "domain": "bible",
+      "unk_rate": 0.01416
+    },
+    {
+      "lang": "th",
+      "tokenizer": "paat_a100",
+      "domain": "bible",
+      "unk_rate": 0.060861
+    },
+    {
+      "lang": "ar",
+      "tokenizer": "paat_a100",
+      "domain": "bible",
+      "unk_rate": 0.022229
+    },
+    {
+      "lang": "my",
+      "tokenizer": "paat_a100",
+      "domain": "bible",
+      "unk_rate": 0.30381
+    },
+    {
+      "lang": "zh",
+      "tokenizer": "paat_a20_l0",
+      "domain": "flores",
+      "unk_rate": 0.02162
+    },
+    {
+      "lang": "ja",
+      "tokenizer": "paat_a20_l0",
+      "domain": "flores",
+      "unk_rate": 0.021593
+    },
+    {
+      "lang": "fa",
+      "tokenizer": "paat_a20_l0",
+      "domain": "flores",
+      "unk_rate": 0.031084
+    },
+    {
+      "lang": "zh",
+      "tokenizer": "paat_a20_l0",
+      "domain": "ntrex",
+      "unk_rate": 0.020096
+    },
+    {
+      "lang": "fa",
+      "tokenizer": "paat_a20_l0",
+      "domain": "ntrex",
+      "unk_rate": 0.01711
+    },
+    {
+      "lang": "ja",
+      "tokenizer": "paat_a20_l0",
+      "domain": "ntrex",
+      "unk_rate": 0.017731
+    },
+    {
+      "lang": "te",
+      "tokenizer": "paat_a20_l0",
+      "domain": "ntrex",
+      "unk_rate": 0.010441
+    },
+    {
+      "lang": "zh",
+      "tokenizer": "paat_a20_l0",
+      "domain": "bible",
+      "unk_rate": 0.037915
+    },
+    {
+      "lang": "fa",
+      "tokenizer": "paat_a20_l0",
+      "domain": "bible",
+      "unk_rate": 0.021038
+    },
+    {
+      "lang": "ja",
+      "tokenizer": "paat_a20_l0",
+      "domain": "bible",
+      "unk_rate": 0.013757
+    },
+    {
+      "lang": "th",
+      "tokenizer": "paat_a20_l0",
+      "domain": "bible",
+      "unk_rate": 0.086658
+    },
+    {
+      "lang": "my",
+      "tokenizer": "paat_a20_l0",
+      "domain": "bible",
+      "unk_rate": 0.312567
+    },
+    {
+      "lang": "zh",
+      "tokenizer": "paat_a50_l0",
+      "domain": "flores",
+      "unk_rate": 0.021298
+    },
+    {
+      "lang": "ja",
+      "tokenizer": "paat_a50_l0",
+      "domain": "flores",
+      "unk_rate": 0.021343
+    },
+    {
+      "lang": "fa",
+      "tokenizer": "paat_a50_l0",
+      "domain": "flores",
+      "unk_rate": 0.030693
+    },
+    {
+      "lang": "zh",
+      "tokenizer": "paat_a50_l0",
+      "domain": "ntrex",
+      "unk_rate": 0.019845
+    },
+    {
+      "lang": "fa",
+      "tokenizer": "paat_a50_l0",
+      "domain": "ntrex",
+      "unk_rate": 0.016917
+    },
+    {
+      "lang": "ja",
+      "tokenizer": "paat_a50_l0",
+      "domain": "ntrex",
+      "unk_rate": 0.017529
+    },
+    {
+      "lang": "te",
+      "tokenizer": "paat_a50_l0",
+      "domain": "ntrex",
+      "unk_rate": 0.011276
+    },
+    {
+      "lang": "zh",
+      "tokenizer": "paat_a50_l0",
+      "domain": "bible",
+      "unk_rate": 0.037661
+    },
+    {
+      "lang": "fa",
+      "tokenizer": "paat_a50_l0",
+      "domain": "bible",
+      "unk_rate": 0.020923
+    },
+    {
+      "lang": "ja",
+      "tokenizer": "paat_a50_l0",
+      "domain": "bible",
+      "unk_rate": 0.0137
+    },
+    {
+      "lang": "th",
+      "tokenizer": "paat_a50_l0",
+      "domain": "bible",
+      "unk_rate": 0.093631
+    },
+    {
+      "lang": "my",
+      "tokenizer": "paat_a50_l0",
+      "domain": "bible",
+      "unk_rate": 0.312567
+    },
+    {
+      "lang": "zh",
+      "tokenizer": "paat_a100_l0",
+      "domain": "flores",
+      "unk_rate": 0.02121
+    },
+    {
+      "lang": "ja",
+      "tokenizer": "paat_a100_l0",
+      "domain": "flores",
+      "unk_rate": 0.020982
+    },
+    {
+      "lang": "fa",
+      "tokenizer": "paat_a100_l0",
+      "domain": "flores",
+      "unk_rate": 0.030122
+    },
+    {
+      "lang": "zh",
+      "tokenizer": "paat_a100_l0",
+      "domain": "ntrex",
+      "unk_rate": 0.019748
+    },
+    {
+      "lang": "ja",
+      "tokenizer": "paat_a100_l0",
+      "domain": "ntrex",
+      "unk_rate": 0.017347
+    },
+    {
+      "lang": "fa",
+      "tokenizer": "paat_a100_l0",
+      "domain": "ntrex",
+      "unk_rate": 0.016629
+    },
+    {
+      "lang": "te",
+      "tokenizer": "paat_a100_l0",
+      "domain": "ntrex",
+      "unk_rate": 0.011571
+    },
+    {
+      "lang": "kn",
+      "tokenizer": "paat_a100_l0",
+      "domain": "ntrex",
+      "unk_rate": 0.010376
+    },
+    {
+      "lang": "zh",
+      "tokenizer": "paat_a100_l0",
+      "domain": "bible",
+      "unk_rate": 0.037437
+    },
+    {
+      "lang": "fa",
+      "tokenizer": "paat_a100_l0",
+      "domain": "bible",
+      "unk_rate": 0.020621
+    },
+    {
+      "lang": "ja",
+      "tokenizer": "paat_a100_l0",
+      "domain": "bible",
+      "unk_rate": 0.013533
+    },
+    {
+      "lang": "th",
+      "tokenizer": "paat_a100_l0",
+      "domain": "bible",
+      "unk_rate": 0.097377
+    },
+    {
+      "lang": "my",
+      "tokenizer": "paat_a100_l0",
+      "domain": "bible",
+      "unk_rate": 0.312567
+    }
+  ]
+}

@@ -1,0 +1,101 @@
+[ntrex] reusing existing checkout at vendor/NTREX-128
+[af] already exists (1997 sentences), skipping.
+[am] already exists (1997 sentences), skipping.
+[ar] already exists (1997 sentences), skipping.
+[az] already exists (1997 sentences), skipping.
+[be] already exists (1997 sentences), skipping.
+[bg] already exists (1997 sentences), skipping.
+[bn] already exists (1997 sentences), skipping.
+[ca] already exists (1997 sentences), skipping.
+[ceb] missing source file newstest2019-ref.ceb.txt — skipping.
+[cs] already exists (1997 sentences), skipping.
+[cy] already exists (1997 sentences), skipping.
+[da] already exists (1997 sentences), skipping.
+[de] already exists (1997 sentences), skipping.
+[el] already exists (1997 sentences), skipping.
+[en] already exists (1997 sentences), skipping.
+[eo] missing source file newstest2019-ref.epo.txt — skipping.
+[es] already exists (1997 sentences), skipping.
+[et] already exists (1997 sentences), skipping.
+[eu] already exists (1997 sentences), skipping.
+[fa] already exists (1997 sentences), skipping.
+[fi] already exists (1997 sentences), skipping.
+[fil] already exists (1997 sentences), skipping.
+[fr] already exists (1997 sentences), skipping.
+[ga] already exists (1997 sentences), skipping.
+[gd] missing source file newstest2019-ref.gla.txt — skipping.
+[gl] already exists (1997 sentences), skipping.
+[gu] already exists (1997 sentences), skipping.
+[ha] already exists (1997 sentences), skipping.
+[hi] already exists (1997 sentences), skipping.
+[ht] missing source file newstest2019-ref.hat.txt — skipping.
+[hu] already exists (1997 sentences), skipping.
+[hy] already exists (1997 sentences), skipping.
+[id] already exists (1997 sentences), skipping.
+[ig] already exists (1997 sentences), skipping.
+[is] already exists (1997 sentences), skipping.
+[it] already exists (1997 sentences), skipping.
+[iw] already exists (1997 sentences), skipping.
+[ja] already exists (1997 sentences), skipping.
+[jv] missing source file newstest2019-ref.jav.txt — skipping.
+[ka] already exists (1997 sentences), skipping.
+[kk] already exists (1997 sentences), skipping.
+[km] already exists (1997 sentences), skipping.
+[kn] already exists (1997 sentences), skipping.
+[ko] already exists (1997 sentences), skipping.
+[ku] already exists (1997 sentences), skipping.
+[ky] already exists (1997 sentences), skipping.
+[lb] already exists (1997 sentences), skipping.
+[lo] already exists (1997 sentences), skipping.
+[lt] already exists (1997 sentences), skipping.
+[lv] missing source file newstest2019-ref.lvs.txt — skipping.
+[mg] missing source file newstest2019-ref.plt.txt — skipping.
+[mi] already exists (1997 sentences), skipping.
+[mk] already exists (1997 sentences), skipping.
+[ml] already exists (1997 sentences), skipping.
+[mn] already exists (1997 sentences), skipping.
+[mr] already exists (1997 sentences), skipping.
+[ms] missing source file newstest2019-ref.zsm.txt — skipping.
+[mt] already exists (1997 sentences), skipping.
+[my] already exists (1997 sentences), skipping.
+[ne] missing source file newstest2019-ref.npi.txt — skipping.
+[nl] already exists (1997 sentences), skipping.
+[no] already exists (1997 sentences), skipping.
+[ny] already exists (1997 sentences), skipping.
+[pa] missing source file newstest2019-ref.pan-Guru.txt — skipping.
+[pl] already exists (1997 sentences), skipping.
+[ps] already exists (1997 sentences), skipping.
+[pt] already exists (1997 sentences), skipping.
+[ro] already exists (1997 sentences), skipping.
+[ru] already exists (1997 sentences), skipping.
+[sd] missing source file newstest2019-ref.snd.txt — skipping.
+[si] already exists (1997 sentences), skipping.
+[sk] already exists (1997 sentences), skipping.
+[sl] already exists (1997 sentences), skipping.
+[sm] already exists (1997 sentences), skipping.
+[sn] missing source file newstest2019-ref.sna.txt — skipping.
+[so] already exists (1997 sentences), skipping.
+[sq] already exists (1997 sentences), skipping.
+[sr] already exists (1997 sentences), skipping.
+[st] missing source file newstest2019-ref.sot.txt — skipping.
+[su] missing source file newstest2019-ref.sun.txt — skipping.
+[sv] already exists (1997 sentences), skipping.
+[sw] missing source file newstest2019-ref.swh.txt — skipping.
+[ta] already exists (1997 sentences), skipping.
+[te] already exists (1997 sentences), skipping.
+[tg] missing source file newstest2019-ref.tgk.txt — skipping.
+[th] already exists (1997 sentences), skipping.
+[tr] already exists (1997 sentences), skipping.
+[uk] already exists (1997 sentences), skipping.
+[ur] already exists (1997 sentences), skipping.
+[uz] missing source file newstest2019-ref.uzn.txt — skipping.
+[vi] already exists (1997 sentences), skipping.
+[xh] already exists (1997 sentences), skipping.
+[yi] missing source file newstest2019-ref.ydd.txt — skipping.
+[yo] already exists (1997 sentences), skipping.
+[zh] already exists (1997 sentences), skipping.
+[zu] already exists (1997 sentences), skipping.
+
+[ntrex] wrote 78/96 languages to data/raw/ntrex
+[ntrex] skipped (no NTREX file): ceb eo gd ht jv lv mg ms ne pa sd sn st su sw tg uz yi
+[ntrex] alignment OK: 78 files × 1997 sentences
